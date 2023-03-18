@@ -22,7 +22,7 @@ class ProductManager {
             stock: stock,            
             id: ++id_producto
         }
-        if ((producto.title == "" || producto.title == null) || (producto.description == "" || producto.description == null) || (producto.price == "" || producto.price == null) || (producto.thumbnail == "" || producto.thumbnail == null) || (producto.code == "" || producto.code == null) || (producto.stock == "" || producto.stock == null))
+        if (!producto.title || !producto.description || !producto.price || !producto.thumbnail || !producto.code || !producto.stock)
         {
             return console.log("Todos los campos son obligatorios")
         }
