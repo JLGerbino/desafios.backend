@@ -22,7 +22,7 @@ class ProductManager {
             stock: stock,            
             id: ++id_producto
         }
-        if (!producto.title || !producto.description || !producto.price || !producto.thumbnail || !producto.code || !producto.stock)
+        if (Object.values(producto).includes(" ") || Object.values(producto).includes(""))
         {
             return console.log("Todos los campos son obligatorios")
         }
