@@ -34,16 +34,5 @@
 		"code": 4,
 		"stock": 20,
 		"id": 4
-	},
-	{
-		"title": {
-			"title": "cacapedo",
-			"description": "cacapedo feo",
-			"price": "545000",
-			"thumbnail": "no imagen",
-			"code": "40",
-			"stock": "50"
-		},
-		"id": 5
 	}
 ]
