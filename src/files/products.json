@@ -1,0 +1,49 @@
+[
+	{
+		"title": "Colchon",
+		"description": "Colchon 140 x 190",
+		"price": 82900,
+		"thumbnail": "no imagen",
+		"code": 1,
+		"stock": 20,
+		"id": 1
+	},
+	{
+		"title": "Cama",
+		"description": "Colchon 140 x 190",
+		"price": 82900,
+		"thumbnail": "no imagen",
+		"code": 2,
+		"stock": 20,
+		"id": 2
+	},
+	{
+		"title": "silla",
+		"description": "Colchon 140 x 190",
+		"price": 82900,
+		"thumbnail": "no imagen",
+		"code": 3,
+		"stock": 20,
+		"id": 3
+	},
+	{
+		"title": "mesa",
+		"description": "Colchon 140 x 190",
+		"price": 82900,
+		"thumbnail": "no imagen",
+		"code": 4,
+		"stock": 20,
+		"id": 4
+	},
+	{
+		"title": {
+			"title": "cacapedo",
+			"description": "cacapedo feo",
+			"price": "545000",
+			"thumbnail": "no imagen",
+			"code": "40",
+			"stock": "50"
+		},
+		"id": 5
+	}
+]

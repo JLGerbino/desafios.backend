@@ -2,7 +2,7 @@ import fs from "fs";
 
 export default class ProductManager {
   constructor(){
-    this.path = "./files/productos.json";
+    this.path = "./src/files/products.json";
   }  
  
   getProducts = async () => {
@@ -63,7 +63,7 @@ export default class ProductManager {
       const products = await this.getProducts();
       const producto = products.find((producto) => producto.id == id_producto);
       if (producto) {      
-        return console.log(producto);
+        return producto;
       } else {
         return "not found";
       }
@@ -77,11 +77,11 @@ export default class ProductManager {
       const products = await this.getProducts();    
       const indexProducto = products.findIndex(producto => producto.id == id_producto);
       if (indexProducto !== -1) {            
-        const deleteP = products.splice(indexProducto,1)[0];      
+        products.splice(indexProducto,1)[0];      
         await fs.promises.writeFile(this.path,JSON.stringify(products, null, "\t")
         );
         console.log("El producto fue eliminado");
-        return deleteP
+        return "Producto eliminado"
       } else {
         return "El producto que quiere eliminar no existe";
       }
