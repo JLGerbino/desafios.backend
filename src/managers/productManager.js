@@ -2,7 +2,7 @@ import fs from "fs";
 
 export default class ProductManager {
   constructor(){
-    this.path = "./src/files/products.json";
+    this.path = "./src/files/products.json";    
   }  
  
   getProducts = async () => {
@@ -18,18 +18,18 @@ export default class ProductManager {
       console.log(error)
     }
   }
-
-  addProduct = async (title, description, price, thumbnail, code, stock) => {
+  //title, description, price, thumbnail, code, stock"esto iba en lugar de producto" 
+  addProduct = async (producto) => {
     try{  
       const products = await this.getProducts();
-      let producto = {
-        title: title,
-        description: description,
-        price: price,
-        thumbnail: thumbnail,
-        code: code,
-        stock: stock,      
-      };
+      // let producto = {
+      //   title: title,
+      //   description: description,
+      //   price: price,
+      //   thumbnail: thumbnail,
+      //   code: code,
+      //   stock: stock,      
+      // };
       let id_producto = producto.id;
       if (products.length === 0) {
         producto.id = 1;
@@ -39,14 +39,12 @@ export default class ProductManager {
       if (
         Object.values(producto).includes(" ") ||
         Object.values(producto).includes("")
-      ) {
-        return console.log("Todos los campos son obligatorios");
+      ) {        
+        return "Todos los campos son obligatorios";
       }
       let codigo = products.find((ele) => ele.code == producto.code);
       if (codigo) {
-        return console.log(
-          "El 'code' del producto ya existe, intente cambiarlo."
-        );
+        return "El 'code' del producto ya existe, intente cambiarlo.";
       } else {
         products.push(producto);
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
@@ -89,46 +87,39 @@ export default class ProductManager {
       console.log(error)
     }
   };
-
-    updateProduct = async (id_producto, title, description, price, thumbnail, code, stock) =>{    
-    try{
-      let producto = {
-        title: title,
-        description: description,
-        price: price,
-        thumbnail: thumbnail,
-        code: code,
-        stock: stock,
-        id: id_producto
-      };
-      const products = await this.getProducts();
-      const indexProducto = products.findIndex(producto => producto.id === id_producto);    
-      if (indexProducto !== -1) {
-        if (Object.values(producto).includes(" ") ||
-        Object.values(producto).includes("")){
-          return console.log("Todos los campos son obligatorios");
-        }
-        let codigo = products.find((ele) => ele.code == producto.code);
-        if (codigo) {
-          return console.log(
-            "El 'code' del producto ya existe, intente cambiarlo."
-          );
-        }else{
-        const deleteP = products.splice(indexProducto,1)[0];
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
-        deleteP;
-        products.push(producto);
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
-        console.log("El producto se modificó con exito")     
-        return producto;
-      }        
-      } else {
-          return "El producto que quiere modificar no existe"
-      }    
-    } catch(error){
-    console.log(error)
-    }
+  
+updateProduct = async (id_producto, title, description, price, thumbnail, code, stock) =>{    
+  try{
+    let producto = {
+      title: title,
+      description: description,
+      price: price,
+      thumbnail: thumbnail,
+      code: code,
+      stock: stock,
+      id: id_producto
+    };
+    const products = await this.getProducts();
+    const indexProducto = products.findIndex(producto => producto.id == id_producto);    
+    if (indexProducto !== -1) {
+      if (Object.values(producto).includes(" ") ||
+      Object.values(producto).includes("")){
+        return console.log("Todos los campos son obligatorios");
+      }else{
+      const deleteP = products.splice(indexProducto,1)[0];
+      await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
+      deleteP;
+      products.push(producto);
+      await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+      console.log("El producto se modificó con exito")     
+      return producto;
+    }        
+    } else {
+        return "El producto que quiere modificar no existe"
+    }    
+  } catch(error){
+  console.log(error)
   }
 }
-
+}
 
