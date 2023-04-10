@@ -25,8 +25,8 @@ router.get("/:pid", async(req, res)=>{
 })
 
 router.post('/', async (req,res)=>{
-    const {title, description, code, price, status, stock, category,thumbnail:[]} = req.body;
-    const producto = {title, description, code, price, status, stock, category, thumbnail:[]};
+    const {title, description, code, price, status, stock, category,thumbnail} = req.body;
+    const producto = {title, description, code, price, status, stock, category, thumbnail};
     console.log(producto)
     const msg = await manager.addProduct(producto);
     res.send(msg);

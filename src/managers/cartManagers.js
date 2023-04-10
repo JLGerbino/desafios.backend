@@ -1,13 +1,11 @@
 import fs from "fs";
 import ProductManager from "./productManager.js";
-//const carts = [];
 
 const manager = new ProductManager();
-//const quantity = 1
+
 export default class CartManager {
   constructor() {
-    this.path = "./src/files/carrito.json";
-    //this.carts = []
+    this.path = "./src/files/carrito.json";   
   }
 
   getCarts = async () => {
@@ -25,9 +23,8 @@ export default class CartManager {
   };
 
   createCart = async () => {
-    //     try{
+    try{
     const carts = await this.getCarts();
-
     let cart = {
       product: [],
     };
@@ -40,7 +37,9 @@ export default class CartManager {
     carts.push(cart);
     await fs.promises.writeFile(this.path, JSON.stringify(carts, null, "\t"));
     return cart;
-    // }
+     }catch(error){
+      console.log(error)
+    }
   };
 
   addCart = async (id_carrito, id_producto) => {
@@ -66,11 +65,7 @@ export default class CartManager {
             });
           } else {
             let cantidad = prodInCart.quantity;
-            prodInCart.quantity = cantidad + 1
-            // carts[indexCarrito].product.splice(0, 2, {
-            //   product: id_producto,
-            //   quantity: cantidad + 1,
-            // });
+            prodInCart.quantity = cantidad + 1            
           }
           console.log("cargar producto");
           console.log(id_producto);

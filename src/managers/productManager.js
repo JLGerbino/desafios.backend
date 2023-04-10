@@ -18,18 +18,10 @@ export default class ProductManager {
       console.log(error)
     }
   }
-  //title, description, price, thumbnail, code, stock"esto iba en lugar de producto" 
+   
   addProduct = async (producto) => {
     try{  
-      const products = await this.getProducts();
-      // let producto = {
-      //   title: title,
-      //   description: description,
-      //   price: price,
-      //   thumbnail: thumbnail,
-      //   code: code,
-      //   stock: stock,      
-      // };
+      const products = await this.getProducts();      
       let id_producto = producto.id;
       if (products.length === 0) {
         producto.id = 1;
@@ -88,15 +80,17 @@ export default class ProductManager {
     }
   };
   
-updateProduct = async (id_producto, title, description, price, thumbnail, code, stock) =>{    
+updateProduct = async (id_producto, title, description, code, price, status, stock, category, thumbnail) =>{    
   try{
     let producto = {
       title: title,
       description: description,
-      price: price,
-      thumbnail: thumbnail,
       code: code,
+      price: price,
+      status: status,
       stock: stock,
+      category: category,
+      thumbnail: thumbnail,      
       id: id_producto
     };
     const products = await this.getProducts();

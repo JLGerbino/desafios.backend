@@ -1,143 +1,46 @@
 [
 	{
-		"title": "Colchon",
-		"description": "Colchon 140 x 190",
-		"price": 82900,
-		"thumbnail": "no imagen",
+		"title": "Silla pino",
+		"description": "Silla pino tapizada",
 		"code": 1,
-		"stock": 20,
-		"id": 1
-	},
-	{
-		"title": "Cama",
-		"description": "Colchon 140 x 190",
-		"price": 82900,
-		"thumbnail": "no imagen",
-		"code": 2,
-		"stock": 20,
-		"id": 2
-	},
-	{
-		"title": "silla",
-		"description": "Colchon 140 x 190",
-		"price": 82900,
-		"thumbnail": "no imagen",
-		"code": 3,
-		"stock": 20,
-		"id": 3
-	},
-	{
-		"title": "mesa",
-		"description": "Colchon 140 x 190",
-		"price": 82900,
-		"thumbnail": "no imagen",
-		"code": 4,
-		"stock": 20,
-		"id": 4
-	},
-	{
-		"title": "alfombrav",
-		"description": "alfombras",
-		"price": "10000",
-		"thumbnail": "no hay",
-		"code": 5,
-		"stock": "30",
-		"id": 5
-	},
-	{
-		"title": "mesa tv",
-		"description": "mesa tv 130 mts",
-		"price": "10000",
-		"thumbnail": "no hay",
-		"code": "6",
-		"stock": "30",
-		"id": 6
-	},
-	{
-		"title": "Chaleco",
-		"description": "chaleco de fuerza",
-		"price": 40800,
-		"thumbnail": "sin imagen",
-		"code": 7,
-		"stock": 255,
-		"id": 7
-	},
-	{
-		"title": "camisa",
-		"description": "camisa de fuerza",
-		"price": 50800,
-		"thumbnail": "no hay",
-		"code": 8,
-		"stock": 255,
-		"id": 8
-	},
-	{
-		"title": "polera",
-		"description": "polera de fuerza",
-		"price": 50800,
-		"thumbnail": "no hay",
-		"code": 9,
-		"stock": 255,
-		"id": 9
-	},
-	{
-		"title": "silla guatambu",
-		"description": "otra nueva silla guatambu",
-		"price": 45000,
-		"thumbnail": "no hay",
-		"code": 10,
-		"stock": 255,
-		"id": 10
-	},
-	{
-		"title": "silla guatambu",
-		"description": "otra nueva silla guatambu",
-		"code": 11,
-		"price": 45000,
-		"stock": 255,
-		"thumbnail": "no hay",
-		"id": 11
-	},
-	{
-		"title": "silla pino",
-		"description": "silla guatambu pino",
-		"code": 12,
 		"price": 45000,
 		"status": "true",
 		"stock": 255,
 		"category": "sillas",
 		"thumbnail": "no hay",
-		"id": 12
+		"id": 1
 	},
 	{
-		"title": "silla paraiso",
-		"description": "sillon paraiso",
-		"price": 13,
-		"thumbnail": 45000,
-		"code": "true",
-		"stock": 255,
-		"id": 13
-	},
-	{
-		"title": "sillon",
-		"description": "sillon pino",
-		"code": 13,
-		"price": 125000,
+		"title": "Sillon",
+		"description": "sillon pino tapizado",
+		"code": 2,
+		"price": 15000,
 		"status": "true",
 		"stock": 20,
 		"category": "sillones",
-		"thumbnail": [],
-		"id": 14
+		"thumbnail": "no hay",
+		"id": 2
 	},
 	{
-		"title": "sillon",
-		"description": "sillon pino",
-		"code": 15,
-		"price": 125000,
+		"title": "Cama",
+		"description": "Cama pino 140 mts",
+		"code": 3,
+		"price": 55000,
 		"status": "true",
-		"stock": 20,
-		"category": "sillones",
-		"thumbnail": [],
-		"id": 15
+		"stock": 10,
+		"category": "camas",
+		"thumbnail": "no hay",
+		"id": 3
+	},
+	{
+		"title": "Mesa",
+		"description": "mesa píno 180 x 90",
+		"code": 4,
+		"price": 48200,
+		"status": "true",
+		"stock": 10,
+		"category": "mesas",
+		"thumbnail": "no hay",
+		"id": 4
 	}
 ]
