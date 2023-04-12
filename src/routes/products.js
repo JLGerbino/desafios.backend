@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductManager from "../managers/productManager.js";
+import { uploader } from "../utils.js";
 
 const router = Router();
 const manager = new ProductManager
@@ -24,13 +25,32 @@ router.get("/:pid", async(req, res)=>{
     res.send(producto);
 })
 
-router.post('/', async (req,res)=>{
-    const {title, description, code, price, status, stock, category,thumbnail} = req.body;
-    const producto = {title, description, code, price, status, stock, category, thumbnail};
-    console.log(producto)
-    const msg = await manager.addProduct(producto);
-    res.send(msg);
-})
+router.post('/', uploader.array('thumbnail'), async (req, res) => {
+  const { title, description, code, price, status, stock, category } = req.body;
+  const files = req.files;
+  const filenames = [];  
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];        
+    const filename = `${file.originalname}`;
+    filenames.push(filename);
+  }  
+  const producto = {
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnail: []
+  };  
+  filenames.forEach((filename) => {
+    producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
+  });  
+  console.log(producto);
+  const msg = await manager.addProduct(producto);
+  res.send(msg);
+});
 
 router.delete("/:pid", async(req, res)=>{
     const id = req.params.pid;
@@ -38,11 +58,35 @@ router.delete("/:pid", async(req, res)=>{
     res.send(msg);
 })
 
-router.put('/:pid', async (req,res)=>{
+router.put('/:pid', uploader.array('thumbnail'), async (req,res)=>{
     const id_producto = req.params.pid
-    const {title, description, code, price, status, stock, category, thumbnail} = req.body;    
-    const msg = await manager.updateProduct(parseInt(id_producto), title, description, code, price, status, stock, category, thumbnail);
-    res.send(msg);
-})
+    const {title, description, code, price, status, stock, category} = req.body;
+    const files = req.files;
+  const filenames = [];
+  
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const filename = `${file.originalname}`;
+    filenames.push(filename);
+  }  
+  const producto = {
+    id: parseInt(id_producto),
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnail: []
+  };  
+  filenames.forEach((filename) => {
+    producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
+  });  
+  console.log(producto);
+  const msg = await manager.updateProduct(producto);
+  res.send(msg);
+});
+
 
 export default router;

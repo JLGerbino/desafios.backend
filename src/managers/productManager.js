@@ -80,40 +80,30 @@ export default class ProductManager {
     }
   };
   
-updateProduct = async (id_producto, title, description, code, price, status, stock, category, thumbnail) =>{    
-  try{
-    let producto = {
-      title: title,
-      description: description,
-      code: code,
-      price: price,
-      status: status,
-      stock: stock,
-      category: category,
-      thumbnail: thumbnail,      
-      id: id_producto
-    };
-    const products = await this.getProducts();
-    const indexProducto = products.findIndex(producto => producto.id == id_producto);    
-    if (indexProducto !== -1) {
-      if (Object.values(producto).includes(" ") ||
-      Object.values(producto).includes("")){
-        return console.log("Todos los campos son obligatorios");
-      }else{
-      const deleteP = products.splice(indexProducto,1)[0];
-      await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
-      deleteP;
-      products.push(producto);
-      await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
-      console.log("El producto se modificó con exito")     
-      return producto;
-    }        
-    } else {
-        return "El producto que quiere modificar no existe"
-    }    
-  } catch(error){
-  console.log(error)
+  updateProduct = async (producto) =>{    
+    try{       
+      const products = await this.getProducts();         
+      let id_producto = producto.id;      
+      const indexProducto = products.findIndex(producto => producto.id === id_producto);    
+      if (indexProducto !== -1) {
+        if (Object.values(producto).includes(" ") ||
+        Object.values(producto).includes("")){
+          return console.log("Todos los campos son obligatorios");
+        }else{
+        const deleteP = products.splice(indexProducto,1)[0];
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
+        deleteP;
+        products.push(producto);
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+        console.log("El producto se modificó con exito")     
+        return producto;
+      }        
+      } else {
+          return "El producto que quiere modificar no existe"
+      }    
+    } catch(error){
+    console.log(error)
+    }
   }
-}
 }
 
