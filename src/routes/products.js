@@ -24,9 +24,9 @@ router.get("/:pid", async(req, res)=>{
     const producto = await manager.getProductsById(id);
     res.send(producto);
 })
-
+             
 router.post('/', uploader.array('thumbnail'), async (req, res) => {
-  const { title, description, code, price, status, stock, category } = req.body;
+  const { title, description, code, price, stock, category } = req.body;
   const files = req.files;
   const filenames = [];  
   for (let i = 0; i < files.length; i++) {
@@ -39,7 +39,7 @@ router.post('/', uploader.array('thumbnail'), async (req, res) => {
     description,
     code,
     price,
-    status,
+    status: "true",
     stock,
     category,
     thumbnail: []

@@ -1,288 +1,68 @@
 [
 	{
-		"title": "Silla pino",
-		"description": "Silla pino tapizada",
-		"code": 1,
-		"price": 45000,
+		"title": "Colchon 140  x 190 Cannon",
+		"description": "Colchon Soñar 140 x 190 Cannon",
+		"code": "1",
+		"price": "85200",
 		"status": "true",
-		"stock": 255,
-		"category": "sillas",
-		"thumbnail": "no hay",
+		"stock": "15",
+		"category": "Colchones Cannon",
+		"thumbnail": [
+			"http://localhost:8080/images/Cannon-Sonar.png",
+			"http://localhost:8080/images/Canno-Sonar-140.jpg"
+		],
 		"id": 1
 	},
 	{
-		"title": "Sillon",
-		"description": "sillon pino tapizado",
-		"code": 2,
-		"price": 15000,
+		"title": "Mesa guatambu 180 x 90",
+		"description": "Mesa guatambu 180 x 90",
+		"code": "2",
+		"price": "78900",
 		"status": "true",
-		"stock": 20,
-		"category": "sillones",
-		"thumbnail": "no hay",
+		"stock": "10",
+		"category": "Mesas guatambu",
+		"thumbnail": [
+			"http://localhost:8080/images/mesa-de-guatambu.jpg"
+		],
 		"id": 2
 	},
 	{
-		"title": "Cama",
-		"description": "Cama pino 140 mts",
-		"code": 3,
-		"price": 55000,
+		"title": "Silla pino Emilia",
+		"description": "Silla pino tapizada",
+		"code": "3",
+		"price": "28900",
 		"status": "true",
-		"stock": 10,
-		"category": "camas",
-		"thumbnail": "no hay",
+		"stock": "12",
+		"category": "Sillas pino",
+		"thumbnail": [
+			"http://localhost:8080/images/SILLA-pino.jpg"
+		],
 		"id": 3
 	},
 	{
-		"title": "Mesa",
-		"description": "mesa píno 180 x 90",
-		"code": 4,
-		"price": 48200,
+		"title": "Cama pino 140 mts",
+		"description": "Cama pino 140 tapizada",
+		"code": "4",
+		"price": "76500",
 		"status": "true",
-		"stock": 10,
-		"category": "mesas",
-		"thumbnail": "no hay",
+		"stock": "3",
+		"category": "Camas pino",
+		"thumbnail": [
+			"http://localhost:8080/images/cama-1564-valentino.jpg"
+		],
 		"id": 4
 	},
 	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 180",
-		"code": "13",
-		"price": "13000",
+		"title": "Rack tv 150 mts",
+		"description": "Rack tv 150 mts melamina",
+		"code": "5",
+		"price": "37900",
 		"status": "true",
-		"stock": "13",
-		"category": "colchon perros",
-		"thumbnail": "http://localhost:8080/images/undefined",
+		"stock": "5",
+		"category": "Racks tv",
+		"thumbnail": [
+			"http://localhost:8080/images/rack-tv-150.jpg"
+		],
 		"id": 5
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "14",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": "http://localhost:8080/images/undefined",
-		"id": 6
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "123",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": "http://localhost:8080/images/1681151548000-mr.jpg",
-		"id": 7
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "122",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": "http://localhost:8080/images/[object Object]",
-		"id": 8
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "121",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": "http://localhost:8080/images/[object Object]",
-		"id": 9
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "120",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": [
-			"http://localhost:8080/images/thumbnail-1681232502954-6031.jpg",
-			"http://localhost:8080/images/thumbnail-1681232502954-1744.jpg"
-		],
-		"id": 10
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "50",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/images/1681232898543-cachorros.jpg",
-			"http://localhost:8080/images/1681232898543-mr.jpg"
-		],
-		"id": 11
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "49",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/images/1681233167487-cachorros.jpg",
-			"http://localhost:8080/images/1681233167487-mr.jpg"
-		],
-		"id": 12
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "48",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/images/1681233290029-cachorros.jpg",
-			"http://localhost:8080/images/1681233290029-mr.jpg"
-		],
-		"id": 13
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "47",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/public/images/1681233547702-cachorros.jpg",
-			"http://localhost:8080/public/images/1681233547702-mr.jpg"
-		],
-		"id": 14
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "46",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/src/public/images/1681233614883-cachorros.jpg",
-			"http://localhost:8080/src/public/images/1681233614883-mr.jpg"
-		],
-		"id": 15
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "45",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/public/images/1681234135059-cachorros.jpg",
-			"http://localhost:8080/public/images/1681234135059-mr.jpg"
-		],
-		"id": 16
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "44",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/public/images/1681234422098-cachorros.jpg",
-			"http://localhost:8080/public/images/1681234422098-mr.jpg"
-		],
-		"id": 17
-	},
-	{
-		"title": "caca de perro",
-		"description": "mucha cacac",
-		"code": "450",
-		"price": "50",
-		"status": "true",
-		"stock": "50",
-		"category": "caca de mesa",
-		"thumbnail": [
-			"http://localhost:8080/public/images/1681234135059-cachorros.jpg",
-			"http://localhost:8080/public/images/1681234135059-mr.jpg"
-		],
-		"id": 18
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 18",
-		"code": "300",
-		"price": "140000",
-		"status": "true",
-		"stock": "14",
-		"category": "colchon mesas",
-		"thumbnail": "http://localhost:8080/images/1681235548366-mr.jpg",
-		"id": 19
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 180",
-		"code": "1113",
-		"price": "13000",
-		"status": "true",
-		"stock": "13",
-		"category": "colchon perros",
-		"thumbnail": [],
-		"id": 20
-	},
-	{
-		"title": "Colchon de perro Mesa",
-		"description": "mesa peroo  colchon píno 180",
-		"code": "113",
-		"price": "13000",
-		"status": "true",
-		"stock": "13",
-		"category": "colchon perros",
-		"thumbnail": [
-			"http://localhost:8080/images/undefined"
-		],
-		"id": 21
-	},
-	{
-		"id": 22,
-		"title": "colchon 140 canno",
-		"description": "mesa perrofdgdfgfdg",
-		"code": "89",
-		"price": "15000",
-		"status": "true",
-		"stock": "14",
-		"category": "Colchones Cannon",
-		"thumbnail": [
-			"http://localhost:8080/images/cachorros.jpg"
-		]
-	},
-	{
-		"id": 23,
-		"title": "colchon 140 canno",
-		"description": "mesa perrofdgdfgfdg",
-		"code": "89",
-		"price": "15000",
-		"status": "true",
-		"stock": "14",
-		"category": "Colchones Cannon",
-		"thumbnail": [
-			"http://localhost:8080/images/mr.jpg"
-		]
 	}
 ]
