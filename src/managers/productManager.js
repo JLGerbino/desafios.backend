@@ -28,12 +28,14 @@ export default class ProductManager {
       } else {
         producto.id = products[products.length - 1].id + 1;
       }
+      //comentado de aca
       if (
         Object.values(producto).includes(" ") ||
         Object.values(producto).includes("")
       ) {        
         return "Todos los campos son obligatorios";
       }
+      //hsta aca
       let codigo = products.find((ele) => ele.code == producto.code);
       if (codigo) {
         return "El 'code' del producto ya existe, intente cambiarlo.";
@@ -41,7 +43,7 @@ export default class ProductManager {
         products.push(producto);
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
         console.log(producto);
-        return producto;
+        //return producto;
       }
     } catch(error){
       console.log(error)

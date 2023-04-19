@@ -1,0 +1,69 @@
+
+<div>
+    <h1>Cargar producto</h1>
+    
+        <label>Titulo</label>
+        <input id = "title" name="title"><br>
+
+        <label>Descripcion</label>
+        <input id = "description" name="description"><br>
+
+        <label>Codigo</label>
+        <input id = "code" name="code"><br>
+
+        <label>Precio</label>
+        <input id = "price" name="price" type="number"><br>
+
+        <label>Stock</label>
+        <input id = "stock" name="stock" type="number"><br>
+
+        <label>Categoria</label>
+        <input id = "category" name="category"><br>
+
+        <label>Imagenes</label>
+        <input id = "thumbnail" name="thumbnail" type="file"><br>
+
+        <input id="enviar" type="submit">   
+   
+</div>
+<div>
+<h1>eliminar producto</h1>
+<label>ingresar Id</label>
+    <input id = "id" name="id" type="number"><br>
+<input id="eliminar" type="submit">
+</div>
+<h1>Listado de productos real</h1>
+
+<div id="inicio">
+    {{#each products}}
+      <p id="idn">id: {{this.id}}</p>
+      <p id="titlen">title: {{this.title}}</p>
+      <p id="descriptionn">description: {{this.description}}</p>
+      <p id="coden">price: {{this.price}}</p>
+      <p id="statusn">status: {{this.status}}</p>
+      <p id="stockn">stock: {{this.stock}}</p>
+      <p id="categoryn">category: {{this.category}}</p>
+      <p id="thumbnailn">thumbnail: {{this.thumbnail}}</p><br>    
+  {{/each}}
+</div>
+
+
+{{!-- <input id="textbox">
+<p id="log"></p> --}}
+<p id="productos"></p>
+
+{{!-- <ul>
+  {{#each products}}
+      <p id="idn">id: {{this.id}}</p>
+      <p id="titlen">title: {{this.title}}</p>
+      <p id="descriptionn">description: {{this.description}}</p>
+      <p id="coden">price: {{this.price}}</p>
+      <p id="statusn">status: {{this.status}}</p>
+      <p id="stockn">stock: {{this.stock}}</p>
+      <p id="categoryn">category: {{this.category}}</p>
+      <p id="thumbnailn">thumbnail: {{this.thumbnail}}</p><br>    
+  {{/each}}
+</ul> --}}
+{{!-- <script type="module" src="/js/home.js"></script> --}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
