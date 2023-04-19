@@ -1,6 +1,7 @@
 <h1>Listado de productos home</h1>
   {{#each products}}
-      <p>id: {{this.id}}</p>
+  <p>id: {{this.id}}, title: {{this.title}}, description: {{this.description}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
+      {{!-- <p>id: {{this.id}}</p>
       <p>title: {{this.title}}</p>
       <p>description: {{this.description}}</p>
       <p>code: {{this.code}}</p>
@@ -8,8 +9,8 @@
       <p>status: {{this.status}}</p>
       <p>stock: {{this.stock}}</p>
       <p>category: {{this.category}}</p>
-      <p>thumbnail: {{this.thumbnail}}</p><br>    
+      <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
   {{/each}}
 </ul>
 
-{{!-- <script src="/js/home.js"></script> --}}
+

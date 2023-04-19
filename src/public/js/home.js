@@ -4,7 +4,6 @@ const log = document.getElementById('log');
 
 const botonEnviar = document.getElementById("enviar");
 
-
 botonEnviar.addEventListener("click", event => {
    if (event){
       const title = document.getElementById("title").value;
@@ -13,9 +12,9 @@ botonEnviar.addEventListener("click", event => {
       const price = document.getElementById("price").value;
       const stock = document.getElementById("stock").value;
       const category = document.getElementById("category").value;
-      const thumbnail = document.getElementById("thumbnail").value;
+      const thumbnail = document.getElementById("thumbnail").value;      
       
-      const nuevoProducto = {title , description, code, price, status: "true" , stock, category, thumbnail};
+      const nuevoProducto = {title, description, code, price, status: "true", stock, category, thumbnail};
       
       socket.emit("message", nuevoProducto);
    }      
@@ -35,7 +34,6 @@ socket.on("actualizado", productos => {
  
  botonEliminar = document.getElementById("eliminar");
  botonEliminar.addEventListener("click", event => {
-   //event.preventDefault();
    if (event){
       const id =  document.getElementById("id").value;
       socket.emit("message1", id);

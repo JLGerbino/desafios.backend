@@ -27,43 +27,21 @@
    
 </div>
 <div>
-<h1>eliminar producto</h1>
+<h1>Eliminar producto</h1>
 <label>ingresar Id</label>
     <input id = "id" name="id" type="number"><br>
 <input id="eliminar" type="submit">
 </div>
-<h1>Listado de productos real</h1>
+<h1>Listado de productos en tiempo real</h1>
 
 <div id="inicio">
     {{#each products}}
-      <p id="idn">id: {{this.id}}</p>
-      <p id="titlen">title: {{this.title}}</p>
-      <p id="descriptionn">description: {{this.description}}</p>
-      <p id="coden">price: {{this.price}}</p>
-      <p id="statusn">status: {{this.status}}</p>
-      <p id="stockn">stock: {{this.stock}}</p>
-      <p id="categoryn">category: {{this.category}}</p>
-      <p id="thumbnailn">thumbnail: {{this.thumbnail}}</p><br>    
-  {{/each}}
+      <p id="idn">id: {{this.id}}, title: {{this.title}}, description: {{this.description}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
+    {{/each}}
 </div>
 
-
-{{!-- <input id="textbox">
-<p id="log"></p> --}}
 <p id="productos"></p>
 
-{{!-- <ul>
-  {{#each products}}
-      <p id="idn">id: {{this.id}}</p>
-      <p id="titlen">title: {{this.title}}</p>
-      <p id="descriptionn">description: {{this.description}}</p>
-      <p id="coden">price: {{this.price}}</p>
-      <p id="statusn">status: {{this.status}}</p>
-      <p id="stockn">stock: {{this.stock}}</p>
-      <p id="categoryn">category: {{this.category}}</p>
-      <p id="thumbnailn">thumbnail: {{this.thumbnail}}</p><br>    
-  {{/each}}
-</ul> --}}
-{{!-- <script type="module" src="/js/home.js"></script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/home.js"></script>

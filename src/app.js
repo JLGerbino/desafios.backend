@@ -31,10 +31,14 @@ const server = app.listen(PORT, ()=>{
 const socketServerIO = new Server(server);
 
 socketServerIO.on("connection", socket =>{
-    console.log("Usuario conectado");
-    socket.on("message", async nuevoProducto =>{
+        console.log("Usuario conectado");
+        socket.on("message", async nuevoProducto =>{
 
         nuevoProducto = await manager.addProduct(nuevoProducto);//esto tengo que hacer en app
+        console.log(nuevoProducto)
+        // if (nuevoProducto === "Todos los campos son obligatorios"){
+        //   return  alert("Todos los campos son obligatorios")
+        // }
         //console.log(nuevoProducto)
         //const productos = manager.getProduct();
         // console.log(agregado)
