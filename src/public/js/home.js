@@ -21,6 +21,17 @@ botonEnviar.addEventListener("click", event => {
 })
 
 socket.on("actualizado", productos => {
+   console.log(productos)
+   if (productos === "campos"){
+      Swal.fire('Todos los campos son obligatorios')
+   }
+   if(productos === "code"){
+      Swal.fire("El 'code' del producto ya existe, intente cambiarlo.")
+   }  
+   if (productos === "inexistente") {
+      Swal.fire("El producto que quiere eliminar no existe")
+   } 
+   else{
    let inicio = document.getElementById("inicio");
    inicio.style.display = "none";
    let listaProductos = document.getElementById("productos");
@@ -30,7 +41,8 @@ socket.on("actualizado", productos => {
      p.innerText = `id: ${producto.id}, title: ${producto.title}, description: ${producto.description},code: ${producto.code} ,price: ${producto.price}, status: ${producto.status}, stock: ${producto.stock}, category: ${producto.category}, thumbnail: ${producto.thumbnail}`;
      listaProductos.appendChild(p);
    });
- });
+ }
+});
  
  botonEliminar = document.getElementById("eliminar");
  botonEliminar.addEventListener("click", event => {

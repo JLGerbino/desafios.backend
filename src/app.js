@@ -34,26 +34,28 @@ socketServerIO.on("connection", socket =>{
         console.log("Usuario conectado");
         socket.on("message", async nuevoProducto =>{
 
-        nuevoProducto = await manager.addProduct(nuevoProducto);//esto tengo que hacer en app
+        nuevoProducto = await manager.addProduct(nuevoProducto);
         console.log(nuevoProducto)
-        // if (nuevoProducto === "Todos los campos son obligatorios"){
-        //   return  alert("Todos los campos son obligatorios")
-        // }
-        //console.log(nuevoProducto)
-        //const productos = manager.getProduct();
-        // console.log(agregado)
-        //productos.push(nuevoProducto)
+        if (nuevoProducto === "Todos los campos son obligatorios"){
+            socketServerIO.emit("actualizado", "campos"); 
+         }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
+            socketServerIO.emit("actualizado", "code");
+         }else{        
         const productos = await manager.getProducts();
         //console.log(productos);
-        socketServerIO.emit("actualizado", productos); //productos       
+        socketServerIO.emit("actualizado", productos);} //productos       
     })
 
-    socket.on("message1", async idEliminar =>{
-        console.log(idEliminar)
+    socket.on("message1", async idEliminar =>{        
         idEliminar = await manager.deleteProduct(idEliminar);
+        console.log(idEliminar)
+        if (idEliminar === "El producto que quiere eliminar no existe") {
+            socketServerIO.emit("actualizado", "inexistente")
+        }else{
         const productos = await manager.getProducts();
         socketServerIO.emit("actualizado", productos)
-    } )
+        }
+    })
 })
 
 
