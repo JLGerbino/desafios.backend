@@ -62,11 +62,10 @@ export default class ProductManagerDB {
 
   deleteProduct = async (id_producto) => {
     try{    
-      //const products = await this.getProducts();
-      const id = id_producto
-      const product = await productoModel.deleteOne({_id:id_producto}) //products.findIndex(producto => producto.id == id_producto);
-      if (id) {            
-        // products.splice(indexProducto,1)[0];        
+      const products = await this.getProducts();
+      const producto = products.find((producto) => producto.id == id_producto);     
+      if (producto) {  
+        await productoModel.deleteOne({_id:id_producto})            
         console.log("El producto fue eliminado");
         return "Producto eliminado";
       } else {
@@ -87,12 +86,7 @@ export default class ProductManagerDB {
         Object.values(producto).includes("")){
           return console.log("Todos los campos son obligatorios");
         }else{
-        const update = await productoModel.updateOne({_id:id_producto},{$set:producto});
-        // const deleteP = products.splice(indexProducto,1)[0];
-        // await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
-        // deleteP;
-        // products.push(producto);
-        // await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+        const update = await productoModel.updateOne({_id:id_producto},{$set:producto});        
         console.log("El producto se modificó con exito")
         console.log(update)     
         return producto;
