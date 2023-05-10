@@ -1,6 +1,6 @@
 [
 	{
-		"product": [
+		"productos": [
 			{
 				"product": "2",
 				"quantity": 2
@@ -9,7 +9,7 @@
 		"id": 1
 	},
 	{
-		"product": [
+		"productos": [
 			{
 				"product": "2",
 				"quantity": 3
@@ -22,7 +22,7 @@
 		"id": 2
 	},
 	{
-		"product": [
+		"productos": [
 			{
 				"product": "2",
 				"quantity": 3
@@ -35,11 +35,11 @@
 		"id": 3
 	},
 	{
-		"product": [],
+		"productos": [],
 		"id": 4
 	},
 	{
-		"product": [
+		"productos": [
 			{
 				"product": "20",
 				"quantity": 2
@@ -50,5 +50,17 @@
 			}
 		],
 		"id": 5
+	},
+	{
+		"productos": [],
+		"id": 6
+	},
+	{
+		"productos": [],
+		"id": 7
+	},
+	{
+		"productos": [],
+		"id": 8
 	}
 ]

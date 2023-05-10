@@ -38,7 +38,7 @@ socket.on("actualizado", productos => {
    listaProductos.innerHTML = "";    
    productos.forEach(producto => {
      let p = document.createElement("p");
-     p.innerText = `id: ${producto.id}, title: ${producto.title}, description: ${producto.description},code: ${producto.code} ,price: ${producto.price}, status: ${producto.status}, stock: ${producto.stock}, category: ${producto.category}, thumbnail: ${producto.thumbnail}`;
+     p.innerText = `id: ${producto._id}, title: ${producto.title}, description: ${producto.description},code: ${producto.code} ,price: ${producto.price}, status: ${producto.status}, stock: ${producto.stock}, category: ${producto.category}, thumbnail: ${producto.thumbnail}`;
      listaProductos.appendChild(p);
    });
  }

@@ -26,7 +26,7 @@ export default class CartManager {
     try{
     const carts = await this.getCarts();
     let cart = {
-      product: [],
+      productos: [],
     };
     let id_carrito = cart.id;
     if (carts.length === 0) {

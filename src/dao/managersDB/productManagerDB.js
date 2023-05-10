@@ -1,19 +1,15 @@
-import fs from "fs";
+import productoModel from "../models/producto.model.js";
 
-export default class ProductManager {
+export default class ProductManagerDB {
   constructor(){
     this.path = "./src/files/products.json";    
   }  
  
+  
   getProducts = async () => {
     try{
-      if (fs.existsSync(this.path)) {
-        const data = await fs.promises.readFile(this.path, "utf8");
-        const products = JSON.parse(data);      
-        return products      
-      } else {
-        return [];
-      }
+      const products = await productoModel.find()
+      return products      
     } catch(error){
       console.log(error)
     }
@@ -40,10 +36,10 @@ export default class ProductManager {
       if (codigo) {
         return "El 'code' del producto ya existe, intente cambiarlo.";
       } else {
-        products.push(producto);
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+        //products.push(producto);
+        await productoModel.create(producto)
         console.log(producto);
-        //return producto;
+        return producto;
       }
     } catch(error){
       console.log(error)
@@ -51,13 +47,13 @@ export default class ProductManager {
   }
 
   getProductsById = async (id_producto) => {
-    try{    
+    try{
       const products = await this.getProducts();
-      const producto = products.find((producto) => producto.id == id_producto);
-      if (producto) {      
+      const producto = products.find((producto) => producto.id == id_producto);      
+      if (producto) {        
         return producto;
       } else {
-        return "not found";
+        return "No existe el producto";
       }
     } catch(error){
       console.log(error)
@@ -66,14 +62,13 @@ export default class ProductManager {
 
   deleteProduct = async (id_producto) => {
     try{    
-      const products = await this.getProducts();    
-      const indexProducto = products.findIndex(producto => producto.id == id_producto);
-      if (indexProducto !== -1) {            
-        products.splice(indexProducto,1)[0];      
-        await fs.promises.writeFile(this.path,JSON.stringify(products, null, "\t")
-        );
+      //const products = await this.getProducts();
+      const id = id_producto
+      const product = await productoModel.deleteOne({_id:id_producto}) //products.findIndex(producto => producto.id == id_producto);
+      if (id) {            
+        // products.splice(indexProducto,1)[0];        
         console.log("El producto fue eliminado");
-        return "Producto eliminado"
+        return "Producto eliminado";
       } else {
         return "El producto que quiere eliminar no existe";
       }
@@ -92,12 +87,14 @@ export default class ProductManager {
         Object.values(producto).includes("")){
           return console.log("Todos los campos son obligatorios");
         }else{
-        const deleteP = products.splice(indexProducto,1)[0];
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
-        deleteP;
-        products.push(producto);
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
-        console.log("El producto se modificó con exito")     
+        const update = await productoModel.updateOne({_id:id_producto},{$set:producto});
+        // const deleteP = products.splice(indexProducto,1)[0];
+        // await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));      
+        // deleteP;
+        // products.push(producto);
+        // await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+        console.log("El producto se modificó con exito")
+        console.log(update)     
         return producto;
       }        
       } else {
@@ -108,4 +105,3 @@ export default class ProductManager {
     }
   }
 }
-
