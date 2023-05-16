@@ -3,7 +3,7 @@ import ProductManagerFS from "../dao/managersFS/productManager.js";
 import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
 import { uploader } from "../utils.js";
 //import estudianteModel from "../dao/models/producto.model.js";
-//import productoModel from "../dao/models/producto.model.js";
+import productoModel from "../dao/models/producto.model.js";
 
 const router = Router();
 const manager = new ProductManagerFS

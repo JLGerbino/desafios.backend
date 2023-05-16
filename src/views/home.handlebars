@@ -10,6 +10,16 @@
       <p>stock: {{this.stock}}</p>
       <p>category: {{this.category}}</p>
       <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
-  {{/each}}
+  {{/each}} 
+    {{#if hasPrevPage}}    
+    <a href="/?page={{prevPage}}"><button>Anterior</button></a>
+    {{/if}}
+    {{#if hasNextPage}}
+    <a href="/?page={{nextPage}}"><button>Siguiente</button></a><br>
+    {{/if}}
+    <p>Pagina: {{page}}</p>
+    <p>Total paginas: {{totalPages}}</p>
+
+
 </ul>
 

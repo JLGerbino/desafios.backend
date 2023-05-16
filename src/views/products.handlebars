@@ -1,0 +1,39 @@
+<h1>Listado de productos prodcutos home</h1>
+<div class="row">
+  <div "col-sm-6 mb-3 mb-sm-0">
+  {{#each products}}
+  {{!-- <p>id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br> --}}
+      <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.description}}</p>
+    <p class="card-text">$ {{this.price}}</p>
+    <a href="#" class="btn btn-primary"><button>agregar a carrito</button></a>
+  </div>
+</div>
+</div>
+</div>
+      {{!-- <p>id: {{this.id}}</p>
+      <p>title: {{this.title}}</p>
+      <p>description: {{this.description}}</p>
+      <p>code: {{this.code}}</p>
+      <p>price: {{this.price}}</p>
+      <p>status: {{this.status}}</p>
+      <p>stock: {{this.stock}}</p>
+      <p>category: {{this.category}}</p>
+      <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
+      
+  {{/each}} 
+    {{#if hasPrevPage}}    
+    <a href="/productos?page={{prevPage}}"><button>Anterior</button></a>
+    {{/if}}
+    {{#if hasNextPage}}
+    <a href="/productos?page={{nextPage}}"><button>Siguiente</button></a><br>
+    {{/if}}
+    <p>Pagina: {{page}}</p>
+    <p>Total paginas: {{totalPages}}</p>
+
+
+</ul>
+
