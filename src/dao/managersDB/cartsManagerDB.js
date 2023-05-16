@@ -178,7 +178,7 @@ export default class CartManagerDB {
         return "El producto no está en el carrito";
       }  
       products[indexProducto].quantity += parseInt(cantidad);  
-      await carritoModel.updateOne({_id:id_carrito},{$set:cart}); //cart.save();  
+      await carritoModel.updateOne({_id:id_carrito},{$set:cart}); 
       return "Se actualizó la cantidad";
     } catch (error) {
       console.log(error);
