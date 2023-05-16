@@ -170,44 +170,61 @@ export default class CartManagerDB {
 
   UpdateQuantityProd = async (id_carrito, id_producto, cantidad) => {
     try {
-      const cart = await carritoModel.findOne({_id:id_carrito})
-     // const carts = await this.getCarts();
-      const products = cart.productos//await pManagerDB.getProducts();
-      console.log("productos" + id_producto);
-     // const indexCarrito = carts.findIndex((cart) => cart.id == id_carrito);
-      //console.log(id_carrito);
-      // if (indexCarrito !== -1) {
-         const indexProducto = products.findIndex(
-           (producto) => producto.product == id_producto
-         );
-       // console.log(indexProducto);
-        //  if (indexProducto !== -1) {
-        //    let prodInCart = carts[indexCarrito].productos.find(
-        //      (ele) => ele.product == id_producto
-        //    );          
-          //console.log(prodInCart);
-          if (indexProducto !== -1) {
-            return "El producto no esta en el carrito"            
-          } else {
-            console.log("console" + products[indexProducto]);
-            products[indexProducto].quantity = parseInt(cantidad)+products[indexProducto].quantity                         
-            //cart.productos.splice(indexProducto,1)//[0]            
-            await carritoModel.updateOne({_id:id_carrito},{$set:cart});
-            //await carritoModel.findByIdAndUpdate(id_carrito, {$set: {productos: cart.productos}});
-            //console.log("nueva " + prodInCart);
-
-            return "Se actualizo la cantidad"                        
-          }                  
-      //   } else {
-      //     return "No existe el producto";
-      //   }
-      // } else {
-      //   return "No existe el carrito";
-      // }
+      const cart = await carritoModel.findOne({ _id: id_carrito });
+      const products = cart.productos;  
+      const indexProducto = products.findIndex(
+        (producto) => producto.product == id_producto);  
+      if (indexProducto === -1) {
+        return "El producto no está en el carrito";
+      }  
+      products[indexProducto].quantity += parseInt(cantidad);  
+      await carritoModel.updateOne({_id:id_carrito},{$set:cart}); //cart.save();  
+      return "Se actualizó la cantidad";
     } catch (error) {
       console.log(error);
     }
-  }; 
+  };
+
+  // UpdateQuantityProd = async (id_carrito, id_producto, cantidad) => {
+  //   try {
+  //     const cart = await carritoModel.findOne({_id:id_carrito})
+  //    // const carts = await this.getCarts();
+  //     const products = cart.productos//await pManagerDB.getProducts();
+  //     console.log("productos" + id_producto);
+  //    // const indexCarrito = carts.findIndex((cart) => cart.id == id_carrito);
+  //     //console.log(id_carrito);
+  //     // if (indexCarrito !== -1) {
+  //        const indexProducto = products.findIndex(
+  //          (producto) => producto.product == id_producto
+  //        );
+  //      // console.log(indexProducto);
+  //       //  if (indexProducto !== -1) {
+  //       //    let prodInCart = carts[indexCarrito].productos.find(
+  //       //      (ele) => ele.product == id_producto
+  //       //    );          
+  //         //console.log(prodInCart);
+  //         if (indexProducto !== -1) {
+  //           return "El producto no esta en el carrito"            
+  //         } else {
+  //           console.log("console" + products[indexProducto]);
+  //           products[indexProducto].quantity = parseInt(cantidad)+products[indexProducto].quantity                         
+  //           //cart.productos.splice(indexProducto,1)//[0]            
+  //           await carritoModel.updateOne({_id:id_carrito},{$set:cart});
+  //           //await carritoModel.findByIdAndUpdate(id_carrito, {$set: {productos: cart.productos}});
+  //           //console.log("nueva " + prodInCart);
+
+  //           return "Se actualizo la cantidad"                        
+  //         }                  
+  //     //   } else {
+  //     //     return "No existe el producto";
+  //     //   }
+  //     // } else {
+  //     //   return "No existe el carrito";
+  //     // }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }; 
  
   UpdateCartWithProds = async (id_carrito) => {
     try {
