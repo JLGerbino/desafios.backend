@@ -116,14 +116,14 @@ export default class CartManagerDB {
         );
         console.log(indexProducto);
         if (indexProducto !== -1) {
-          let prodInCart = carts[indexCarrito].productos.find(
+          let prodInCart = carts[indexCarrito].productos.findIndex(
             (ele) => ele.product == id_producto
           );          
           console.log(prodInCart);
-          if (!prodInCart) {
+          if (prodInCart === -1) {
             return "El producto no esta en el carrito"            
           } else {             
-            cart.productos.splice(indexProducto,1)//[0]
+            cart.productos.splice(prodInCart ,1)//[0]
             await carritoModel.updateOne({_id:id_carrito},{$set:cart})                        
           }                  
         } else {
