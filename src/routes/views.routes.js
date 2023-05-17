@@ -108,9 +108,8 @@ router.get("/products", async (req, res)=>{
         totalPages,
         page
         })
-} 
-}
-
+       } 
+    }
 })
 
 
@@ -150,16 +149,9 @@ router.get("/carts/:cid", async (req, res)=>{
     console.log("productosCart" + productosCart)    
     res.render("carts", {
         productos: productosCart.productos,
-                
+        id: id_carrito                
     })
 })
-
-
-
-
-//quantity: productosCart.quantity,
-//idProducto: productosCart._id,
-        //id: id_carrito
 
 router.get("/chat", (req,res)=>{
     res.render("chat", {})

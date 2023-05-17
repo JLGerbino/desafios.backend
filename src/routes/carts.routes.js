@@ -76,10 +76,12 @@ router.put('/:cid/products/:pid', async (req,res)=>{
     res.send(msg);
 })
 
-router.put('/:cid', async (req,res)=>{
-    const id_carrito = req.params.cid;    
-    const msg = await managerDB.UpdateCartWithProds(id_carrito)
+//ruta db nueva
+router.put('/:cid', async (req, res) => {
+    const id_carrito = req.params.cid; 
+    const products = req.body.products;     
+    const msg = await managerDB.UpdateCartWithProds(id_carrito, products);
     res.send(msg);
-})
+  });
 
 export default router;
