@@ -1,6 +1,6 @@
 <h1>Listado de productos prodcutos home</h1>
 <div class="row">
-  <div "col-sm-6 mb-3 mb-sm-0">
+  <div "col-xl-6 col-md-6 col-sm-12">
   {{#each products}}
   {{!-- <p>id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br> --}}
       <div class="card" style="width: 18rem;">
@@ -25,11 +25,13 @@
       <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
       
   {{/each}} 
-    {{#if hasPrevPage}}    
-    <a href="/products?page={{prevPage}}"><button>Anterior</button></a>
+    {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}&sort={{sort}}&limit={{limit}}"><button>Anterior</button></a>    
+    {{!-- <a href="/products?page={{prevPage}}"><button>Anterior</button></a> --}}
     {{/if}}
     {{#if hasNextPage}}
-    <a href="/products?page={{nextPage}}"><button>Siguiente</button></a><br>
+    <a href="/products?page={{nextPage}}&sort={{sort}}&limit={{limit}}"><button>Siguiente</button></a><br>
+    {{!-- <a href="/products?page={{nextPage}}"><button>Siguiente</button></a><br> --}}
     {{/if}}
     <p>Pagina: {{page}}</p>
     <p>Total paginas: {{totalPages}}</p>

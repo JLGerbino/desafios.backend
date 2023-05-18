@@ -16,7 +16,6 @@ router.get("/", async (req, res)=>{
     const {page = 1} = req.query
     const sort = req.query.sort
     const query = req.query.query
-    
     const {status, docs, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage} = await productoModel.paginate({},{limit, page, lean:true})
     const products = docs   
    //
@@ -34,7 +33,9 @@ router.get("/", async (req, res)=>{
             prevPage,
             nextPage,
             totalPages,
-            page
+            page,
+            sort,
+            limit
     })
 }else{
     if(sort){
@@ -45,7 +46,9 @@ router.get("/", async (req, res)=>{
     prevPage,
     nextPage,
     totalPages,
-    page
+    page,
+    sort,
+    limit
     })
 } else{
     res.render("home", {
@@ -55,7 +58,9 @@ router.get("/", async (req, res)=>{
         prevPage,
         nextPage,
         totalPages,
-        page
+        page,
+        sort,
+        limit
         })
 } 
 }
@@ -85,7 +90,9 @@ router.get("/products", async (req, res)=>{
             prevPage,
             nextPage,
             totalPages,
-            page
+            page,
+            sort,
+            limit
     })
 }else{
     if(sort){
@@ -96,7 +103,9 @@ router.get("/products", async (req, res)=>{
     prevPage,
     nextPage,
     totalPages,
-    page
+    page,
+    sort,
+    limit
     })
 } else{
     res.render("products", {
@@ -106,7 +115,9 @@ router.get("/products", async (req, res)=>{
         prevPage,
         nextPage,
         totalPages,
-        page
+        page,
+        sort,
+        limit
         })
        } 
     }

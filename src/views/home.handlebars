@@ -1,25 +1,14 @@
 <h1>Listado de productos home</h1>
-  {{#each products}}
+{{#each products}}
   <p>id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
-      {{!-- <p>id: {{this.id}}</p>
-      <p>title: {{this.title}}</p>
-      <p>description: {{this.description}}</p>
-      <p>code: {{this.code}}</p>
-      <p>price: {{this.price}}</p>
-      <p>status: {{this.status}}</p>
-      <p>stock: {{this.stock}}</p>
-      <p>category: {{this.category}}</p>
-      <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
-  {{/each}} 
-    {{#if hasPrevPage}}    
-    <a href="/?page={{prevPage}}"><button>Anterior</button></a>
-    {{/if}}
-    {{#if hasNextPage}}
-    <a href="/?page={{nextPage}}"><button>Siguiente</button></a><br>
-    {{/if}}
-    <p>Pagina: {{page}}</p>
-    <p>Total paginas: {{totalPages}}</p>
+{{/each}}
 
+{{#if hasPrevPage}}
+  <a href="/?page={{prevPage}}&sort={{sort}}&limit={{limit}}"><button>Anterior</button></a>
+{{/if}}
+{{#if hasNextPage}}
+  <a href="/?page={{nextPage}}&sort={{sort}}&limit={{limit}}"><button>Siguiente</button></a><br>
+{{/if}}
 
-</ul>
-
+<p>Pagina: {{page}}</p>
+<p>Total paginas: {{totalPages}}</p>
