@@ -1,14 +1,18 @@
 import express from "express"
 import handlebars from "express-handlebars";
+import session from "express-session";
 import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import { Server } from "socket.io";
 import ProductManagerFS from "./dao/managersFS/productManager.js";
 import ProductManagerDB from "./dao/managersDB/productManagerDB.js";
 import ChatManagerDB from "./dao/managersDB/chatManagerDB.js";
 import productsRouter from "./routes/products.routes.js";
 import cartsRouter from "./routes/carts.routes.js";
-import viewRouter from "./routes/views.routes.js"
+import viewRouter from "./routes/views.routes.js";
+import sessionRouter from "./routes/sessions.routes.js";
 import __dirname from "./utils.js";
+
 
 const PORT = 8080;
 
@@ -25,12 +29,22 @@ const connection = mongoose.connect(MONGO);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
+app.use(session({
+    store: new MongoStore({
+        mongoUrl: MONGO,
+        ttl:3600
+    }),
+    secret:'CoderSecret',
+    resave:false,
+    saveUninitialized:false
+}))
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname +'/views');
 app.set('view engine', 'handlebars');
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
+app.use("/api/session", sessionRouter)
 
 const server = app.listen(PORT, ()=>{    
         console.log(`Servidor funcionando en el puerto ${PORT}`)

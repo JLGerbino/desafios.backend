@@ -20,15 +20,20 @@ export default class CartManagerDB {
     let cart = {
       product: [],
       };    
-    let id_carrito = cart.id;
+    //let id_carrito = cart._id;
     // if (carts.length === 0) {
     //   cart.id = 1;
     // } else {
     //   cart.id = carts[carts.length - 1].id + 1;
     // }
+    // console.log(id_carrito)
     carts.push(cart);
-    await carritoModel.create(cart) 
-    return cart;
+    const nuevoCarrito = await carritoModel.create(cart)
+    const id_carrito = nuevoCarrito._id;
+    return {
+      id: id_carrito,
+      product: cart.product
+    };    
      }catch(error){
       console.log(error)
     }

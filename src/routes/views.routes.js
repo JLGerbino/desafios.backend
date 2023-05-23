@@ -4,6 +4,7 @@ import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
 import CartManagerDB from "../dao/managersDB/cartsManagerDB.js";
 import productoModel from "../dao/models/producto.model.js";
 import carritoModel from "../dao/models/carrito.model.js";
+//import userModel from "../dao/models/user.model.js";
 
 const router = Router();
 
@@ -75,40 +76,42 @@ router.get("/products", async (req, res)=>{
     
     const {status, docs, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage} = await productoModel.paginate({},{limit, page, lean:true})
     const products = docs   
-   //
-   const filter = await productoModel.find({category: query})
-   const prodsFilt = filter.map(item=>item.toObject())
-   const orden = await productoModel.find().sort({price: sort})
-   const prodsOrd = orden.map(item=>item.toObject())
+    const filter = await productoModel.find({category: query})
+    const prodsFilt = filter.map(item=>item.toObject())
+    const orden = await productoModel.find().sort({price: sort})
+    const prodsOrd = orden.map(item=>item.toObject())
   console.log(orden);
 
     if(query){
         res.render("products", {
-            products: prodsFilt,//products,
-            hasPrevPage,
-            hasNextPage, 
-            prevPage,
-            nextPage,
-            totalPages,
-            page,
-            sort,
-            limit
+        user: req.session.user,
+        products: prodsFilt,
+        hasPrevPage,
+        hasNextPage, 
+        prevPage,
+        nextPage,
+        totalPages,
+        page,
+        sort,
+        limit
     })
 }else{
     if(sort){
     res.render("products", {
-    products: prodsOrd,
-    hasPrevPage,
-    hasNextPage, 
-    prevPage,
-    nextPage,
-    totalPages,
-    page,
-    sort,
-    limit
+        user: req.session.user,    
+        products: prodsOrd,
+        hasPrevPage,
+        hasNextPage, 
+        prevPage,
+        nextPage,
+        totalPages,
+        page,
+        sort,
+        limit
     })
 } else{
-    res.render("products", {
+    res.render("products",{
+        user: req.session.user,     
         products,
         hasPrevPage,
         hasNextPage, 
@@ -167,5 +170,38 @@ router.get("/carts/:cid", async (req, res)=>{
 router.get("/chat", (req,res)=>{
     res.render("chat", {})
 })
+
+//user
+const publicAcces = (req,res,next) =>{
+    if(req.session.user) return res.redirect('/profile');
+    next();
+}
+
+const privateAcces = (req,res,next)=>{
+    if(!req.session.user) return res.redirect('/login');
+    next();
+}
+
+
+router.get('/register', publicAcces, (req,res)=>{
+    res.render('register')
+})
+
+router.get('/login', publicAcces, (req,res)=>{
+    res.render('login')
+})
+
+router.get('/profile', privateAcces, (req,res)=>{
+    res.render('profile',{
+        user: req.session.user
+    })
+})
+
+// router.get('/profile', (req,res)=>{
+//     res.render('profile',{
+//         user: req.session.user
+//     })
+// })
+
 
 export default router;

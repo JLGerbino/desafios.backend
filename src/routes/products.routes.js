@@ -59,12 +59,15 @@ router.get("/:pid", async(req, res)=>{
 router.post('/', uploader.array('thumbnail'), async (req, res) => {
   const { title, description, code, price, stock, category } = req.body;
   const files = req.files;
+ //const thumbnails = files.map(file => `/images/${file.filename}`);
   const filenames = []; 
-  // for (let i = 0; i < files.length; i++) {
-  //   const file = files[i];        
-  //   const filename = `${file.originalname}`;
-  //   filenames.push(filename);
-  // }  
+ // comentado de aca
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];        
+    const filename = `${file.originalname}`;
+    filenames.push(filename);
+  }  
+  //hasta aca
   const producto = {
     title,
     description,
@@ -73,12 +76,12 @@ router.post('/', uploader.array('thumbnail'), async (req, res) => {
     status: "true",
     stock,
     category,
-    thumbnail: []
+   thumbnail: []   
   };  
   //comentado de aca
-  // filenames.forEach((filename) => {
-  //   producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
-  // }); 
+  filenames.forEach((filename) => {
+    producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
+  }); 
   //hasta aca 
   console.log(producto);
   const msg = await managerDB.addProduct(producto)  // productoModel.create(producto);

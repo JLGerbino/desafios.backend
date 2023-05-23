@@ -1,41 +1,41 @@
-<h1>Listado de productos prodcutos home</h1>
-<div class="row">
-  <div "col-xl-6 col-md-6 col-sm-12">
+
+<h1>Bienvenido {{user.name}}, {{user.role}} conocé nuestros productos <a href="/api/session/logout" class="btn btn-primary">Cerrar sesión</a></h1>
+
+
+<div class="row justify-content-center align-items-center">
   {{#each products}}
-  {{!-- <p>id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br> --}}
-      <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{this.title}}</h5>
-    <p class="card-text">{{this.description}}</p>
-    <p class="card-text">$ {{this.price}}</p>
-    <a href="#" class="btn btn-primary"><button>agregar a carrito</button></a>
+  <div class="col-xl-4 col-md-6 col-sm-12 mb-4"">
+    <div class="card mx-auto" style="width: 18rem;">
+      <img src="{{this.thumbnail}}"class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{this.title}}</h5>
+        <p class="card-text">{{this.description}}</p>
+        <p class="card-text">$ {{this.price}}</p>
+        <p></p>
+        <a href="#" class="btn btn-primary"><button>agregar a carrito</button></a>
+      </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-      {{!-- <p>id: {{this.id}}</p>
-      <p>title: {{this.title}}</p>
-      <p>description: {{this.description}}</p>
-      <p>code: {{this.code}}</p>
-      <p>price: {{this.price}}</p>
-      <p>status: {{this.status}}</p>
-      <p>stock: {{this.stock}}</p>
-      <p>category: {{this.category}}</p>
-      <p>thumbnail: {{this.thumbnail}}</p><br>     --}}
-      
   {{/each}} 
-    {{#if hasPrevPage}}
-    <a href="/products?page={{prevPage}}&sort={{sort}}&limit={{limit}}"><button>Anterior</button></a>    
-    {{!-- <a href="/products?page={{prevPage}}"><button>Anterior</button></a> --}}
-    {{/if}}
-    {{#if hasNextPage}}
-    <a href="/products?page={{nextPage}}&sort={{sort}}&limit={{limit}}"><button>Siguiente</button></a><br>
-    {{!-- <a href="/products?page={{nextPage}}"><button>Siguiente</button></a><br> --}}
-    {{/if}}
-    <p>Pagina: {{page}}</p>
-    <p>Total paginas: {{totalPages}}</p>
+</div>
 
-
-</ul>
+<div class="pagination-container d-flex justify-content-center align-items-end">
+  {{#if hasPrevPage}}
+    <div style="margin-right: 5px">
+      <a href="/products?page={{prevPage}}&sort={{sort}}&limit={{limit}}" class="btn btn-primary">Anterior</a>
+    </div>
+  {{/if}}
+  {{#if hasNextPage}}
+    <div style="margin-left: 5px">
+      <a href="/products?page={{nextPage}}&sort={{sort}}&limit={{limit}}" class="btn btn-primary">Siguiente</a>
+    </div>
+  {{/if}}
+</div>
+<div class="pagination-container d-flex justify-content-center align-items-end">
+  <p style="margin-right: 5px">Pagina: {{page}}</p>
+  <p style="margin-left: 5px">Total paginas: {{totalPages}}</p>
+</div>
+{{!-- <div class="text-center">
+  <a href="/api/session/logout" class="btn btn-primary">Cerrar sesión</a>
+</div> --}}
 
