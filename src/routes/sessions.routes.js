@@ -22,13 +22,13 @@ router.post('/register', async (req, res) =>{
 
 
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     const { email, password } = req.body;  
     if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
       req.session.user = {
-        name: "Admin",
+        //name: "Admin",
         email: email,
-        role: "administrador"
+        role: "admin"
       };  
       return res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
     }  
@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
       name: `${user.first_name} ${user.last_name}`,
       email: user.email,
       age: user.age,
-      role: "usuario"
+      //role: "usuario"
     };  
     res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
   });
@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
 router.get('/logout', (req,res)=>{
     req.session.destroy(err =>{
         if(err) return res.status(500).send({status:"error", error:"No pudo cerrar sesion"})
-        res.redirect('/login');
+        res.redirect('/');
     })
 })
 

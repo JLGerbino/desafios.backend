@@ -4,10 +4,10 @@
 {{/each}}
 
 {{#if hasPrevPage}}
-  <a href="/?page={{prevPage}}&sort={{sort}}&limit={{limit}}"><button>Anterior</button></a>
+  <a href="/home?page={{prevPage}}&sort={{sort}}&limit={{limit}}"><button>Anterior</button></a>
 {{/if}}
 {{#if hasNextPage}}
-  <a href="/?page={{nextPage}}&sort={{sort}}&limit={{limit}}"><button>Siguiente</button></a><br>
+  <a href="/home?page={{nextPage}}&sort={{sort}}&limit={{limit}}"><button>Siguiente</button></a><br>
 {{/if}}
 
 <p>Pagina: {{page}}</p>

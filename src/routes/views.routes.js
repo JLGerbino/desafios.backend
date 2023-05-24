@@ -12,23 +12,23 @@ const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB
 const managerCartDB = new CartManagerDB 
 
-router.get("/", async (req, res)=>{
+router.get("/home", async (req, res)=>{
     const {limit = 5} =req.query;
     const {page = 1} = req.query
     const sort = req.query.sort
     const query = req.query.query
     const {status, docs, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage} = await productoModel.paginate({},{limit, page, lean:true})
-    const products = docs   
-   //
+    const products = docs      
    const filter = await productoModel.find({category: query})
    const prodsFilt = filter.map(item=>item.toObject())
    const orden = await productoModel.find().sort({price: sort})
    const prodsOrd = orden.map(item=>item.toObject())
   console.log(orden);
 
+//productos  
     if(query){
         res.render("home", {
-            products: prodsFilt,//products,
+            products: prodsFilt,
             hasPrevPage,
             hasNextPage, 
             prevPage,
@@ -134,29 +134,8 @@ router.get("/realTimeProducts", async (req, res)=>{
     res.render("realTimeProducts", {products: prods})
 })
 
-// router.get("/carts/:cid", async (req, res)=>{
-//     const id_carrito = req.params.cid;
-//     const productos = await managerCartDB.getCartsId(id_carrito);
-//     const prods = productos.productos.map(item => item.product.toObject());
-//     console.log("los prosd" + prods);
-//     res.render("carts", { products: prods });
-// });
 
-// router.get("/carts/:cid", async (req, res)=>{
-//     const id_carrito = req.params.cid
-//     const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();//manager.getProducts();
-    
-//     //const prods = productos.product.map(item=>item.toObject())    
-//     console.log("productosCart" + productosCart)
-//     //console.log("estos"+ prods)
-//     //console.log(id_carrito)
-//     res.render("carts", {
-//         products: productosCart,
-//         idProducto: productosCart._id,
-//         id: id_carrito
-//     })
-// })
-
+//cart
 router.get("/carts/:cid", async (req, res)=>{
     const id_carrito = req.params.cid
     const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();    
@@ -167,9 +146,12 @@ router.get("/carts/:cid", async (req, res)=>{
     })
 })
 
+
+//chat
 router.get("/chat", (req,res)=>{
     res.render("chat", {})
 })
+
 
 //user
 const publicAcces = (req,res,next) =>{
@@ -178,16 +160,15 @@ const publicAcces = (req,res,next) =>{
 }
 
 const privateAcces = (req,res,next)=>{
-    if(!req.session.user) return res.redirect('/login');
+    if(!req.session.user) return res.redirect('/');
     next();
 }
-
 
 router.get('/register', publicAcces, (req,res)=>{
     res.render('register')
 })
 
-router.get('/login', publicAcces, (req,res)=>{
+router.get('/', publicAcces, (req,res)=>{
     res.render('login')
 })
 
@@ -196,12 +177,5 @@ router.get('/profile', privateAcces, (req,res)=>{
         user: req.session.user
     })
 })
-
-// router.get('/profile', (req,res)=>{
-//     res.render('profile',{
-//         user: req.session.user
-//     })
-// })
-
 
 export default router;
