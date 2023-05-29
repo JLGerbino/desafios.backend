@@ -1,14 +1,22 @@
-<div>
-    <h1>Login</h1>
-    <form id="loginForm">
-        <label>Email</label>
-        <input name="email">
-        <br>
-        <label>Contraseña</label>
-        <input name="password" type="password">
-        <input type="submit">
-    </form>
-    <p>No estás resgistrado? <a href="/register">Regístrate aquí</a></p>
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="text-center">Login</h1>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" name="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contraseña</label>
+          <input class="form-control" name="password" type="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+      </form>
+      <p class="text-center">No estás registrado? <a href="/register">Regístrate aquí</a></p>
+      <p class="text-center">No estás resgistrado? <a href="/api/sessions/github">Regístrate con GitHub</a></p>
+    </div>
+  </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/login.js"></script>

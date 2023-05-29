@@ -1,20 +1,32 @@
-<div>
-        <h1>Registro</h1>
-        <form id="registerForm">
-            <label>Nombre</label>
-            <input name="first_name">
-            <label>Apellido</label>
-            <input name="last_name">
-            <label>Email</label>
-            <input name="email">
-            <label>Edad</label>
-            <input name="age">
-            <label>Contraseña</label>
-            <input type="password" name="password">
-
-            <input type="submit">
-
-        </form>
-        <p>¿Ya tienes una cuenta? <a href="/">Ingrese aquí</a></p>
+<div class="d-flex justify-content-center align-items-center mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="text-center">Registro</h1>
+      <form id="registerForm">
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input class="form-control" name="first_name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Apellido</label>
+          <input class="form-control" name="last_name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" name="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Edad</label>
+          <input class="form-control" name="age">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contraseña</label>
+          <input class="form-control" type="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </form>
+      <p class="text-center">¿Ya tienes una cuenta? <a href="/">Ingrese aquí</a></p>
+    </div>
+  </div>
 </div>
 <script src="/js/register.js"></script>

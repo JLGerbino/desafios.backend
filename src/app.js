@@ -4,6 +4,7 @@ import session from "express-session";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import { Server } from "socket.io";
+import passport from "passport";
 import ProductManagerFS from "./dao/managersFS/productManager.js";
 import ProductManagerDB from "./dao/managersDB/productManagerDB.js";
 import ChatManagerDB from "./dao/managersDB/chatManagerDB.js";
@@ -12,7 +13,7 @@ import cartsRouter from "./routes/carts.routes.js";
 import viewRouter from "./routes/views.routes.js";
 import sessionRouter from "./routes/sessions.routes.js";
 import __dirname from "./utils.js";
-
+import initializePassport from "./config/passport.config.js";
 
 const PORT = 8080;
 
@@ -38,13 +39,16 @@ app.use(session({
     resave:false,
     saveUninitialized:false
 }))
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname +'/views');
 app.set('view engine', 'handlebars');
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
-app.use("/api/session", sessionRouter)
+app.use("/api/sessions", sessionRouter)
 
 const server = app.listen(PORT, ()=>{    
         console.log(`Servidor funcionando en el puerto ${PORT}`)

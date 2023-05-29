@@ -178,4 +178,11 @@ router.get('/profile', privateAcces, (req,res)=>{
     })
 })
 
+//restaurar contreaseña
+router.get('/resetPassword', (req,res)=>{
+    res.render('resetPassword');
+})
+
+
+
 export default router;
