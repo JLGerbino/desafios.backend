@@ -35,16 +35,16 @@ app.use(session({
         mongoUrl: MONGO,
         ttl:3600
     }),
-    secret:'CoderSecret',
+    secret:"CoderSecret",
     resave:false,
     saveUninitialized:false
 }))
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
-app.engine('handlebars', handlebars.engine());
-app.set('views', __dirname +'/views');
-app.set('view engine', 'handlebars');
+app.engine("handlebars", handlebars.engine());
+app.set("views", __dirname +"/views");
+app.set("view engine", "handlebars");
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
@@ -69,7 +69,7 @@ io.on("connection", socket =>{
             io.emit("actualizado", "code");
         }else{        
         const productos = await managerDB.getProducts(); //manager.getProducts();        
-        io.emit("actualizado", productos);} //productos       
+        io.emit("actualizado", productos);}      
     })
 
     socket.on("message1", async idEliminar =>{        

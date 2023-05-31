@@ -146,12 +146,10 @@ router.get("/carts/:cid", async (req, res)=>{
     })
 })
 
-
 //chat
 router.get("/chat", (req,res)=>{
     res.render("chat", {})
 })
-
 
 //user
 const publicAcces = (req,res,next) =>{
@@ -164,23 +162,23 @@ const privateAcces = (req,res,next)=>{
     next();
 }
 
-router.get('/register', publicAcces, (req,res)=>{
-    res.render('register')
+router.get("/register", publicAcces, (req,res)=>{
+    res.render("register")
 })
 
-router.get('/', publicAcces, (req,res)=>{
-    res.render('login')
+router.get("/", publicAcces, (req,res)=>{
+    res.render("login")
 })
 
-router.get('/profile', privateAcces, (req,res)=>{
-    res.render('profile',{
+router.get("/profile", privateAcces, (req,res)=>{
+    res.render("profile",{
         user: req.session.user
     })
 })
 
 //restaurar contreaseña
-router.get('/resetPassword', (req,res)=>{
-    res.render('resetPassword');
+router.get("/resetPassword", (req,res)=>{
+    res.render("resetPassword");
 })
 
 

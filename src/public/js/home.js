@@ -1,6 +1,6 @@
 //ESTA ES LA PARTE DEL CLIENTE
 const socket = io();
-const log = document.getElementById('log');
+const log = document.getElementById("log");
 
 const botonEnviar = document.getElementById("enviar");
 
@@ -23,7 +23,7 @@ botonEnviar.addEventListener("click", event => {
 socket.on("actualizado", productos => {
    console.log(productos)
    if (productos === "campos"){
-      Swal.fire('Todos los campos son obligatorios')
+      Swal.fire("Todos los campos son obligatorios")
    }
    if(productos === "code"){
       Swal.fire("El 'code' del producto ya existe, intente cambiarlo.")

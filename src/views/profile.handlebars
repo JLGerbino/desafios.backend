@@ -1,8 +1,13 @@
-<div>
-    <h1>Tu perfil</h1>
-    <p>{{user.name}}</p>
-    <p>{{user.email}}</p>
-    <p>{{user.age}}</p>
-
-    <a href="/api/sessions/logout"><button>Salir</button></a>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="profile-container p-4">
+        <h1>Tu perfil</h1>
+        <p>Nombre: {{user.firts_name}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Edad: {{user.age}}</p>
+        <a href="/api/sessions/logout" class="btn btn-primary">Salir</a>
+      </div>
+    </div>
+  </div>
 </div>
