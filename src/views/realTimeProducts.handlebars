@@ -1,4 +1,4 @@
-<div>
+{{!-- <div>
     <h1>Cargar producto</h1>
         <label>Titulo</label>
         <input id = "title" name="title"><br>
@@ -19,9 +19,9 @@
         <input id = "category" name="category"><br>
 
         <label>Imagenes</label>
-        <input id = "thumbnail" name="thumbnail"><br> 
+        <input id = "thumbnail" name="thumbnail"><br>  --}}
         {{!-- de aca saque el type="file" --}}
-
+{{!-- 
         <input id="enviar" type="submit">   
    
 </div>
@@ -31,15 +31,76 @@
     <input id = "id" name="id" type="text" size="30"><br>
 <input id="eliminar" type="submit">
 </div>
-<h1>Listado de productos en tiempo real</h1>
-
+<h1>Listado de productos en tiempo real</h1> --}}
+{{!-- 
 <div id="inicio">
     {{#each products}}
       <p id="idn">id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
     {{/each}}
 </div>
 
-<p id="productos"></p>
+<p id="productos"></p> --}}
+
+{{!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script> --}}
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container p-4">
+        <h1>Cargar producto</h1>
+        <label>Titulo</label>
+        <input id="title" name="title" class="form-control"><br>
+
+        <label>Descripcion</label>
+        <input id="description" name="description" class="form-control"><br>
+
+        <label>Codigo</label>
+        <input id="code" name="code" class="form-control"><br>
+
+        <label>Precio</label>
+        <input id="price" name="price" type="number" class="form-control"><br>
+
+        <label>Stock</label>
+        <input id="stock" name="stock" type="number" class="form-control"><br>
+
+        <label>Categoria</label>
+        <input id="category" name="category" class="form-control"><br>
+
+        <label>Imagenes</label>
+        <input id="thumbnail" name="thumbnail" class="form-control" type="file"><br>
+
+        <input id="enviar" type="submit" class="btn btn-primary">   
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container p-4">
+        <h1>Eliminar producto</h1>
+        <label>Ingresar Id</label>
+        <input id="id" name="id" type="text" size="30" class="form-control"><br>
+        <input id="eliminar" type="submit" class="btn btn-danger">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <h1>Listado de productos en tiempo real</h1>
+
+  <div id="inicio">
+    {{#each products}}
+      <p id="idn">id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
+    {{/each}}
+  </div>
+
+  <p id="productos"></p>
+</div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>

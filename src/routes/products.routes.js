@@ -64,7 +64,7 @@ router.post('/', uploader.array('thumbnail'), async (req, res) => {
  // comentado de aca
   for (let i = 0; i < files.length; i++) {
     const file = files[i];        
-    const filename = `${file.originalname}`;
+    const filename = file.filename;//`${file.originalname}`;
     filenames.push(filename);
   }  
   //hasta aca
