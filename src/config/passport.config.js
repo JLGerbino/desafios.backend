@@ -2,12 +2,13 @@ import passport from "passport";
 import local from "passport-local";
 import userModel from "../dao/models/user.model.js";
 import GitHubStrategy from "passport-github2";
-import  { createHash, validatePassword } from "../utils.js"
+import { createHash, validatePassword } from "../utils.js";
+import CartManagerDB from "../dao/managersDB/cartsManagerDB.js"//
 
 const LocalStrategy = local.Strategy;
+const managerDB = new CartManagerDB//
 
 const initializePassport = () => {
-
     passport.use("register", new LocalStrategy(
         {passReqToCallback:true, usernameField:"email"}, 
         async (req,username, password,done) =>{
@@ -18,12 +19,16 @@ const initializePassport = () => {
                     console.log("El usuario existe");
                     return done(null,false);
                 }
+                const msg = await managerDB.createCart();//
+                const cartId= msg.id//
                 const newUser = {
                     first_name, 
                     last_name, 
                     email, 
                     age, 
-                    password: createHash(password)
+                    password: createHash(password),
+                    cartId: cartId,//
+                    role:"User"//
                 }
                 const result = await userModel.create(newUser);
                 return done(null, result);
@@ -67,6 +72,8 @@ const initializePassport = () => {
             console.log(profile);
             let user = await userModel.findOne({email: profile._json.email})
             if(!user){
+                const msg = await managerDB.createCart();//
+                const cartId= msg.id//
                 const email = profile._json.email == null ?  profile._json.username : null;
                 const newUser = {
                         first_name: profile._json.name,
@@ -74,6 +81,8 @@ const initializePassport = () => {
                         email: email,
                         age: 18,
                         password:"",
+                        cartId: cartId,//
+                        role:"User"//
                 }
                 const result = await userModel.create(newUser);
                 done(null,result)

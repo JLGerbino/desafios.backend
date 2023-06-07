@@ -23,6 +23,12 @@ const schema = new mongoose.Schema({
     password:{
         type: String,
         require: true
+    },
+    cartId:{//
+        type: String,
+        require: true
+    },
+    role: {type: String
     }
 })
 

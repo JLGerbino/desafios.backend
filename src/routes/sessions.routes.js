@@ -26,11 +26,12 @@ router.get("/failregister", async (req, res) =>{
       };  
       return res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
     } 
-    if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});
+    if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});    
     req.session.user = {
       firts_name: req.user.first_name,
       email: req.user.email,
       age: req.user.age,
+      cartId: req.user.cartId//
       }        
     res.send({status:"success", payload:req.user, message:"Primer logueo!!"});
   });

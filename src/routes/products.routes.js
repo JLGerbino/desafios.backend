@@ -59,7 +59,7 @@ router.get("/:pid", async(req, res)=>{
 router.post('/', uploader.array('thumbnail'), async (req, res) => {
   const { title, description, code, price, stock, category } = req.body;
   const files = req.files;
- //const thumbnails = files.map(file => `/images/${file.filename}`);
+  const thumbnails = files.map(file => `/images/${file.filename}`);
   const filenames = []; 
  // comentado de aca
   for (let i = 0; i < files.length; i++) {
