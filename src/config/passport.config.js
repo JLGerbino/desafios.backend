@@ -76,13 +76,11 @@ const initializePassport = () => {
                 const cartId= msg.id//
                 const email = profile._json.email == null ?  profile._json.username : null;
                 const newUser = {
-                        first_name: profile._json.name,
+                        first_name: profile._json.login,
                         last_name:"",
                         email: email,
                         age: 18,
                         password:"",
-                        cartId: cartId,//
-                        role:"User"//
                 }
                 const result = await userModel.create(newUser);
                 done(null,result)
