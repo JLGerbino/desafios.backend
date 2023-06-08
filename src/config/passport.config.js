@@ -81,6 +81,7 @@ const initializePassport = () => {
                         email: email,
                         age: 18,
                         password:"",
+                        cartId: cartId,//                        
                 }
                 const result = await userModel.create(newUser);
                 done(null,result)
