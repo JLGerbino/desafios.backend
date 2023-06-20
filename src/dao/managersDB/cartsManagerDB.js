@@ -157,9 +157,7 @@ export default class CartManagerDB {
     } catch (error) {
       console.log(error);
     }
-  };
-  //estaba pasando mal el parametro para actualizar
-  //await carritoModel.findByIdAndUpdate(id_carrito, {$set: {productos: cart.productos}});
+  };  
     
   UpdateCartWithProds = async (id_carrito, products) => {
     try {

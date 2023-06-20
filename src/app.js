@@ -14,10 +14,11 @@ import viewRouter from "./routes/views.routes.js";
 import sessionRouter from "./routes/sessions.routes.js";
 import __dirname from "./utils.js";
 import initializePassport from "./config/passport.config.js";
+import { config } from "./config/config.js"
 
-const PORT = 8080;
+const PORT = config.server.port;
 
-const MONGO = "mongodb+srv://joselgerbino:tote1311@cluster0.qduemld.mongodb.net/ecommerce?retryWrites=true&w=majority"
+const MONGO = config.mongo.url; 
 
 const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB
@@ -35,7 +36,7 @@ app.use(session({
         mongoUrl: MONGO,
         ttl:3600
     }),
-    secret:"CoderSecret",
+    secret: config.keys.cookieSecret, //"CoderSecret",
     resave:false,
     saveUninitialized:false
 }))
@@ -49,6 +50,8 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
 app.use("/api/sessions", sessionRouter)
+
+console.log("configuracion",config)
 
 const server = app.listen(PORT, ()=>{    
         console.log(`Servidor funcionando en el puerto ${PORT}`)

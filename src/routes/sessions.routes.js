@@ -2,6 +2,7 @@ import { Router } from 'express';
 import passport from 'passport';
 import userModel from '../dao/models/user.model.js';
 import { createHash, validatePassword } from '../utils.js';
+import { config } from '../config/config.js';
 
 const router = Router();
 
@@ -17,8 +18,8 @@ router.get("/failregister", async (req, res) =>{
 
 //nueva ruta con passport 
   router.post("/", passport.authenticate("login" ,{failureRedirect:"/faillogin"}), async (req, res) => {
-    const { email, password } = req.body;  
-    if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
+    const { email, password } = req.body;      
+    if (email === config.auth.account && password === config.auth.pass) {
       req.session.user = {
         //name: "Admin",
         email: email,
