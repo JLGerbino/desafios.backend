@@ -51,6 +51,4 @@ export default class CartController {
     const msg = await cartManagerDB.UpdateCartWithProds(id_carrito, products);
     res.send(msg);
   }
-
-
 }
