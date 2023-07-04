@@ -10,10 +10,12 @@ const COOKIE_SECRET = process.env.COOKIE_SECRET
 const ID_GITHUB = process.env.ID_GITHUB
 const SECRET_GITHUB = process.env.SECRET_GITHUB
 const CALLBACKURL_GITHUB = process.env.CALLBACKURL_GITHUB
+const PERSISTENCE = process.env.PERSISTENCE
 
 export const config = {
     server: {
-        port: PORT    
+        port: PORT,
+        persistence: PERSISTENCE    
     },
     mongo: {
         url: MONGO_URL

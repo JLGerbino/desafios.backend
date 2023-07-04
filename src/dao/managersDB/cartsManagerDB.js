@@ -13,11 +13,12 @@ export default class CartManagerDB {
       console.log(error);
     }   
   };
-
+                       
   createCart = async () => {
     try{
     const carts = await this.getCarts();    
     let cart = {
+      
       product: [],
       };    
     //let id_carrito = cart._id;
@@ -32,7 +33,8 @@ export default class CartManagerDB {
     const id_carrito = nuevoCarrito._id;
     return {
       id: id_carrito,
-      product: cart.product
+      product: cart.product,
+      //id_user: id_user
     };    
      }catch(error){
       console.log(error)
@@ -173,5 +175,59 @@ export default class CartManagerDB {
       console.log(error);
     }
   };
-}
+
+  Purchase = async(id_carrito) => {
+    try {
+    //const id_carrito = req.params.cid;    
+    // const cart = await this.getCartsId(id_carrito);    
+
+    // const productsToPurchase = [];
+    // const productsNotRemove = [];
+
+    // for (const product of cart.productos) {      
+    // const productId = product.product._id.toString();
+    // const quantity = product.quantity;      
+    //  console.log("producto id", productId)
+    //   // Obtener el producto desde el administrador de productos (puedes usar el ProductManagerDB)
+    //   const productInfo = await pManagerDB.getProductsById(productId) //pManagerDB.getProductById(productId);
+    //   console.log("productInfo" + productInfo.stock)
+    //   // if (!productInfo) {
+    //   //   productsToRemove.push(productId);
+    //   //   continue;
+    //   // }
+
+    //   if (productInfo.stock >= quantity) {
+    //     // Restar la cantidad del producto del stock
+    //     productInfo.stock -= quantity;
+    //     productsToPurchase.push(productInfo);
+    //   } else {
+    //     productsNotRemove.push(productInfo);
+    //   }
+    // }
+    // console.log("purchase" + productsToPurchase)
+    // console.log("remove" + productsNotRemove)
+
+    // // borra el carrito
+    // await this.deleteProdInCart(id_carrito);
+
+    // // Actualizar el carrito con los productos que se van a comprar   
+    // await this.UpdateCartWithProds(id_carrito, productsNotRemove.product);
+
+    //res.send("Proceso de compra finalizado");
+      // const id_carrito = req.params.cid;    
+      // const cart = await carritoModel.findOne({_id: id_carrito})//cartDao.getCartsId(id_carrito);
+      // const indexCarrito = cart.findIndex((cart) => cart.id == id_carrito)
+      // console.log("indexCarrito" + indexCarrito)
+      // const productsToPurchase = [];
+      // const productsToRemove = [];
+      // if (indexCarrito !== -1) {
+      //   for (const product of cart.productos) {      
+      //   const { product: productId, quantity } = product;
+            
+      // }} else { return "No existe el carrito";
+      }
+           catch (error) {
+      console.log(error);      
+    }
   
+  }}

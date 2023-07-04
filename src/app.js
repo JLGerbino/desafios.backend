@@ -15,10 +15,11 @@ import sessionRouter from "./routes/sessions.routes.js";
 import __dirname from "./utils.js";
 import initializePassport from "./config/passport.config.js";
 import { config } from "./config/config.js"
+import { connectDB } from "./config/dbConnection.js";
 
 const PORT = config.server.port;
 
-const MONGO = config.mongo.url; 
+//const MONGO = config.mongo.url; 
 
 const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB
@@ -26,14 +27,15 @@ const managerChatDB = new ChatManagerDB
 
 const app = express();
 
-const connection = mongoose.connect(MONGO);
+connectDB()
+//const connection = mongoose.connect(MONGO);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(session({
     store: new MongoStore({
-        mongoUrl: MONGO,
+        mongoUrl: config.mongo.url, //MONGO,
         ttl:3600
     }),
     secret: config.keys.cookieSecret, //"CoderSecret",

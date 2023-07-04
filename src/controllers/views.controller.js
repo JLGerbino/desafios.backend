@@ -1,8 +1,12 @@
 import productoModel from "../dao/models/producto.model.js";
-import ProductManagerDB from "../dao/managersDB/productManagerDB.js"
-import carritoModel from "../dao/models/carrito.model.js"
+import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
+import carritoModel from "../dao/models/carrito.model.js";
+//import { CreateUserDto, GetUserDto } from "../dao/dto/user.dto.js";
+import { GetUserDto } from "../dao/dto/user.dto.js";
+import { productsDao } from "../dao/factory.js";
 
 const managerDB = new ProductManagerDB
+//const usuariodto = new GetUserDto
 
 export default class viewController {
   async getHome(req, res){
@@ -72,7 +76,8 @@ export default class viewController {
     const {page = 1} = req.query
     const sort = req.query.sort
     const query = req.query.query
-    
+    const user = req.session.user
+    const userDto = new GetUserDto(user)
     const {status, docs, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage} = await productoModel.paginate({},{limit, page, lean:true})
     const products = docs   
     const filter = await productoModel.find({category: query})
@@ -83,7 +88,7 @@ export default class viewController {
 
     if(query){
         res.render("products", {
-        user: req.session.user,
+        user: userDto,//req.session.user,
         products: prodsFilt,
         hasPrevPage,
         hasNextPage, 
@@ -97,7 +102,7 @@ export default class viewController {
 }else{
     if(sort){
     res.render("products", {
-        user: req.session.user,    
+        user: userDto,//req.session.user,    
         products: prodsOrd,
         hasPrevPage,
         hasNextPage, 
@@ -110,7 +115,7 @@ export default class viewController {
     })
 } else{
     res.render("products",{
-        user: req.session.user,     
+        user: userDto,//req.session.user,     
         products,
         hasPrevPage,
         hasNextPage, 
@@ -154,10 +159,13 @@ export default class viewController {
     res.render("login")
   }
 
-  async profile(req, res){
+  async profile(req, res){    
+    const user = req.session.user
+    const userDto = new GetUserDto(user)
     res.render("profile",{
-        user: req.session.user
+    user: userDto//userDto //req.session.user//usuariodto //
     })
+    console.log(userDto);
   }
 
   async resetPassword(req, res){

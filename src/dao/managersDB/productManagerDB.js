@@ -2,7 +2,7 @@ import productoModel from "../models/producto.model.js";
 
 export default class ProductManagerDB {
   constructor(){
-    this.path = "./src/files/products.json";    
+    //this.path = "./src/files/products.json";    
   }  
  
   
@@ -79,7 +79,8 @@ export default class ProductManagerDB {
   updateProduct = async (producto) =>{    
     try{       
       const products = await this.getProducts();         
-      let id_producto = producto.id;      
+      let id_producto = producto.id; 
+      console.log("console" + producto.id);     
       const indexProducto = products.findIndex(producto => producto.id === id_producto);    
       if (indexProducto !== -1) {
         if (Object.values(producto).includes(" ") ||

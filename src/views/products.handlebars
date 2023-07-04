@@ -1,5 +1,6 @@
 
-<h1>Bienvenid@ {{user.firts_name}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h1>
+<h1>Bienvenid@ {{user.nombreCompleto}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h1><br>
+{{!-- <a href="/api/cart/:cid" class="btn btn-primary">ir a carrito</a></h1><br> --}}
 {{#if user.role}}
 <div class="text-center" style="background-color: red;"><h5>role: {{user.role}}</h5></div>
 {{/if}}

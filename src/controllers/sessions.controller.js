@@ -1,6 +1,7 @@
 //import passport from 'passport';
 import { createHash, validatePassword } from '../utils.js';
 import { config } from '../config/config.js';
+import { CreateUserDto, GetUserDto } from "../dao/dto/user.dto.js";
 
 
 export default class sessionsController{
@@ -24,15 +25,16 @@ export default class sessionsController{
         return res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
         } 
         if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});    
-        req.session.user = {
-        firts_name: req.user.first_name,
+        req.session.user = {        
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,        
         email: req.user.email,
         age: req.user.age,
         cartId: req.user.cartId//
         }        
         res.send({status:"success", payload:req.user, message:"Primer logueo!!"});
         }
-
+   
     async faillogin(req, res){
         console.log("Fallo en el ingreso");
         res.send({error: "Error en el ingreso"})

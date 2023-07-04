@@ -1,11 +1,20 @@
-import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
-//import { uploader } from "../utils.js";
+//import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
+//esto voy agregando
+import { productsDao } from "../dao/factory.js";
+import { productService } from "../repository/index.js";
+//import ProductManagerFS from "../dao/managersFS/productManager.js";
+//
 
-const productManagerDB = new ProductManagerDB();
+//import { uploader } from "../utils.js";
+//esto voy agregando
+//const productsService = new ProductManagerDB();
+//
+
+//const productManagerDB = new ProductManagerDB();
 
 export default class ProductController {
   async getProducts(req, res){
-    const productos = await productManagerDB.getProducts(); //productoModel.find();
+    const productos = await productService.getProductsRep(); //productsDao.getProducts() //productsService.getProducts(); //productManagerDB.getProducts(); //productoModel.find();
     const limite = req.query.limit;
     if (!limite) {
       return res.send({
@@ -20,7 +29,7 @@ export default class ProductController {
 
   async getProductsById(req, res){
     const id = req.params.pid;
-    const producto = await productManagerDB.getProductsById(id) // productoModel.find({_id:id});
+    const producto = await productService.getProductsByIdRep(id);//productsDao.getProductsById(id) //productManagerDB.getProductsById(id) // productoModel.find({_id:id});
     res.send(producto);
   }
 
@@ -52,18 +61,18 @@ export default class ProductController {
     }); 
     //hasta aca 
     console.log(producto);
-    const msg = await productManagerDB.addProduct(producto)  // productoModel.create(producto);
+    const msg = await productService.addProductRep(producto); //productsDao.addProduct(producto); //productManagerDB.addProduct(producto)  // productoModel.create(producto);
     res.send(msg);
     }
 
   async deleteProduct(req, res){
     const id = req.params.pid;
-    const msg = await productManagerDB.deleteProduct(id) //productoModel.deleteOne({_id:id});
+    const msg = await productService.deleteProductRep(id); //productsDao.deleteProduct(id); //productManagerDB.deleteProduct(id) //productoModel.deleteOne({_id:id});
     res.send(msg);
     }
   
   async updateProduct(req, res){
-    const id_producto = req.params.pid
+  const id_producto = req.params.pid
   const {title, description, code, price, status, stock, category} = req.body;
   const files = req.files;
 const filenames = [];
@@ -87,7 +96,7 @@ const producto = {
 //   producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
 // });  
 console.log(producto);
-const msg = await productManagerDB.updateProduct(producto) //productoModel.updateOne({_id:id_producto},{$set:producto});
+const msg = await productService.updateProductRep(producto)//productService.updateProductRep({_id:id_producto},{$set:producto}); //productsDao.updateProduct(producto) //productManagerDB.updateProduct(producto) //productoModel.updateOne({_id:id_producto},{$set:producto});
 res.send(msg);
   } 
 }
