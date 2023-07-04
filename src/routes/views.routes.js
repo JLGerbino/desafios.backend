@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ViewController from "../controllers/views.controller.js";
+import { userAccess, adminAccess } from "../middlewares/validations.js";
 
 const router = Router();
 
@@ -16,9 +17,9 @@ const privateAcces = (req,res,next)=>{
 
 router.get("/home", viewController.getHome);
 router.get("/products", viewController.getProducts);
-router.get("/realTimeProducts", viewController.realTimeProducts);
 router.get("/carts/:cid", viewController.cartById);
-router.get("/chat", viewController.chat);
+router.get("/chat", userAccess, viewController.chat);
+router.get("/realTimeProducts", adminAccess, viewController.realTimeProducts);
 router.get("/register", publicAcces, viewController.register);
 router.get("/", publicAcces, viewController.login);
 router.get("/profile", privateAcces, viewController.profile);

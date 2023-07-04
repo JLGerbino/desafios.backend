@@ -30,6 +30,7 @@ export default class sessionsController{
         last_name: req.user.last_name,        
         email: req.user.email,
         age: req.user.age,
+        role: req.user.role,
         cartId: req.user.cartId//
         }        
         res.send({status:"success", payload:req.user, message:"Primer logueo!!"});
