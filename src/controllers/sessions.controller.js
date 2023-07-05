@@ -1,4 +1,3 @@
-//import passport from 'passport';
 import { createHash, validatePassword } from '../utils.js';
 import { config } from '../config/config.js';
 import { CreateUserDto, GetUserDto } from "../dao/dto/user.dto.js";
@@ -32,7 +31,10 @@ export default class sessionsController{
         age: req.user.age,
         role: req.user.role,
         cartId: req.user.cartId//
-        }        
+        }
+        const user = req.session.user
+        userDto = new GetUserDto(user)
+        console.log("sessions.controller", userDto)        
         res.send({status:"success", payload:req.user, message:"Primer logueo!!"});
         }
    

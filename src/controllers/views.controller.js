@@ -1,12 +1,10 @@
 import productoModel from "../dao/models/producto.model.js";
 import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
 import carritoModel from "../dao/models/carrito.model.js";
-//import { CreateUserDto, GetUserDto } from "../dao/dto/user.dto.js";
 import { GetUserDto } from "../dao/dto/user.dto.js";
 import { productsDao } from "../dao/factory.js";
 
 const managerDB = new ProductManagerDB
-//const usuariodto = new GetUserDto
 
 export default class viewController {
   async getHome(req, res){
@@ -84,7 +82,7 @@ export default class viewController {
     const prodsFilt = filter.map(item=>item.toObject())
     const orden = await productoModel.find().sort({price: sort})
     const prodsOrd = orden.map(item=>item.toObject())
-  console.log(orden);
+    console.log(orden);
 
     if(query){
         res.render("products", {
@@ -128,7 +126,7 @@ export default class viewController {
         })
        } 
     }
-  }
+  };
 
   async realTimeProducts(req, res){
     const productos = await managerDB.getProducts(); //manager.getProducts();
@@ -137,15 +135,20 @@ export default class viewController {
     res.render("realTimeProducts", {products: prods})
   };
 
-  async cartById(req, res){
-    const id_carrito = req.params.cid
-    const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();    
-    console.log("productosCart" + productosCart)    
+  async cartById(req, res) {
+    const id_carrito = req.params.cid;
+    const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();
+    const productos = productosCart.productos.map((item) => ({
+      name: item.product.title,
+      price: item.product.price,
+      quantity: item.quantity
+    }));
+    console.log("productosCart", productosCart);
     res.render("carts", {
-        productos: productosCart.productos,
-        id: id_carrito                
-    })
-  };
+      productos: productos,
+      id: id_carrito
+    });
+  }
 
   async chat(req, res){
     res.render("chat", {})
@@ -153,22 +156,22 @@ export default class viewController {
 
   async register(req, res){
     res.render("register")
-  }
+  };
 
   async login(req, res){
     res.render("login")
-  }
+  };
 
   async profile(req, res){    
     const user = req.session.user
     const userDto = new GetUserDto(user)
     res.render("profile",{
-    user: userDto//userDto //req.session.user//usuariodto //
+    user: userDto
     })
     console.log(userDto);
-  }
+  };
 
   async resetPassword(req, res){
-    res.render("resetPassword")
-  }
+    res.render("resetPassword")    
+  };
 }

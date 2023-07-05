@@ -15,5 +15,6 @@ export class GetUserDto{
         this.email = userDB.email;
         this.edad = userDB.age;
         this.roles = userDB.role;
+        this.cartId = userDB.cartId
     }
 }

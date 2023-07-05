@@ -66,15 +66,6 @@ export default class CartController {
       console.log("La sesión del usuario no está presente")};
     const id_carrito = req.params.cid;
     const cart = await cartDao.getCartsId(id_carrito);
-    const user = req.session.user
-
-    console.log("user", user)
-    const userDto = new GetUserDto(user)    
-    console.log("userdto",userDto);
-    
-    console.log("reqsessionuser",req.session.user)
-
-    console.log("usuario id", user.email);
     const productsToPurchase = [];
     const productsNotRemove = [];
 
@@ -94,8 +85,7 @@ export default class CartController {
       }
     }
     let montoTotal = 0;
-    for (const product of productsToPurchase) {
-      //const { quantity, price } = product;
+    for (const product of productsToPurchase) {      
       const { quantity } = product;
       const price = product.product.price;
       const productTotal = quantity * price;
@@ -110,7 +100,7 @@ export default class CartController {
       code: id,
       purchase_datetime: new Date(),
       amount: montoTotal,
-      purchaser: "tote", //user.email//req.user//
+      purchaser: req.session.user.email 
     };
     const ticketManager = new TicketManagerDB();
     try {

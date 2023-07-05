@@ -9,15 +9,9 @@ const schema = new mongoose.Schema({
             {
                 product: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "products",
-                //_id: String
+                ref: "products",                
                 },
-                quantity: Number,
-    //             userId: {
-    //     type: String,//mongoose.Schema.Types.ObjectId,
-    //     //ref: 'User',
-    //     require: true,
-    // }                     
+                quantity: Number,           
             }
         ],
         default: []
