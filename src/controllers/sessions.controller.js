@@ -33,7 +33,7 @@ export default class sessionsController{
         cartId: req.user.cartId//
         }
         const user = req.session.user
-        userDto = new GetUserDto(user)
+        const userDto = new GetUserDto(user)
         console.log("sessions.controller", userDto)        
         res.send({status:"success", payload:req.user, message:"Primer logueo!!"});
         }

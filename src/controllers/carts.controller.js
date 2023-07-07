@@ -60,56 +60,13 @@ export default class CartController {
     res.send(msg);
   }
   
-
   async purchase(req, res) {
     if (!req.session.user) {
-      console.log("La sesión del usuario no está presente")};
-    const id_carrito = req.params.cid;
-    const cart = await cartDao.getCartsId(id_carrito);
-    const productsToPurchase = [];
-    const productsNotRemove = [];
-
-    for (const product of cart.productos) {
-      const productId = product.product._id.toString();
-      const quantity = product.quantity;
-      console.log("producto id", productId);
-      const productInfo = await productService.getProductsByIdRep(productId);
-      console.log("productInfo" + productInfo.stock);
-      if (productInfo.stock >= quantity) {
-        productsToPurchase.push(product);
-        productInfo.stock -= quantity;
-        await productInfo.save();
-        await cartDao.deleteProdInCartById(id_carrito, productId);
-      } else {
-        productsNotRemove.push(productInfo);
-      }
-    }
-    let montoTotal = 0;
-    for (const product of productsToPurchase) {      
-      const { quantity } = product;
-      const price = product.product.price;
-      const productTotal = quantity * price;
-      montoTotal += productTotal;
-      console.log("precio", price);
-    }
-    console.log("purchase", productsToPurchase);
-    console.log("remove", productsNotRemove);
-    console.log("total compra", montoTotal);
-    const id = uuidv4();
-    const ticketData = {
-      code: id,
-      purchase_datetime: new Date(),
-      amount: montoTotal,
-      purchaser: req.session.user.email 
-    };
-    const ticketManager = new TicketManagerDB();
-    try {
-      const createdTicket = await ticketManager.createTicket(ticketData);
-      console.log("Ticket creado:", createdTicket);
-      res.send("Proceso de compra finalizado");
-    } catch (error) {
-      console.log("Error al crear el ticket:", error);
-      res.status(500).send("Error al finalizar la compra");
-    }
-  }
+        console.log("La sesión del usuario no está presente")};
+        const id_carrito = req.params.cid;
+        const userEmail = req.session.user.email        
+        const cart = await cartDao.getCartsId(id_carrito);
+        const msg = await cartDao.Purchase(id_carrito, userEmail);
+        res.send(msg)
+  } 
 }

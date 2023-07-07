@@ -1,7 +1,11 @@
 import carritoModel from "../models/carrito.model.js";
 import ProductManagerDB from "../managersDB/productManagerDB.js";
+//import { productService } from "../../repository/index.js";
+import { v4 as uuidv4 } from "uuid";
+import TicketManagerDB from "../managersDB/ticketManagerDb.js";
 
 const pManagerDB = new ProductManagerDB();
+const ticketManager = new TicketManagerDB();
 
 export default class CartManagerDB {
 
@@ -176,58 +180,54 @@ export default class CartManagerDB {
     }
   };
 
-  Purchase = async(id_carrito) => {
-    try {
-    //const id_carrito = req.params.cid;    
-    // const cart = await this.getCartsId(id_carrito);    
-
-    // const productsToPurchase = [];
-    // const productsNotRemove = [];
-
-    // for (const product of cart.productos) {      
-    // const productId = product.product._id.toString();
-    // const quantity = product.quantity;      
-    //  console.log("producto id", productId)
-    //   // Obtener el producto desde el administrador de productos (puedes usar el ProductManagerDB)
-    //   const productInfo = await pManagerDB.getProductsById(productId) //pManagerDB.getProductById(productId);
-    //   console.log("productInfo" + productInfo.stock)
-    //   // if (!productInfo) {
-    //   //   productsToRemove.push(productId);
-    //   //   continue;
-    //   // }
-
-    //   if (productInfo.stock >= quantity) {
-    //     // Restar la cantidad del producto del stock
-    //     productInfo.stock -= quantity;
-    //     productsToPurchase.push(productInfo);
-    //   } else {
-    //     productsNotRemove.push(productInfo);
-    //   }
-    // }
-    // console.log("purchase" + productsToPurchase)
-    // console.log("remove" + productsNotRemove)
-
-    // // borra el carrito
-    // await this.deleteProdInCart(id_carrito);
-
-    // // Actualizar el carrito con los productos que se van a comprar   
-    // await this.UpdateCartWithProds(id_carrito, productsNotRemove.product);
-
-    //res.send("Proceso de compra finalizado");
-      // const id_carrito = req.params.cid;    
-      // const cart = await carritoModel.findOne({_id: id_carrito})//cartDao.getCartsId(id_carrito);
-      // const indexCarrito = cart.findIndex((cart) => cart.id == id_carrito)
-      // console.log("indexCarrito" + indexCarrito)
-      // const productsToPurchase = [];
-      // const productsToRemove = [];
-      // if (indexCarrito !== -1) {
-      //   for (const product of cart.productos) {      
-      //   const { product: productId, quantity } = product;
-            
-      // }} else { return "No existe el carrito";
+  Purchase = async(id_carrito, userEmail) => {    
+    //const id_carrito = req.params.cid;
+    const cart = await this.getCartsId(id_carrito);    
+    const productsToPurchase = [];
+    const productsNotRemove = [];
+    for (const product of cart.productos) {
+      const productId = product.product._id.toString();
+      const quantity = product.quantity;
+      console.log("producto id", productId);
+      const productInfo = await pManagerDB.getProductsById(productId);//productService.getProductsByIdRep(productId);
+      console.log("productInfo" + productInfo.stock);
+      if (productInfo.stock >= quantity) {
+        productsToPurchase.push(product);
+        productInfo.stock -= quantity;
+        await productInfo.save();
+        await this.deleteProdInCartById(id_carrito, productId);
+      } else {
+        productsNotRemove.push(productInfo);
       }
-           catch (error) {
-      console.log(error);      
+    }//hasta aca revise
+    let montoTotal = 0;
+    for (const product of productsToPurchase) {      
+      const { quantity } = product;
+      const price = product.product.price;
+      const productTotal = quantity * price;
+      montoTotal += productTotal;
+      console.log("precio", price);
     }
+    console.log("purchase", productsToPurchase);
+    console.log("remove", productsNotRemove);
+    console.log("total compra", montoTotal);
+    const id = uuidv4();
+    const ticketData = {
+      code: id,
+      purchase_datetime: new Date(),
+      amount: montoTotal,
+      purchaser: userEmail 
+    };
+    //const ticketManager = new TicketManagerDB();
+    try {
+      const createdTicket = await ticketManager.createTicket(ticketData);
+      console.log("Ticket creado:", createdTicket);
+      //return { ticket: createdTicket, productsNotRemove };
+      //res.send("Proceso de compra finalizado");
+    } catch (error) {
+      console.log("Error al crear el ticket:", error);
+      //res.status(500).send("Error al finalizar la compra");
+    }
+  }
   
-  }}
+}

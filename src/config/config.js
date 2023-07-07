@@ -11,6 +11,8 @@ const ID_GITHUB = process.env.ID_GITHUB
 const SECRET_GITHUB = process.env.SECRET_GITHUB
 const CALLBACKURL_GITHUB = process.env.CALLBACKURL_GITHUB
 const PERSISTENCE = process.env.PERSISTENCE
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL
+const ADMIN_PASS = process.env.ADMIN_PASS
 
 export const config = {
     server: {
@@ -31,5 +33,9 @@ export const config = {
         clientID: ID_GITHUB,
         clientSecret: SECRET_GITHUB,
         callbackURL: CALLBACKURL_GITHUB        
+    },
+    gmail:{
+        adminAccount: ADMIN_EMAIL,
+        adminPass: ADMIN_PASS
     }
 } 

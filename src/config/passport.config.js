@@ -5,6 +5,8 @@ import GitHubStrategy from "passport-github2";
 import { createHash, validatePassword } from "../utils.js";
 import CartManagerDB from "../dao/managersDB/cartsManagerDB.js"//
 import { config } from "./config.js";
+import { transporter } from "./gmail.js";
+
 
 const LocalStrategy = local.Strategy;
 const managerDB = new CartManagerDB//
@@ -20,19 +22,28 @@ const initializePassport = () => {
                     console.log("El usuario existe");
                     return done(null,false);
                 }
-                const msg = await managerDB.createCart();//
-                const cartId= msg.id//
+                const msg = await managerDB.createCart();
+                const cartId= msg.id
                 const newUser = {
                     first_name, 
                     last_name, 
                     email, 
                     age, 
                     password: createHash(password),
-                    cartId: cartId,//
-                    role:"User"//
+                    cartId: cartId,
+                    role:"User"
                 }
-                const result = await userModel.create(newUser);
+                const result = await userModel.create(newUser);                          
+                const contenido = await transporter.sendMail({
+                    from:"Ecommerce Backend",
+                    to: email,
+                    subject:"Registro exitoso",                    
+                })
+                console.log("contenido", contenido);
+                res.json({status:"sucess", message: "Registo y envio de correo."})
+                
                 return done(null, result);
+
             } catch (error) {
                 return done("Error al registrar el usuario: " + error);
             }
