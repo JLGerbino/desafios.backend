@@ -16,6 +16,7 @@ import __dirname from "./utils.js";
 import initializePassport from "./config/passport.config.js";
 import { config } from "./config/config.js"
 import { connectDB } from "./config/dbConnection.js";
+import ViewController from "./controllers/views.controller.js"
 
 const PORT = config.server.port;
 
@@ -24,6 +25,7 @@ const PORT = config.server.port;
 const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB
 const managerChatDB = new ChatManagerDB
+const viewController = new ViewController
 
 const app = express();
 

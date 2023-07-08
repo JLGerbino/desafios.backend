@@ -3,8 +3,11 @@ import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
 import carritoModel from "../dao/models/carrito.model.js";
 import { GetUserDto } from "../dao/dto/user.dto.js";
 import { productsDao } from "../dao/factory.js";
+import { cartDao } from "../dao/factory.js";
+import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js";
 
 const managerDB = new ProductManagerDB
+const ticketManager = new TicketManagerDB
 
 export default class viewController {
   async getHome(req, res){
@@ -134,9 +137,10 @@ export default class viewController {
     console.log(productos)
     res.render("realTimeProducts", {products: prods})
   };
-
+  
   async cartById(req, res) {
     const id_carrito = req.params.cid;
+    const ticketId = req.params.ticketId;    
     const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();
     const productos = productosCart.productos.map((item) => ({
       name: item.product.title,
@@ -146,9 +150,12 @@ export default class viewController {
     console.log("productosCart", productosCart);
     res.render("carts", {
       productos: productos,
-      id: id_carrito
-    });
+      id: id_carrito,
+      ticketId: ticketId
+    }); 
   }
+
+  
 
   async chat(req, res){
     res.render("chat", {})
@@ -173,5 +180,11 @@ export default class viewController {
 
   async resetPassword(req, res){
     res.render("resetPassword")    
-  };
-}
+  };  
+}  
+
+
+
+  
+
+

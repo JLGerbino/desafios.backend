@@ -1,7 +1,6 @@
 import { Router } from "express";
 import ViewController from "../controllers/views.controller.js";
 import { userAccess, adminAccess } from "../middlewares/validations.js";
-
 const router = Router();
 
 const viewController = new ViewController 

@@ -13,4 +13,14 @@ export default class TicketManagerDB {
       throw new Error("no se pudo generar el ticket")//console.log(error)
     }
   }
+
+  async getTicketById(ticketId) {
+    try {
+      const ticket = await ticketModel.findById(ticketId);
+      return ticket;
+    } catch (error) {
+      console.error('Error al obtener el ticket:', error);
+      throw new Error('Error al obtener el ticket');
+    }
+  }
 }

@@ -6,6 +6,8 @@ import userModel from "../dao/models/user.model.js";
 import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js"; //const cartManagerDB = new CartManagerDB();
 import { GetUserDto } from "../dao/dto/user.dto.js"
 
+const ticketManager = new TicketManagerDB();
+
 export default class CartController {
   async createCart(req, res) {
     //const emailUser = req.session.user//agregue
@@ -63,10 +65,11 @@ export default class CartController {
   async purchase(req, res) {
     if (!req.session.user) {
         console.log("La sesión del usuario no está presente")};
-        const id_carrito = req.params.cid;
-        const userEmail = req.session.user.email        
-        const cart = await cartDao.getCartsId(id_carrito);
-        const msg = await cartDao.Purchase(id_carrito, userEmail);
-        res.send(msg)
-  } 
+    const id_carrito = req.params.cid;
+    const userEmail = req.session.user.email;          
+    const cart = await cartDao.getCartsId(id_carrito);
+    const msg = await cartDao.Purchase(id_carrito, userEmail, res);                  
+    //res.send(msg)        
+  }  
+
 }
