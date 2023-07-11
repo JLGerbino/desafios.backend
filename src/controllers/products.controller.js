@@ -2,6 +2,7 @@
 //esto voy agregando
 import { productsDao } from "../dao/factory.js";
 import { productService } from "../repository/index.js";
+import { generateProduct } from "../utils.js"
 //import ProductManagerFS from "../dao/managersFS/productManager.js";
 //
 
@@ -99,5 +100,16 @@ console.log(producto);
 const msg = await productService.updateProductRep(producto)//productService.updateProductRep({_id:id_producto},{$set:producto}); //productsDao.updateProduct(producto) //productManagerDB.updateProduct(producto) //productoModel.updateOne({_id:id_producto},{$set:producto});
 res.send(msg);
   } 
+
+  //nuevo faker
+  async mockingProducts(req, res){
+    const cant = parseInt(req.query.cant) || 100;
+    let productMoking = [];
+    for (let i = 0; i < cant; i++) {
+      const producto = generateProduct();
+      productMoking.push(producto)
+    }
+    res.json({productMoking})    
+  }
 }
 

@@ -1,4 +1,7 @@
 import productoModel from "../models/producto.model.js";
+import { CustomError } from "../../repository/customError.repository.js";
+import { EError } from "../../enums/EErrors.js";
+import { generateProductErrorInfo } from "../../repository/productErrorInfo.js";
 
 export default class ProductManagerDB {
   constructor(){
@@ -28,7 +31,14 @@ export default class ProductManagerDB {
       if (
         Object.values(producto).includes(" ") ||
         Object.values(producto).includes("")
-      ) {        
+      ) {
+        //agrgegue esto
+        CustomError.createError({
+          name: "error al crear el usuario",
+          cause: generateProductErrorInfo(producto),
+          message: "error creando el producto",
+          errorCode: EError.INVALID_JSON
+        })//hasta aca ver si anda. si no hay que ponerlo junto con la validacion en controller        
         return "Todos los campos son obligatorios";
       }
       //hsta aca
