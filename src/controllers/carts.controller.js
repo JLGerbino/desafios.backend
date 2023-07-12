@@ -5,6 +5,8 @@ import { productService } from "../repository/index.js";
 import userModel from "../dao/models/user.model.js";
 import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js"; //const cartManagerDB = new CartManagerDB();
 import { GetUserDto } from "../dao/dto/user.dto.js"
+import { generateProductErrorParam } from "../repository/productErrorParam.js";
+import { generateProductErrorInfo } from "../repository/productErrorInfo.js";
 
 const ticketManager = new TicketManagerDB();
 
@@ -18,6 +20,15 @@ export default class CartController {
   async addCart(req, res) {
     const id_carrito = req.params.cid;
     const id_producto = req.params.pid;
+    //agrego esto
+    if (id_producto === "") {        
+      CustomError.createError({
+        name: "Product in cart error",
+        cause: generateProductErrorParam(id_producto),
+        message: "error creando el producto",
+        errorCode: EError.INVALID_PARAM
+      })
+    }   //hasta ac
     const msg = await cartDao.addCart(id_carrito, id_producto); //cartManagerDB.addCart(id_carrito, id_producto)  //manager.addCart(id_carrito, id_producto);
     res.send(msg);
   }

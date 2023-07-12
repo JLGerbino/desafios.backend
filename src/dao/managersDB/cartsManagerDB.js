@@ -3,6 +3,10 @@ import ProductManagerDB from "../managersDB/productManagerDB.js";
 import { v4 as uuidv4 } from "uuid";
 import TicketManagerDB from "../managersDB/ticketManagerDb.js";
 import { transporter } from "../../config/gmail.js";
+import { CustomError } from "../../repository/customError.repository.js";
+import { EError } from "../../enums/EErrors.js";
+import { generateProductErrorParam } from "../../repository/productErrorParam.js";
+
 
 const pManagerDB = new ProductManagerDB();
 const ticketManager = new TicketManagerDB();
@@ -44,7 +48,7 @@ export default class CartManagerDB {
   };
 
   addCart = async (id_carrito, id_producto) => {
-    try {
+    try {     
       const carts = await this.getCarts();
       const products = await pManagerDB.getProducts();
       const indexCarrito = carts.findIndex((cart) => cart.id == id_carrito);
@@ -54,6 +58,7 @@ export default class CartManagerDB {
           (producto) => producto.id == id_producto
         );
         console.log(indexProducto);
+        
         if (indexProducto !== -1) {
           let prodInCart = carts[indexCarrito].productos.find(
             (ele) => ele.product == id_producto

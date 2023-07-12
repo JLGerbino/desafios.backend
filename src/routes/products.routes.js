@@ -5,7 +5,7 @@ import ProductController from "../controllers/products.controller.js";
 const router = Router();
 const productController = new ProductController
 
-router.get('/mockingproducts', productController.mockingProducts);//nuevo faker
+router.get('/mockingproducts', productController.mockingProducts);
 router.get('/', productController.getProducts);
 router.get("/:pid", productController.getProductsById);
 router.post('/', productController.addProduct);
