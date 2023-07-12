@@ -20,15 +20,6 @@ export default class CartController {
   async addCart(req, res) {
     const id_carrito = req.params.cid;
     const id_producto = req.params.pid;
-    //agrego esto
-    if (id_producto === "") {        
-      CustomError.createError({
-        name: "Product in cart error",
-        cause: generateProductErrorParam(id_producto),
-        message: "error creando el producto",
-        errorCode: EError.INVALID_PARAM
-      })
-    }   //hasta ac
     const msg = await cartDao.addCart(id_carrito, id_producto); //cartManagerDB.addCart(id_carrito, id_producto)  //manager.addCart(id_carrito, id_producto);
     res.send(msg);
   }
