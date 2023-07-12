@@ -23,19 +23,19 @@ const storage = multer.diskStorage({
 
 //nuevo faker
 export const customFaker = new Faker({
-    //Por Ej. el idioma
+    //configura el idioma
     locale: [en],
 })
-const { commerce, image, database, string, internet, person, phone, datatype, lorem } = customFaker;
+const { commerce, image, database, string } = customFaker;
 
 export const generateProduct = () => {
     return {
         _id: database.mongodbObjectId(),
-        title: commerce.productName(),
+        title:commerce.productName(),
         description:commerce.productDescription(),
-        code: string.alphanumeric(10),
+        code:string.alphanumeric(10),
         price: parseFloat(commerce.price()),
-        status: " ",
+        status: true,
         stock: parseInt(string.numeric(2)),        
         category:commerce.productAdjective(),        
         thumbnail: image.url()       

@@ -17,6 +17,7 @@ import initializePassport from "./config/passport.config.js";
 import { config } from "./config/config.js"
 import { connectDB } from "./config/dbConnection.js";
 import ViewController from "./controllers/views.controller.js"
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const PORT = config.server.port;
 
@@ -47,6 +48,7 @@ app.use(session({
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname +"/views");
 app.set("view engine", "handlebars");
@@ -54,6 +56,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
 app.use("/api/sessions", sessionRouter)
+app.use(errorHandler);
 
 console.log("configuracion",config)
 

@@ -10,7 +10,7 @@ export default class TicketManagerDB {
       return ticketCreated;    
     }    
      catch(error){
-      throw new Error("no se pudo generar el ticket")//console.log(error)
+      throw new Error("no se pudo generar el ticket")
     }
   }
 

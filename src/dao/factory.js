@@ -1,7 +1,5 @@
 import { config } from "../config/config.js";
-//agrtegue
-//import ProductManagerDB from "./managersDB/productManagerDB";
-//
+
 const persistence = config.server.persistence;
 
 let productsDao 

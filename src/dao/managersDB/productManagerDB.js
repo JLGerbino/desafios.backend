@@ -26,27 +26,23 @@ export default class ProductManagerDB {
         producto.id = 1;
       } else {
         producto.id = products[products.length - 1].id + 1;
-      }
-      //comentado de aca
+      }      
       if (
         Object.values(producto).includes(" ") ||
         Object.values(producto).includes("")
-      ) {
-        //agrgegue esto
+      ) {        
         CustomError.createError({
-          name: "error al crear el usuario",
+          name: "Product create error",
           cause: generateProductErrorInfo(producto),
           message: "error creando el producto",
           errorCode: EError.INVALID_JSON
-        })//hasta aca ver si anda. si no hay que ponerlo junto con la validacion en controller        
+        })        
         return "Todos los campos son obligatorios";
-      }
-      //hsta aca
+      }      
       let codigo = products.find((ele) => ele.code == producto.code);
       if (codigo) {
         return "El 'code' del producto ya existe, intente cambiarlo.";
-      } else {
-        //products.push(producto);
+      } else {        
         await productoModel.create(producto)
         console.log(producto);
         return producto;
@@ -59,7 +55,7 @@ export default class ProductManagerDB {
   getProductsById = async (id_producto) => {
     try{
       const products = await this.getProducts();
-      const producto = products.find((producto) => producto.id == id_producto);      
+      const producto = products.find((producto) => producto.id == id_producto); 
       if (producto) {        
         return producto;
       } else {

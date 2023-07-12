@@ -1,6 +1,5 @@
 import carritoModel from "../models/carrito.model.js";
 import ProductManagerDB from "../managersDB/productManagerDB.js";
-//import { productService } from "../../repository/index.js";
 import { v4 as uuidv4 } from "uuid";
 import TicketManagerDB from "../managersDB/ticketManagerDb.js";
 import { transporter } from "../../config/gmail.js";
@@ -186,8 +185,7 @@ export default class CartManagerDB {
     }
   };
 
-  Purchase = async (id_carrito, userEmail, res) => {
-    //const id_carrito = req.params.cid;
+  Purchase = async (id_carrito, userEmail, res) => {    
     const cart = await this.getCartsId(id_carrito);
     const productsToPurchase = [];
     const productsNotRemove = [];
@@ -195,7 +193,7 @@ export default class CartManagerDB {
       const productId = product.product._id.toString();
       const quantity = product.quantity;
       console.log("producto id", productId);
-      const productInfo = await pManagerDB.getProductsById(productId); //productService.getProductsByIdRep(productId);
+      const productInfo = await pManagerDB.getProductsById(productId); 
       console.log("productInfo" + productInfo.stock);
       if (productInfo.stock >= quantity) {
         productsToPurchase.push(product);
@@ -205,7 +203,7 @@ export default class CartManagerDB {
       } else {
         productsNotRemove.push(productInfo);
       }
-    } //hasta aca revise
+    } 
     let montoTotal = 0;
     for (const product of productsToPurchase) {
       const { quantity } = product;
@@ -230,7 +228,6 @@ export default class CartManagerDB {
       console.log("Ticket creado:", createdTicket);
       console.log("Ticket creado:", createdTicket);
       console.log("ticketid cartmanager", createdTicket._id);
-
       const emailTemplate = `<div>
       <h1>Muchas gracias por tu compra!!</h1>
       <h2>Detalles del ticket</h2>
@@ -248,11 +245,9 @@ export default class CartManagerDB {
       });
       console.log("contenido", contenido);
       res.json({ status: "sucess", message: "Registo y envio de correo." });
-      return createdTicket;
-      //res.send("Proceso de compra finalizado");
+      return createdTicket;      
     } catch (error) {
-      console.log("Error al crear el ticket:", error);
-      //res.status(500).send("Error al finalizar la compra");
+      console.log("Error al crear el ticket:", error);      
     }
   };
 }
