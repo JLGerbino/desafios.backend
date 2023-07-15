@@ -30,7 +30,7 @@ const viewController = new ViewController
 
 const app = express();
 
-connectDB()
+//connectDB()
 //const connection = mongoose.connect(MONGO);
 
 app.use(express.json());

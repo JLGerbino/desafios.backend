@@ -2,6 +2,7 @@ import productoModel from "../models/producto.model.js";
 import { CustomError } from "../../repository/customError.repository.js";
 import { EError } from "../../enums/EErrors.js";
 import { generateProductErrorInfo } from "../../repository/productErrorInfo.js";
+import { generateProductErrorParam } from "../../repository/productErrorParam.js";
 
 export default class ProductManagerDB {
   constructor(){
@@ -67,7 +68,15 @@ export default class ProductManagerDB {
   };
 
   deleteProduct = async (id_producto) => {
-    try{    
+    try{      
+      if (!id_producto) {        
+        CustomError.createError({
+          name: "Erase Product in data base",
+          cause: generateProductErrorParam(id_producto),
+          message: "error borrando el producto",
+          errorCode: EError.INVALID_PARAM
+        })
+      }       
       const products = await this.getProducts();
       const producto = products.find((producto) => producto.id == id_producto);     
       if (producto) {  

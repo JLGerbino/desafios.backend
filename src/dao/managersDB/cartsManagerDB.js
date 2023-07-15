@@ -6,6 +6,7 @@ import { transporter } from "../../config/gmail.js";
 import { CustomError } from "../../repository/customError.repository.js";
 import { EError } from "../../enums/EErrors.js";
 import { generateProductErrorParam } from "../../repository/productErrorParam.js";
+import { generateCartErrorParam } from "../../repository/cartErrorParam.js";
 
 
 const pManagerDB = new ProductManagerDB();
@@ -106,6 +107,14 @@ export default class CartManagerDB {
 
   deleteProdInCart = async (id_carrito) => {
     try {
+      if (!id_carrito) {        
+        CustomError.createError({
+          name: "Erase all products in cart",
+          cause: generateCartErrorParam(id_carrito),
+          message: "error borrando todos los productos del carrito",
+          errorCode: EError.INVALID_PARAM
+        })
+      }       
       const cart = await carritoModel.findOne({ _id: id_carrito });
       const carts = await this.getCarts();
       const indexCarrito = carts.findIndex((cart) => cart.id == id_carrito);
@@ -125,6 +134,14 @@ export default class CartManagerDB {
 
   deleteProdInCartById = async (id_carrito, id_producto) => {
     try {
+      if (!id_producto) {        
+        CustomError.createError({
+          name: "Erase Product in cart",
+          cause: generateProductErrorParam(id_producto),
+          message: "error borrando el producto",
+          errorCode: EError.INVALID_PARAM
+        })
+      }       
       const cart = await carritoModel.findOne({ _id: id_carrito });
       const carts = await this.getCarts();
       const products = await pManagerDB.getProducts();

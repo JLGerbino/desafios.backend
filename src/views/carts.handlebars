@@ -4,6 +4,11 @@
 <p>ID del carrito: {{id}}</p>
 <ul>
   {{#each productos}}
+    {{!-- <div class="product">
+    <p>{{this.idProducto}}-{{this.quantity}} {{this.name}} - {{this.price}}</p>
+    <button class="btn btn-danger delete-product" data-product-id="{{this.idProducto}}">Eliminar</button>
+    {{!-- <button class="btn btn-danger" data-product-id="{{this._id}}">Eliminar</button> --}}
+  {{!-- </div> --}}
     <li>{{this.quantity}} {{this.name}} - {{this.price}}</li>
   {{/each}}
 </ul>

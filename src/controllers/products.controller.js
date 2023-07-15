@@ -63,7 +63,7 @@ export default class ProductController {
   }
 
   async deleteProduct(req, res) {
-    const id = req.params.pid;
+    const id = req.params.pid;    
     const msg = await productService.deleteProductRep(id); //productsDao.deleteProduct(id); //productManagerDB.deleteProduct(id) //productoModel.deleteOne({_id:id});
     res.send(msg);
   }

@@ -145,17 +145,16 @@ export default class viewController {
     const productos = productosCart.productos.map((item) => ({
       name: item.product.title,
       price: item.product.price,
-      quantity: item.quantity
+      quantity: item.quantity,
+      idProducto: item.product._id
     }));
     console.log("productosCart", productosCart);
     res.render("carts", {
       productos: productos,
       id: id_carrito,
-      ticketId: ticketId
+      ticketId: ticketId,      
     }); 
-  }
-
-  
+  }  
 
   async chat(req, res){
     res.render("chat", {})

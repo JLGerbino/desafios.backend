@@ -14,7 +14,10 @@ export default class sessionsController{
     }
 
     async login(req, res){
-        const { email, password } = req.body;      
+        
+
+        const { email, password } = req.body;
+        
         if (email === config.auth.account && password === config.auth.pass) {
         req.session.user = {
             //name: "Admin",
@@ -31,7 +34,7 @@ export default class sessionsController{
         age: req.user.age,
         role: req.user.role,
         cartId: req.user.cartId//
-        }
+        }        
         const user = req.session.user
         const userDto = new GetUserDto(user)
         console.log("sessions.controller", userDto)        

@@ -7,6 +7,7 @@ import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js"; //const cart
 import { GetUserDto } from "../dao/dto/user.dto.js"
 import { generateProductErrorParam } from "../repository/productErrorParam.js";
 import { generateProductErrorInfo } from "../repository/productErrorInfo.js";
+import { generateCartErrorParam } from "../repository/cartErrorParam.js";
 
 const ticketManager = new TicketManagerDB();
 
@@ -33,12 +34,28 @@ export default class CartController {
   async deleteProdInCartById(req, res) {
     const id_carrito = req.params.cid;
     const id_producto = req.params.pid;
+    // if (!id_carrito) {        
+    //   CustomError.createError({
+    //     name: "Erase all products in cart",
+    //     cause: generateCartErrorParam(id_carrito),
+    //     message: "error borrando todos los productos del carrito",
+    //     errorCode: EError.INVALID_PARAM
+    //   })
+    // }       
     const msg = await cartDao.deleteProdInCartById(id_carrito, id_producto); //cartManagerDB.deleteProdInCartById(id_carrito, id_producto)
     res.send(msg);
   }
 
   async deleteProdInCart(req, res) {
     const id_carrito = req.params.cid;
+    // if (!id_carrito) {        
+    //     CustomError.createError({
+    //       name: "Erase all products in cart",
+    //       cause: generateCartErrorParam(id_carrito),
+    //       message: "error borrando todos los productos del carrito",
+    //       errorCode: EError.INVALID_PARAM
+    //     })
+    //   }    
     const msg = await cartDao.deleteProdInCart(id_carrito); //cartManagerDB.deleteProdInCart(id_carrito)
     res.send(msg);
   }
