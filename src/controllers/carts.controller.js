@@ -1,5 +1,5 @@
 //import CartManagerDB from "../dao/managersDB/cartsManagerDB.js";
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import { cartDao } from "../dao/factory.js";
 import { productService } from "../repository/index.js";
 import userModel from "../dao/models/user.model.js";

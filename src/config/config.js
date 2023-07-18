@@ -13,6 +13,7 @@ const CALLBACKURL_GITHUB = process.env.CALLBACKURL_GITHUB
 const PERSISTENCE = process.env.PERSISTENCE
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL
 const ADMIN_PASS = process.env.ADMIN_PASS
+const NOD_ENV = process.env.NOD_ENV
 
 export const config = {
     server: {
@@ -37,5 +38,8 @@ export const config = {
     gmail:{
         adminAccount: ADMIN_EMAIL,
         adminPass: ADMIN_PASS
+    },
+    entorno:{
+        environment: NOD_ENV
     }
 } 
