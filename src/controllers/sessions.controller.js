@@ -1,7 +1,9 @@
 import { createHash, validatePassword } from '../utils.js';
 import { config } from '../config/config.js';
 import { CreateUserDto, GetUserDto } from "../dao/dto/user.dto.js";
+import { envLogger } from '../middlewares/logger.js';
 
+const logger = envLogger();
 
 export default class sessionsController{
     async register(req, res){
@@ -13,8 +15,7 @@ export default class sessionsController{
         res.send({error: "Error en el registro"}) 
     }
 
-    async login(req, res){
-        
+    async login(req, res){    
 
         const { email, password } = req.body;
         

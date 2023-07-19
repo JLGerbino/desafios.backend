@@ -10,9 +10,12 @@ import { EError } from "../enums/EErrors.js";
 import { CustomError } from "../repository/customError.repository.js";
 import { generateUserErrorParam } from "../repository/userErrorParam.js";
 import { generateUserErrorInfo } from "../repository/userErrorInfo.js";
+import { envLogger }  from "../middlewares/logger.js";
+
 
 const LocalStrategy = local.Strategy;
 const managerDB = new CartManagerDB(); //
+const logger = envLogger()
 
 const initializePassport = () => {
   passport.use(
@@ -81,8 +84,8 @@ const initializePassport = () => {
         try {
           const user = await userModel.findOne({ email: username });
           console.log("login", user);
-          if (!user) {
-            console.log("No existe el usuario");
+          if (!user) { 
+            logger.error("No existe el usuario logger");            
             return done(null, false);
           }
           if (!validatePassword(password, user)) return done(null, false);

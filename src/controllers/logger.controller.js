@@ -6,8 +6,7 @@ export default class LoggerController{
         req.logger.warn("Alerta!");
         req.logger.info("Info");
         req.logger.http("Http");        
-        req.logger.debug("Debug");
-        //req.logger.fatal("Fatal");        
+        req.logger.debug("Debug");              
 
        res.send("Prueba de logger");        
     }

@@ -26,7 +26,7 @@ const customLevels = {
     },
   };
   
-  const devLogger = winston.createLogger({
+  export const devLogger = winston.createLogger({
     levels: customLevels.levels,    
     transports: [
       new winston.transports.Console({ level: "debug",
@@ -40,7 +40,7 @@ const customLevels = {
     ],
   });
   
-  const prodLogger = winston.createLogger({
+  export const prodLogger = winston.createLogger({
     levels: customLevels.levels,
     transports: [
       new winston.transports.Console({ level: "info", 
@@ -53,14 +53,21 @@ const customLevels = {
       new winston.transports.File({ filename: path.join(__dirname, "./error.log"), level: "error" }),
     ],
   });
-  
-  export const addLogger = (req, res, next) => {
+
+  let logger;
+  export const envLogger = () => {
     if (currentEnv === "development") {
-      req.logger = devLogger;
+      logger = devLogger;
     } else {
-      req.logger = prodLogger;
+      logger = prodLogger;
     }
+    return logger;
+  };
+
+  export const addLogger = (req, res, next) => {
+    req.logger = envLogger();
     req.logger.http(`${req.method} en ${req.url}`);
     next();
   };
-
+      
+  

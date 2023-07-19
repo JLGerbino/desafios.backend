@@ -5,7 +5,6 @@ import { CustomError } from "../repository/customError.repository.js";
 import { EError } from "../enums/EErrors.js";
 import { generateProductErrorInfo } from "../repository/productErrorInfo.js";
 //import ProductManagerFS from "../dao/managersFS/productManager.js";
-
 //import { uploader } from "../utils.js";
 
 
@@ -25,7 +24,7 @@ export default class ProductController {
   }
 
   async getProductsById(req, res) {
-    const id = req.params.pid;
+    const id = req.params.pid;    
     const producto = await productService.getProductsByIdRep(id); //productsDao.getProductsById(id) //productManagerDB.getProductsById(id) // productoModel.find({_id:id});
     res.send(producto);
   }

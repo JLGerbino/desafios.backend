@@ -20,10 +20,10 @@ import { connectDB } from "./config/dbConnection.js";
 import ViewController from "./controllers/views.controller.js"
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { addLogger } from "./middlewares/logger.js";
+import { envLogger } from "./middlewares/logger.js";
+
 
 const PORT = config.server.port;
-
-//const MONGO = config.mongo.url; 
 
 const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB
@@ -32,9 +32,7 @@ const viewController = new ViewController
 
 const app = express();
 
-//connectDB()
-//const connection = mongoose.connect(MONGO);
-
+app.use(addLogger);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
@@ -50,7 +48,7 @@ app.use(session({
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(addLogger);
+
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname +"/views");
 app.set("view engine", "handlebars");
@@ -60,20 +58,19 @@ app.use("/", viewRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/api/logger", loggerRouter);
 app.use(errorHandler);
+const logger = envLogger();
 
+logger.info("configuracion",config.entorno)
 
-console.log("configuracion",config)
-
-const server = app.listen(PORT, ()=>{    
-        console.log(`Servidor funcionando en el puerto ${PORT}`)
+const server = app.listen(PORT, (req)=>{ 
+    logger.info(`Servidor funcionando en el puerto ${PORT}`)         
     })
 
 const io = new Server(server);
 const messages = []
 
 io.on("connection", socket =>{
-        console.log("Usuario conectado");
-        
+        logger.info("Usuario conectado");                
         socket.on("message", async nuevoProducto =>{
         nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
         console.log(nuevoProducto)
@@ -88,7 +85,7 @@ io.on("connection", socket =>{
 
     socket.on("message1", async idEliminar =>{        
         idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
-        console.log(idEliminar)
+        logger.info("producto eliminado")        
         if (idEliminar === "El producto que quiere eliminar no existe") {
             io.emit("actualizado", "inexistente")
         }else{

@@ -3,7 +3,9 @@ import { CustomError } from "../../repository/customError.repository.js";
 import { EError } from "../../enums/EErrors.js";
 import { generateProductErrorInfo } from "../../repository/productErrorInfo.js";
 import { generateProductErrorParam } from "../../repository/productErrorParam.js";
+import { envLogger } from "../../middlewares/logger.js";
 
+const logger = envLogger();
 export default class ProductManagerDB {
   constructor(){
     //this.path = "./src/files/products.json";    
@@ -42,9 +44,11 @@ export default class ProductManagerDB {
       }      
       let codigo = products.find((ele) => ele.code == producto.code);
       if (codigo) {
+         logger.error("El 'code' del producto ya existe, intente cambiarlo.")
         return "El 'code' del producto ya existe, intente cambiarlo.";
       } else {        
         await productoModel.create(producto)
+        //addLogger.debug(producto)//req.loggers.debug(producto)
         console.log(producto);
         return producto;
       }
