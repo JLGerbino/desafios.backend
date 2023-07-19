@@ -4,3 +4,5 @@
 {"level":"error","message":"Error"}
 {"level":"error","message":"El 'code' del producto ya existe, intente cambiarlo."}
 {"level":"error","message":"No existe el usuario logger"}
+{"level":"fatal","message":"Fatal"}
+{"level":"error","message":"Error"}

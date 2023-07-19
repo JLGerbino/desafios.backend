@@ -7,9 +7,11 @@ import { CustomError } from "../../repository/customError.repository.js";
 import { EError } from "../../enums/EErrors.js";
 import { generateProductErrorParam } from "../../repository/productErrorParam.js";
 import { generateCartErrorParam } from "../../repository/cartErrorParam.js";
+import { envLogger } from "../../middlewares/logger.js";
 
 const pManagerDB = new ProductManagerDB();
 const ticketManager = new TicketManagerDB();
+const logger = envLogger();
 
 export default class CartManagerDB {
   getCarts = async () => {
@@ -43,7 +45,7 @@ export default class CartManagerDB {
         //id_user: id_user
       };
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   };
 
@@ -53,18 +55,17 @@ export default class CartManagerDB {
       const products = await pManagerDB.getProducts();
       const indexCarrito = carts.findIndex((cart) => cart.id == id_carrito);
       //winston.loggers.info(id_carrito);
-      console.log(id_carrito);
+      logger.debug(id_carrito);
       if (indexCarrito !== -1) {
         const indexProducto = products.findIndex(
           (producto) => producto.id == id_producto
         );
-        console.log(indexProducto);
-        
+        logger.debug(indexProducto);        
         if (indexProducto !== -1) {
           let prodInCart = carts[indexCarrito].productos.find(
             (ele) => ele.product == id_producto
           );
-          console.log(prodInCart);
+          logger.debug(prodInCart);
           if (!prodInCart) {
             carts[indexCarrito].productos.push({
               product: id_producto,
@@ -82,7 +83,7 @@ export default class CartManagerDB {
         return "No existe el carrito";
       }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   };
 

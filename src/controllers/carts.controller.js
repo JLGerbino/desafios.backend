@@ -47,15 +47,7 @@ export default class CartController {
   }
 
   async deleteProdInCart(req, res) {
-    const id_carrito = req.params.cid;
-    // if (!id_carrito) {        
-    //     CustomError.createError({
-    //       name: "Erase all products in cart",
-    //       cause: generateCartErrorParam(id_carrito),
-    //       message: "error borrando todos los productos del carrito",
-    //       errorCode: EError.INVALID_PARAM
-    //     })
-    //   }    
+    const id_carrito = req.params.cid;    
     const msg = await cartDao.deleteProdInCart(id_carrito); //cartManagerDB.deleteProdInCart(id_carrito)
     res.send(msg);
   }
