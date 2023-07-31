@@ -32,7 +32,12 @@ const schema = new mongoose.Schema({
         type: String,
         require:true
     },
-    thumbnail:[]
+    owner:{
+        //type: String
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"        
+    },
+    thumbnail:[]    
 })
 
 schema.plugin(mongoosePaginate)

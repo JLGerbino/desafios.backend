@@ -7,7 +7,8 @@ export class CreateProductDto {
         this.status = product.status;
         this.stock = product.stock;
         this.category = product.categoria;
-        this.thumbnail = product.imagen
+        this.owner = product.owner;
+        this.thumbnail = product.imagen;       
     }  
 }
 export class GetProductDto{
@@ -15,5 +16,6 @@ export class GetProductDto{
         this.nombreProducto = productDB.title + ' ' + productDB.desciption;
         this.precio = productDB.price;
         this.status = productDB.status;
+        this.owner = productDB.owner;//aca tambien
     }
 }

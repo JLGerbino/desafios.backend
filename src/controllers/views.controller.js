@@ -32,7 +32,7 @@ export default class viewController {
     console.log(orden);
     //productos
     if (query) {
-      res.render("home", {
+      res.render("home",{
         products: prodsFilt,
         hasPrevPage,
         hasNextPage,
@@ -177,8 +177,13 @@ export default class viewController {
     console.log(userDto);
   };
 
+  async forgotPassword(req, res){
+    res.render("forgotPassword");
+  }
+
   async resetPassword(req, res){
-    res.render("resetPassword")    
+    const token = req.query.token;
+    res.render("resetPassword",{token})    
   };  
 }  
 

@@ -21,9 +21,9 @@ export default class ProductManagerDB {
     }
   }
    
-  addProduct = async (producto) => {
-    try{  
-      const products = await this.getProducts();      
+  addProduct = async (producto, user) => {
+      try{     
+      const products = await this.getProducts();        
       let id_producto = producto.id;
       if (products.length === 0) {
         producto.id = 1;
@@ -46,10 +46,12 @@ export default class ProductManagerDB {
       if (codigo) {
          logger.error("El 'code' del producto ya existe, intente cambiarlo.")
         return "El 'code' del producto ya existe, intente cambiarlo.";
-      } else {        
+      } else {
+        console.log("addproduct ",products.owner);
+        producto.owner = user//"owner";        
         await productoModel.create(producto)
         //addLogger.debug(producto)//req.loggers.debug(producto)
-        console.log(producto);
+        //console.log(producto);
         return producto;
       }
     } catch(error){

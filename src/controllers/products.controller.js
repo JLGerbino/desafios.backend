@@ -4,6 +4,7 @@ import { generateProduct } from "../utils.js";
 import { CustomError } from "../repository/customError.repository.js";
 import { EError } from "../enums/EErrors.js";
 import { generateProductErrorInfo } from "../repository/productErrorInfo.js";
+import productoModel from "../dao/models/producto.model.js";
 //import ProductManagerFS from "../dao/managersFS/productManager.js";
 //import { uploader } from "../utils.js";
 
@@ -32,6 +33,9 @@ export default class ProductController {
   async addProduct(req, res) {
     const { title, description, code, price, stock, category } = req.body;
     const files = req.files;
+    const user = req.session.user._id;
+    //const user = req.session.user.email//agrego esto 
+    console.log("products.controller",user);
     const thumbnails = files.map((file) => `/images/${file.filename}`);
     const filenames = [];
     // comentado de aca
@@ -49,15 +53,17 @@ export default class ProductController {
       status: "true",
       stock,
       category,
-      thumbnail: [],
+      //owner: "premiun",//user,//agrego esto
+      thumbnail: [],      
     };
     //comentado de aca
     filenames.forEach((filename) => {
       producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
     });
     //hasta aca
-    console.log(producto);
-    const msg = await productService.addProductRep(producto); //productsDao.addProduct(producto); //productManagerDB.addProduct(producto)  // productoModel.create(producto);
+    //console.log(producto);
+    const msg = await productService.addProductRep(producto, user);
+    //const msg = await productService.addProductRep(producto, user);//acac agregue user //productsDao.addProduct(producto); //productManagerDB.addProduct(producto)  // productoModel.create(producto);
     res.send(msg);
   }
 
@@ -69,7 +75,7 @@ export default class ProductController {
 
   async updateProduct(req, res) {
     const id_producto = req.params.pid;
-    const { title, description, code, price, status, stock, category } =
+    const { title, description, code, price, status, stock, category, owner} =
       req.body;
     const files = req.files;
     const filenames = [];
@@ -87,6 +93,7 @@ export default class ProductController {
       status,
       stock,
       category,
+      owner,
       thumbnail: [],
     };
     // filenames.forEach((filename) => {

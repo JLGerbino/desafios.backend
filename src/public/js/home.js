@@ -3,7 +3,8 @@ const socket = io();
 const log = document.getElementById("log");
 
 const botonEnviar = document.getElementById("enviar");
-
+//const user = {user};//agregue esto
+//console.log("front", user);
 botonEnviar.addEventListener("click", event => {
    if (event){
       const title = document.getElementById("title").value;

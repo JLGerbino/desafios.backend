@@ -13,6 +13,7 @@ import cartsRouter from "./routes/carts.routes.js";
 import viewRouter from "./routes/views.routes.js";
 import sessionRouter from "./routes/sessions.routes.js";
 import loggerRouter from "./routes/logger.routes.js";
+import userRouter from "./routes/users.routes.js";
 import __dirname from "./utils.js";
 import initializePassport from "./config/passport.config.js";
 import { config } from "./config/config.js"
@@ -48,7 +49,7 @@ app.use(session({
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(express.json());
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname +"/views");
 app.set("view engine", "handlebars");
@@ -57,6 +58,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/", viewRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/api/logger", loggerRouter);
+app.use("/api/users", userRouter);
 app.use(errorHandler);
 const logger = envLogger();
 

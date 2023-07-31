@@ -9,16 +9,13 @@ form.addEventListener("submit", e=>{
     data.forEach((value,key)=>obj[key]=value);
 
     //fetch("/api/sessions/restartPassword", {
-    fetch("/api/sessions/resetPassword", {
+    fetch("/api/resetPassword", {
         method: "POST",
         body: JSON.stringify(obj),
         headers:{
             'Content-Type': 'application/json'
         }
-    }).then(result=>{ 
-        if(result.status === 200){
-            console.log("Contraseña restaurada");
-        }
+    }).then(result=>result.json()).then(json=>{ 
+        localStorage.setItem('token',json.access_token)
      })
-
 })

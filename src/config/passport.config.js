@@ -23,14 +23,15 @@ const initializePassport = () => {
     new LocalStrategy(
       { passReqToCallback: true, usernameField: "email" },
       async (req, username, password, done) => {
-        const { first_name, last_name, email, age } = req.body;
+        const { first_name, last_name, email, age, role} = req.body;
+        console.log("EL ROLE", role);
         try {
-          const userError = { first_name, last_name, email, age, password };
-          if (!first_name || !last_name || !email || !age || !password) {
+          const userError = { first_name, last_name, email, age, password, role};
+          if (!first_name || !last_name || !email || !age  || !password || !role ) {
             CustomError.createError({
-              name: "Erase Product in cart",
+              name: "Register error",
               cause: generateUserErrorInfo(userError),
-              message: "error de logueo",
+              message: "error de registro",
               errorCode: EError.INVALID_PARAM,              
             });            
           }
@@ -48,7 +49,8 @@ const initializePassport = () => {
             age,
             password: createHash(password),
             cartId: cartId,
-            role: "User",
+            role: role,
+            //role: "User",
           };          
           const result = await userModel.create(newUser);
           const contenido = await transporter.sendMail({

@@ -17,5 +17,6 @@ export const generateUserErrorInfo = (user) => {
       email: Debe ser un campo string, pero recibió "${user.email}"
       age: Debe ser un campo numérico, pero recibió "${user.age}"
       password: Debe ser un campo string, pero recibió "${user.password}"
+      role: Debe ser un campo string, pero recibió "${user.role}"
     `;
   }

@@ -8,9 +8,10 @@ export class ProductRepository{
         const products = await this.dao.getProducts()
         return products;
     }
-    async addProductRep(product){
+    async addProductRep(product){//agregue user
         const productDto = new CreateProductDto(product);
-        const productCreated = await this.dao.addProduct(productDto);
+        //const productWithOwner = { ...productDto, owner: user };//77agregue esto
+        const productCreated = await this.dao.addProduct(productWithOwner);
         return productCreated;
     }
 
