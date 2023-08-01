@@ -2,10 +2,9 @@ const socket = io();
 const log = document.getElementById("log");
 
 const botonEnviar = document.getElementById("enviar");
-
-//const user = {user};
-//agregue esto
+const newrole = window.role
 const user = window.owner;
+console.log("front", role);
 console.log("front", owner);
 botonEnviar.addEventListener("click", event => {
    if (event){
@@ -16,7 +15,13 @@ botonEnviar.addEventListener("click", event => {
       const stock = document.getElementById("stock").value;
       const category = document.getElementById("category").value;
       const thumbnail = document.getElementById("thumbnail").value;       
-      const nuevoProducto = {title, description, code, price, status: "true", stock, category, owner: user, thumbnail};      
+      let nuevoOwner;      
+      if (role === "premium") {
+         nuevoOwner = user;
+      } else {
+         nuevoOwner = "admin";
+      }     
+      const nuevoProducto = {title, description, code, price, status: "true", stock, category, owner: nuevoOwner, thumbnail};      
       socket.emit("message", nuevoProducto);
    }      
 })

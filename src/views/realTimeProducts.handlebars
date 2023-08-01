@@ -2,12 +2,13 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="form-container p-4">
-        <h1>Cargar producto</h1>owner:{{user}}
+        <h1>Cargar producto</h1>owner:{{user}} 
+        role:{{role}}
         <script>
     
     
   </script>
-
+<br>
         <label>Titulo</label>
         <input id="title" name="title" class="form-control"><br>
 
@@ -60,6 +61,10 @@
 <script>
   const owner = "{{user}}";
   window.owner = owner;
+</script>
+<script>
+  const role = "{{role}}";
+  window.role = role;
 </script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

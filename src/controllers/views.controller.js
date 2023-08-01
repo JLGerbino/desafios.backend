@@ -133,10 +133,11 @@ export default class viewController {
 
   async realTimeProducts(req, res){
     const productos = await managerDB.getProducts(); //manager.getProducts();
-    const prods = productos.map(item=>item.toObject())
-    prods[0].owner = req.session.user._id
+    const prods = productos.map(item=>item.toObject())    
+    prods[0].owner = req.session.user.email//_id
+    prods[1].role = req.session.user.role
     console.log("realtime",productos)
-    res.render("realTimeProducts", {products: prods, user: req.session.user._id})
+    res.render("realTimeProducts", {products: prods, user: req.session.user.email, role: req.session.user.role})//aca en vez de email iba _id
   };
   
   async cartById(req, res) {

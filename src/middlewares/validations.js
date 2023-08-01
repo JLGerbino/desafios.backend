@@ -30,6 +30,14 @@ export const premiumAccess = (req,res,next)=>{
     }    
 }
 
+export const userPremiumAccess = (req,res,next)=>{
+    if(req.session.user && req.session.user.role === "User" || req.session.user.role === "premium"){
+       next();
+    } else {
+        res.status(400).json({status:"error", message:"los users no pueden visitar esta ruta"});
+    }    
+}
+
 // export const checkRole = (roles) => {
 //     return (req,res,next)=>{
 //         if (!req.user) {

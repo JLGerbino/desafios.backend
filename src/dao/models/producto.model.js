@@ -33,9 +33,9 @@ const schema = new mongoose.Schema({
         require:true
     },
     owner:{
-        //type: String
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"        
+        type: String
+        // type:mongoose.Schema.Types.ObjectId,
+        // ref:"User"        
     },
     thumbnail:[]    
 })
