@@ -2,9 +2,11 @@ const socket = io();
 const log = document.getElementById("log");
 
 const botonEnviar = document.getElementById("enviar");
+
 //const user = {user};
 //agregue esto
-//console.log("front", user);
+const user = window.owner;
+console.log("front", owner);
 botonEnviar.addEventListener("click", event => {
    if (event){
       const title = document.getElementById("title").value;
@@ -13,10 +15,8 @@ botonEnviar.addEventListener("click", event => {
       const price = document.getElementById("price").value;
       const stock = document.getElementById("stock").value;
       const category = document.getElementById("category").value;
-      const thumbnail = document.getElementById("thumbnail").value;      
-      
-      const nuevoProducto = {title, description, code, price, status: "true", stock, category, thumbnail};
-      
+      const thumbnail = document.getElementById("thumbnail").value;       
+      const nuevoProducto = {title, description, code, price, status: "true", stock, category, owner: user, thumbnail};      
       socket.emit("message", nuevoProducto);
    }      
 })
@@ -39,7 +39,7 @@ socket.on("actualizado", productos => {
    listaProductos.innerHTML = "";    
    productos.forEach(producto => {
      let p = document.createElement("p");
-     p.innerText = `id: ${producto._id}, title: ${producto.title}, description: ${producto.description},code: ${producto.code} ,price: ${producto.price}, status: ${producto.status}, stock: ${producto.stock}, category: ${producto.category}, thumbnail: ${producto.thumbnail}`;
+     p.innerText = `id: ${producto._id}, title: ${producto.title}, description: ${producto.description},code: ${producto.code} ,price: ${producto.price}, status: ${producto.status}, stock: ${producto.stock}, category: ${producto.category}, owner:${producto.owner}, thumbnail: ${producto.thumbnail}`;
      listaProductos.appendChild(p);
    });
  }

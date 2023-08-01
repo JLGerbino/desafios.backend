@@ -74,14 +74,14 @@ const messages = []
 
 io.on("connection", socket =>{
     logger.info("Usuario conectado");                
-    socket.on("message", async nuevoProducto =>{
+    socket.on("message", async nuevoProducto =>{        
     nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
     console.log(nuevoProducto)
     if (nuevoProducto === "Todos los campos son obligatorios"){
         io.emit("actualizado", "campos"); 
     }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
         io.emit("actualizado", "code");
-    }else{        
+    }else{
     const productos = await managerDB.getProducts(); //manager.getProducts();        
     io.emit("actualizado", productos);}      
 })

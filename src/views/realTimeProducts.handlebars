@@ -5,7 +5,7 @@
         <h1>Cargar producto</h1>owner:{{user}}
         <script>
     
-    const owner = {{user}};
+    
   </script>
 
         <label>Titulo</label>
@@ -55,12 +55,12 @@
       <p id="idn">id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
     {{/each}}
   </div>
-  <p id="productos"></p>
-  {{!-- <script>
-    // Obtener el valor del owner del usuario desde la variable {{user}} en el HTML
-    const owner = {{user}};
-  </script> --}}
+  <p id="productos"></p>  
 </div>
+<script>
+  const owner = "{{user}}";
+  window.owner = owner;
+</script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
