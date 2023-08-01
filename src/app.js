@@ -71,35 +71,68 @@ const server = app.listen(PORT, (req)=>{
 const io = new Server(server);
 const messages = []
 
+
 io.on("connection", socket =>{
-        logger.info("Usuario conectado");                
-        socket.on("message", async nuevoProducto =>{
-        nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
-        console.log(nuevoProducto)
-        if (nuevoProducto === "Todos los campos son obligatorios"){
-            io.emit("actualizado", "campos"); 
-        }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
-            io.emit("actualizado", "code");
-        }else{        
-        const productos = await managerDB.getProducts(); //manager.getProducts();        
-        io.emit("actualizado", productos);}      
-    })
-
-    socket.on("message1", async idEliminar =>{        
-        idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
-        logger.info("producto eliminado")        
-        if (idEliminar === "El producto que quiere eliminar no existe") {
-            io.emit("actualizado", "inexistente")
-        }else{
-        const productos = await managerDB.getProducts(); //manager.getProducts();
-        io.emit("actualizado", productos)
-        }
-    })
-
-    //chat
-    socket.on("message2", async data =>{
-        await messages.push(data)
-        await managerChatDB.createChats(data)
-        io.emit("messageLogs", messages)
-    })
+    logger.info("Usuario conectado");                
+    socket.on("message", async nuevoProducto =>{
+    nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
+    console.log(nuevoProducto)
+    if (nuevoProducto === "Todos los campos son obligatorios"){
+        io.emit("actualizado", "campos"); 
+    }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
+        io.emit("actualizado", "code");
+    }else{        
+    const productos = await managerDB.getProducts(); //manager.getProducts();        
+    io.emit("actualizado", productos);}      
 })
+
+socket.on("message1", async idEliminar =>{        
+    idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
+    logger.info("producto eliminado")        
+    if (idEliminar === "El producto que quiere eliminar no existe") {
+        io.emit("actualizado", "inexistente")
+    }else{
+    const productos = await managerDB.getProducts(); //manager.getProducts();
+    io.emit("actualizado", productos)
+    }
+})
+
+//chat
+socket.on("message2", async data =>{
+    await messages.push(data)
+    await managerChatDB.createChats(data)
+    io.emit("messageLogs", messages)
+})
+})
+// io.on("connection", socket =>{
+//         logger.info("Usuario conectado");                
+//         socket.on("message", async nuevoProducto =>{
+//         nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
+//         console.log(nuevoProducto)
+//         if (nuevoProducto === "Todos los campos son obligatorios"){
+//             io.emit("actualizado", "campos"); 
+//         }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
+//             io.emit("actualizado", "code");
+//         }else{        
+//         const productos = await managerDB.getProducts(); //manager.getProducts();        
+//         io.emit("actualizado", productos);}      
+//     })
+
+//     socket.on("message1", async idEliminar =>{        
+//         idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
+//         logger.info("producto eliminado")        
+//         if (idEliminar === "El producto que quiere eliminar no existe") {
+//             io.emit("actualizado", "inexistente")
+//         }else{
+//         const productos = await managerDB.getProducts(); //manager.getProducts();
+//         io.emit("actualizado", productos)
+//         }
+//     })
+
+//     //chat
+//     socket.on("message2", async data =>{
+//         await messages.push(data)
+//         await managerChatDB.createChats(data)
+//         io.emit("messageLogs", messages)
+//     })
+// })

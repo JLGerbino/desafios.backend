@@ -30,6 +30,9 @@ export default class ProductController {
     res.send(producto);
   }
 
+
+
+
   async addProduct(req, res) {
     const { title, description, code, price, stock, category } = req.body;
     const files = req.files;
@@ -53,7 +56,7 @@ export default class ProductController {
       status: "true",
       stock,
       category,
-      //owner: "premiun",//user,//agrego esto
+      owner: req.session.user._id,//"premiun",//user,//agrego esto
       thumbnail: [],      
     };
     //comentado de aca
@@ -62,10 +65,15 @@ export default class ProductController {
     });
     //hasta aca
     //console.log(producto);
-    const msg = await productService.addProductRep(producto, user);
+    //const msg = await productService.addProductRep(producto, user);
     //const msg = await productService.addProductRep(producto, user);//acac agregue user //productsDao.addProduct(producto); //productManagerDB.addProduct(producto)  // productoModel.create(producto);
     res.send(msg);
   }
+
+
+
+
+
 
   async deleteProduct(req, res) {
     const id = req.params.pid;    

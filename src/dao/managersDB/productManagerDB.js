@@ -20,6 +20,8 @@ export default class ProductManagerDB {
       console.log(error)
     }
   }
+
+
    
   addProduct = async (producto, user) => {
       try{     
@@ -47,8 +49,8 @@ export default class ProductManagerDB {
          logger.error("El 'code' del producto ya existe, intente cambiarlo.")
         return "El 'code' del producto ya existe, intente cambiarlo.";
       } else {
-        console.log("addproduct ",products.owner);
-        producto.owner = user//"owner";        
+        console.log("adproduct ",producto.owner);
+        //producto.owner = //user//req.session.user.email//"owner";        
         await productoModel.create(producto)
         //addLogger.debug(producto)//req.loggers.debug(producto)
         //console.log(producto);
@@ -58,6 +60,8 @@ export default class ProductManagerDB {
       console.log(error)
     }
   }
+
+
 
   getProductsById = async (id_producto) => {
     try{

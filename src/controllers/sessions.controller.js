@@ -31,7 +31,8 @@ export default class sessionsController{
         // return res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
         // } 
         if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});    
-        req.session.user = {        
+        req.session.user = { 
+        _id: req.user._id,           
         first_name: req.user.first_name,
         last_name: req.user.last_name,        
         email: req.user.email,

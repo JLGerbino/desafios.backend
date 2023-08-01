@@ -2,7 +2,12 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="form-container p-4">
-        <h1>Cargar producto</h1>
+        <h1>Cargar producto</h1>owner:{{user}}
+        <script>
+    
+    const owner = {{user}};
+  </script>
+
         <label>Titulo</label>
         <input id="title" name="title" class="form-control"><br>
 
@@ -44,13 +49,17 @@
 </div>
 
 <div class="container mt-4">
-  <h1>Listado de productos en tiempo real</h1>
+  <h1>Listado de productos en tiempo real </h1>
   <div id="inicio">
     {{#each products}}
       <p id="idn">id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, thumbnail: {{this.thumbnail}}</p><br>
     {{/each}}
   </div>
   <p id="productos"></p>
+  {{!-- <script>
+    // Obtener el valor del owner del usuario desde la variable {{user}} en el HTML
+    const owner = {{user}};
+  </script> --}}
 </div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
