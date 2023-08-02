@@ -10,8 +10,7 @@ export default class ProductManagerDB {
   constructor(){
     //this.path = "./src/files/products.json";    
   }  
- 
-  
+
   getProducts = async () => {
     try{
       const products = await productoModel.find()
@@ -21,8 +20,6 @@ export default class ProductManagerDB {
     }
   }
 
-
-   
   addProduct = async (producto, user) => {
       try{     
       const products = await this.getProducts();        
@@ -61,8 +58,6 @@ export default class ProductManagerDB {
     }
   }
 
-
-
   getProductsById = async (id_producto) => {
     try{
       const products = await this.getProducts();
@@ -100,7 +95,7 @@ export default class ProductManagerDB {
       console.log(error)
     }
   };
-  
+    
   updateProduct = async (producto) =>{    
     try{       
       const products = await this.getProducts();         

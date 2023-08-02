@@ -2,8 +2,10 @@ const socket = io();
 const log = document.getElementById("log");
 
 const botonEnviar = document.getElementById("enviar");
+//const botonEliminar = document.getElementById("eliminar"); 
 const newrole = window.role
 const user = window.owner;
+//let nuevoOwner
 console.log("front", role);
 console.log("front", owner);
 botonEnviar.addEventListener("click", event => {
@@ -49,14 +51,72 @@ socket.on("actualizado", productos => {
    });
  }
 });
- 
- botonEliminar = document.getElementById("eliminar");
- botonEliminar.addEventListener("click", event => {
-   if (event){
-      const id =  document.getElementById("id").value;
-      socket.emit("message1", id);
-   }
+
+botonEliminar = document.getElementById("eliminar");
+botonEliminar.addEventListener("click", event => {
+  if (event){
+     const id =  document.getElementById("id").value;
+     socket.emit("message1", id);
+  }
 })
+
+
+//  const botonEliminar = document.getElementById("eliminar");
+//  botonEliminar.addEventListener("click", event => {
+//    if (event){
+//       const id =  document.getElementById("id").value;
+//       socket.emit("message1", id);
+//    }
+// })
+//agregue
+// botonEliminar.addEventListener("click", event => {
+//    if (event) {
+//      const id = document.getElementById("id").value;
+//      socket.emit("deleteProduct", { productId: id, userEmail: user, userRole: role });
+//    }
+//  });
+ 
+// botonEliminar.addEventListener("click", event => {
+//    if (event) {
+//      const id = document.getElementById("id").value;
+//      socket.emit("getProductInfo", id); // Enviamos una solicitud para obtener información del producto
+//    }
+//  });
+ //agregue
+//  socket.on("productInfo", product => {
+//    if (!product) {
+//      Swal.fire("El producto no existe o hubo un error al obtener la información");
+//    } else if (role === "premium" && product.owner !== user) {
+//      Swal.fire("Solo puedes borrar tus propios productos");
+//    } else {
+//      socket.emit("message1", product._id); // Si el usuario es "premium" y es el dueño del producto, enviamos el ID para eliminarlo
+//    }
+//  });
+//  socket.on("productInfo", product => {
+//    // product contiene la información del producto obtenida del servidor
+//    if (role === "premium" && product.owner !== user) {
+//      Swal.fire("Solo puedes borrar tus propios productos");
+//    } else {
+//      socket.emit("message1", product._id); // Si el usuario es "premium" y es el dueño del producto, enviamos el ID para eliminarlo
+//    }
+//  }); 
+
+//
+//botonEliminar = document.getElementById("eliminar"); 
+// botonEliminar.addEventListener("click", event => {
+//    if (event){
+//       const id =  document.getElementById("id").value;
+//       // Verificar que el usuario premium solo pueda borrar sus propios productos
+//       if (role === "premium" && owner !== user) {
+//          Swal.fire("Solo puedes borrar tus propios productos");
+//       } else {
+//          socket.emit("message1", id);
+//       }
+//    }
+// });
+
+//este es el que anda
+ 
 
 
 

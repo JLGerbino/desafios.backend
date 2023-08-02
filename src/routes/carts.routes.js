@@ -5,7 +5,7 @@ const router = Router();
 const cartController = new CartController;
 
 router.post('/', cartController.createCart);
-router.post('/:cid/products/:pid', cartController.addCart);
+router.post('/:cid/products/:pid', cartController.addCart);//aca agregue/email/:emu
 router.get("/:cid", cartController.getCartsId);
 router.delete('/:cid/products/:pid', cartController.deleteProdInCartById);
 router.delete('/:cid', cartController.deleteProdInCart);

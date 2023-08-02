@@ -47,7 +47,7 @@ export default class CartManagerDB {
     } catch (error) {
       logger.error(error);
     }
-  };
+  };  
 
   addCart = async (id_carrito, id_producto) => {
     try {     

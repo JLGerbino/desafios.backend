@@ -21,7 +21,8 @@ export default class CartController {
   async addCart(req, res) {
     const id_carrito = req.params.cid;
     const id_producto = req.params.pid;
-    const msg = await cartDao.addCart(id_carrito, id_producto); //cartManagerDB.addCart(id_carrito, id_producto)  //manager.addCart(id_carrito, id_producto);
+    //const emailUser = req.params.emu;//esto lo agrego para enviar el email del usuario
+    const msg = await cartDao.addCart(id_carrito, id_producto);//aca agregue emailUser //cartManagerDB.addCart(id_carrito, id_producto)  //manager.addCart(id_carrito, id_producto);
     res.send(msg);
   }
 

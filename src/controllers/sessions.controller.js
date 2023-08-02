@@ -17,19 +17,7 @@ export default class sessionsController{
         res.send({error: "Error en el registro"}) 
     }
 
-    async login(req, res){    
-
-        //const { email, password, role } = req.body;
-        
-        // if (email === config.auth.account && password === config.auth.pass) {
-        // req.session.user = {
-        //     //name: "Admin",
-        //     email: email,
-        //     role: role
-        //     //role: "admin"
-        // };  
-        // return res.send({ status: "success", payload: req.res.user, message: "Primer logueo!!" });
-        // } 
+    async login(req, res){        
         if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});    
         req.session.user = { 
         _id: req.user._id,           
@@ -56,17 +44,7 @@ export default class sessionsController{
             if(err) return res.status(500).send({status:"error", error:"No pudo cerrar sesion"})
             res.redirect('/');
         })
-    }
-    //esta es la que tenia de antes
-    // async resetPassword(req, res){
-    //     const {email, password } = req.body;  
-    //     if(!email || !password ) return res.status(400).send({status:"error", error:"Datos incorrectos"})
-    //     const user = await userModel.findOne({email});
-    //     if(!user) return res.status(400).send({status:"error", error:"Datos incorrectos"})  
-    //     const newHashedPassword = createHash(password);
-    //     await userModel.updateOne({_id:user._id},{$set:{password:newHashedPassword}});
-    //     res.send({status:"success", message:"Contraseña actualizada"}) 
-    // }      
+    }    
 
     async forgotPassword(req,res){
         try {

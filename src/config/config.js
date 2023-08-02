@@ -14,6 +14,7 @@ const PERSISTENCE = process.env.PERSISTENCE
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL
 const ADMIN_PASS = process.env.ADMIN_PASS
 const NOD_ENV = process.env.NOD_ENV
+const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 export const config = {
     server: {
@@ -28,7 +29,8 @@ export const config = {
         pass: PASSWORD_ADMIN
     },
     keys:{
-        cookieSecret: COOKIE_SECRET
+        cookieSecret: COOKIE_SECRET,
+        jwtSecret: PRIVATE_KEY
     },
     gitHub:{
         clientID: ID_GITHUB,
