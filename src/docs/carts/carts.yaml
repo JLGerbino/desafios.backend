@@ -174,16 +174,22 @@ components:
       properties:
         productos:
           type: array
-          items:
-            $ref: "#/components/schemas/Product"
+          # items:
+          #   $ref: "#/components/schemas/Product"
       example: Array con productos con producto y cantidad
-    Product:
-      type: object
-      properties:
-        product:
-          type: string          
-        quantity:
-          type: number
+    
+    # este es el schema que agregue
+    # Product:
+    #   type: object
+    #   properties:
+    #     product:
+    #       type: string          
+    #     quantity:
+    #       type: number
+    #   example:
+    #     productos: Array con productos
+
+
     # Carts:
     #   type: object
     #   properties:
@@ -201,9 +207,7 @@ components:
     #         #   type: string
     #         #   quantity:
     #         #   type: number
-    #       description: Array con productos        
-      example:
-        productos: Array con productos            
+    #       description: Array con productos                 
   requestBodies:
     updateCart:
       type: object
@@ -211,7 +215,7 @@ components:
         productos:
           type: array
           items:
-            $ref: "#components/schemas/Product"
+            $ref: "#components/schemas/Carts"
           description: Array con productos
     # updateCart:
     #   type: object
