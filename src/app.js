@@ -16,7 +16,7 @@ import viewRouter from "./routes/views.routes.js";
 import sessionRouter from "./routes/sessions.routes.js";
 import loggerRouter from "./routes/logger.routes.js";
 import userRouter from "./routes/users.routes.js";
-import __dirname from "./utils.js";
+import  __dirname  from "./utils.js";
 import initializePassport from "./config/passport.config.js";
 import { config } from "./config/config.js"
 import { connectDB } from "./config/dbConnection.js";

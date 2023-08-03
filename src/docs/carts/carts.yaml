@@ -1,6 +1,225 @@
 paths:
   /api/carts/:
-    get:
-      summary: Obtener todos los carritos
+    post:
+      summary: Crea un carrito
       tags:
         - Carritos
+      responses:
+        "200":
+          description: El carrito se creo de forma correcta
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Carts"
+        "500":
+          description: Error interno del servidor    
+  /api/carts/{cid}:
+    get:
+      summary: Obtener un carrito por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito que quiero obtener
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: El carrito se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Carts"
+        "500":
+          description: Error interno del servidor         
+    put: 
+      summary: Carga en un carrito todos los productos disponibles
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito que quiero cargar con todos los productos
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateCart'
+      responses:
+        "200":
+          description: El carrito actualizo con todos los productos
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Carts"
+        "500":
+          description: Error interno del servidor
+    delete:
+      summary: elimina todos los productos del carrito traido por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito del cual se quiere eliminar todos los productos que contiene
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Se eliminaron los productos correctamente
+        "500":
+          description: Error interno del servidor          
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Guarda en una carrito traido por id un producto elegido por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito en el cual se quiere agregar el producto
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto que se quiere agregar al carrito
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: El producto se agrego correctamente
+        "500":
+          description: Error interno del servidor
+    put: 
+      summary: Modifica la cantidad del producto traido por id que se encuentra en el carrito traido por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito en el que tengo el producto del cual quiero modifcar la cantidad
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto en el carrito del cual quiero modificar la cantidad  
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateCart'
+      responses:
+        "200":
+          description: La cantidad del producto en el carrito se actualizo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Carts"
+        "500":
+          description: Error interno del servidor
+    delete:
+      summary: Elimina del carrito traido por id el producto traido por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito del cual se quiere eliminar todos los productos que contiene
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto que se quiere eliminar del carrito
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Se elimino el producto correctamente
+        "500":
+          description: Error interno del servidor
+  /api/carts/{cid}/purchase/:
+    post:
+      summary: Hace efectiva la compra de los productos que se encuentran en el carrito traido por id
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: cid es el id del carrito de cual se quiere efectivizar la compra
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: La compra se realizo exitosamente
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:    
+    Carts:
+      type: object
+      properties:
+        productos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+      example: Array con productos con producto y cantidad
+    Product:
+      type: object
+      properties:
+        product:
+          type: string          
+        quantity:
+          type: number
+    # Carts:
+    #   type: object
+    #   properties:
+    #     productos:
+    #       type: array
+    #       items:
+    #         $ref: "#components/schemas/Product"
+    #       description: Array con productos
+    # Carts:
+    #   type: object
+    #   properties:
+    #     productos:
+    #       type: array
+    #         # products:
+    #         #   type: string
+    #         #   quantity:
+    #         #   type: number
+    #       description: Array con productos        
+      example:
+        productos: Array con productos            
+  requestBodies:
+    updateCart:
+      type: object
+      properties:
+        productos:
+          type: array
+          items:
+            $ref: "#components/schemas/Product"
+          description: Array con productos
+    # updateCart:
+    #   type: object
+    #   properties:
+    #     productos:
+    #       type: array
+    #       description: Array con productos
+      example:
+        productos: Array con productos
+        
+      

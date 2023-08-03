@@ -4,3 +4,177 @@ paths:
       summary: Obtener todos los productos
       tags:
         - Productos
+      responses:
+        "200":
+          description: Los productos se obtuvieron de forma correcta
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del servidor
+    post:
+      summary: Cargar un producto en la base de datos
+      tags:
+        - Productos
+      responses:
+        "200":
+          description: El producto se guardo correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del servidor
+  /api/products/{pid}:
+    get:
+      summary: Obtener un producto por id
+      tags:
+        - Productos
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto que quiero obtener
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: El producto se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del servidor
+    put:
+      summary: Actualizar el producto por id
+      tags:
+        - Productos
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto que quiero actualizar
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: El producto se actualizo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Products"
+        "500":
+          description: Error interno del servidor
+    delete:
+      summary: eliminar un producto por id
+      tags:
+        - Productos
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: pid es el id del producto que desea eliminar
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Se elimino el producto correctamente
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo
+        description:
+          type: string
+          description: Descripcion
+        code:
+          type: number
+          description: Codigo de productos
+        price:
+          type: number        
+          description: Precio
+        status:
+          type: boolean
+          description: Indica si el producto se puede comercializar
+        stock:
+          type: number
+          description: Cantidad de productos disponibles
+        category:
+          type: string
+          description: Categoria del producto
+        owner:
+          type: string
+          description: Creador del producto
+        thumbnail: 
+          type: string
+          description: Array de links imagenes productos
+      example:
+        Titulo: Camiseta Seleccion Nacional
+        description: Camiseta futbol Adidas
+        code: 124
+        price: 25900
+        status: true
+        stock: 25
+        category: remeras
+        owner: userpremium@email.com
+        thumbnail: C:\Users\Jose Luis\OneDrive\Escritorio\coderBackend\Canno-Sonar-140.jp    
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:        
+        title:
+          type: string
+          description: Titulo
+        description:
+          type: string
+          description: Descripcion
+        code:
+          type: number
+          description: Codigo de productos
+        price:
+          type: number        
+          description: Precio
+        status:
+          type: boolean
+          description: Indica si el producto se puede comercializar
+        stock:
+          type: number
+          description: Cantidad de productos disponibles
+        category:
+          type: string
+          description: Categoria del producto
+        owner:
+          type: string
+          description: Creador del producto
+        thumbnail: 
+          type: string
+          description: Array de links imagenes productos
+      example:
+        Titulo: Camiseta Seleccion Nacional
+        description: Camiseta futbol Adidas
+        code: 124
+        price: 25900
+        status: ok
+        stock: 25
+        category: remeras
+        owner: userpremium@email.com
+        thumbnail: C:\Users\Jose Luis\OneDrive\Escritorio\coderBackend\Canno-Sonar-140.jp
+      
