@@ -80,7 +80,7 @@ paths:
           description: Error interno del servidor          
   /api/carts/{cid}/products/{pid}:
     post:
-      summary: Guarda en una carrito traido por id un producto elegido por id
+      summary: Guarda en un carrito traido por id un producto elegido por id
       tags:
         - Carritos
       parameters:
@@ -172,11 +172,19 @@ components:
     Carts:
       type: object
       properties:
-        productos:
-          type: array
+        products:
+          type: string
+          description: id del producto
+        quantity:
+          type: string
+          description: cantidad del producto
+          # # agrego esto
           # items:
-          #   $ref: "#/components/schemas/Product"
-      example: Array con productos con producto y cantidad
+          #   product: id de producto
+          #   quantity: cantidad del preoducto
+      example:
+        products: 64554bfb67e3b69cad00eba1
+        quantity: 2
     
     # este es el schema que agregue
     # Product:
@@ -212,11 +220,11 @@ components:
     updateCart:
       type: object
       properties:
-        productos:
-          type: array
-          items:
-            $ref: "#components/schemas/Carts"
-          description: Array con productos
+        quantity:
+          type: number
+          # items:
+          #   $ref: "#components/schemas/Carts"
+          description: Cantidad a comprar de un producto
     # updateCart:
     #   type: object
     #   properties:
@@ -224,6 +232,6 @@ components:
     #       type: array
     #       description: Array con productos
       example:
-        productos: Array con productos
+        quantity: 2
         
       
