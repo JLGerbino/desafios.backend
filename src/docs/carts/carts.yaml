@@ -177,60 +177,17 @@ components:
           description: id del producto
         quantity:
           type: string
-          description: cantidad del producto
-          # # agrego esto
-          # items:
-          #   product: id de producto
-          #   quantity: cantidad del preoducto
+          description: cantidad del producto          
       example:
         products: 64554bfb67e3b69cad00eba1
-        quantity: 2
-    
-    # este es el schema que agregue
-    # Product:
-    #   type: object
-    #   properties:
-    #     product:
-    #       type: string          
-    #     quantity:
-    #       type: number
-    #   example:
-    #     productos: Array con productos
-
-
-    # Carts:
-    #   type: object
-    #   properties:
-    #     productos:
-    #       type: array
-    #       items:
-    #         $ref: "#components/schemas/Product"
-    #       description: Array con productos
-    # Carts:
-    #   type: object
-    #   properties:
-    #     productos:
-    #       type: array
-    #         # products:
-    #         #   type: string
-    #         #   quantity:
-    #         #   type: number
-    #       description: Array con productos                 
+        quantity: 2                    
   requestBodies:
     updateCart:
       type: object
       properties:
         quantity:
-          type: number
-          # items:
-          #   $ref: "#components/schemas/Carts"
-          description: Cantidad a comprar de un producto
-    # updateCart:
-    #   type: object
-    #   properties:
-    #     productos:
-    #       type: array
-    #       description: Array con productos
+          type: number          
+          description: Cantidad a comprar de un producto    
       example:
         quantity: 2
         
