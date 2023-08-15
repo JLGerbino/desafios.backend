@@ -107,3 +107,5 @@ socket.on("message2", async data =>{
 })
 })
 
+export {app};
+
