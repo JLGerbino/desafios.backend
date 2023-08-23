@@ -18,7 +18,10 @@ export default class sessionsController{
     }
 
     async login(req, res){        
-        if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});    
+        if(!req.user) return res.status(400).send({status:"error", error: 'Invalid credentials'});        
+        // Guardar la fecha y hora del último inicio de sesión
+        req.user.last_connection = Date.now();
+        await req.user.save();        
         req.session.user = { 
         _id: req.user._id,           
         first_name: req.user.first_name,

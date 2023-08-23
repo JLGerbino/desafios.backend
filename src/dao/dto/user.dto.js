@@ -6,7 +6,8 @@ export class CreateUserDto {
         this.age = user.edad;
         this.password = user.contraseña;
         this.cartId = user.id_carrito;
-        this.role = user.roles
+        this.role = user.roles;
+        this.avatar = user.avatar;
     }  
 }
 export class GetUserDto{
@@ -15,6 +16,7 @@ export class GetUserDto{
         this.email = userDB.email;
         this.edad = userDB.age;
         this.roles = userDB.role;
-        this.cartId = userDB.cartId
+        this.cartId = userDB.cartId;
+        this.avatar = userDB.avatar;
     }
 }

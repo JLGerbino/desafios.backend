@@ -53,8 +53,8 @@ export default class ProductController {
       status: "true",
       stock,
       category,
-      owner: req.session.user._id,//"premiun",//user,//agrego esto
-      thumbnail: [],      
+      owner: req.session.user._id,
+      thumbnail: thumbnails//[], aca cambie el array por thumbnails      
     };
     //comentado de aca
     filenames.forEach((filename) => {

@@ -23,7 +23,8 @@ const initializePassport = () => {
     new LocalStrategy(
       { passReqToCallback: true, usernameField: "email" },
       async (req, username, password, done) => {
-        const { first_name, last_name, email, age, role} = req.body;
+        const { first_name, last_name, email, age, role, avatar} = req.body;//aca agregue avatar
+        //const {avatar} = req.file
         console.log("EL ROLE", role);
         try {
           const userError = { first_name, last_name, email, age, password, role};
@@ -50,8 +51,9 @@ const initializePassport = () => {
             password: createHash(password),
             cartId: cartId,
             role: role,
+            avatar: avatar,//agregue esto
             //role: "User",
-          };          
+          };                    
           const result = await userModel.create(newUser);
           const contenido = await transporter.sendMail({
             from: "Ecommerce Backend",

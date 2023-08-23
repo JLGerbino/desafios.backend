@@ -8,6 +8,8 @@ const user = window.owner;
 //let nuevoOwner
 console.log("front", role);
 console.log("front", owner);
+
+//este anda
 botonEnviar.addEventListener("click", event => {
    if (event){
       const title = document.getElementById("title").value;

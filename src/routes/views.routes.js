@@ -1,6 +1,8 @@
 import { Router } from "express";
 import ViewController from "../controllers/views.controller.js";
 import { userAccess, adminPremiumAccess, adminAccess, userPremiumAccess } from "../middlewares/validations.js";
+import { uploaderProfile } from "../utils.js";
+
 const router = Router();
 
 const viewController = new ViewController 
@@ -19,7 +21,7 @@ router.get("/products", viewController.getProducts);
 router.get("/carts/:cid", userPremiumAccess, viewController.cartById);
 router.get("/chat", userAccess, viewController.chat);
 router.get("/realTimeProducts", adminPremiumAccess,  viewController.realTimeProducts);
-router.get("/register", publicAcces, viewController.register);
+router.get("/register", publicAcces, uploaderProfile.single("avatar"), viewController.register);
 router.get("/", publicAcces, viewController.login);
 router.get("/profile", privateAcces, viewController.profile);
 router.get("/reset-password", viewController.resetPassword);

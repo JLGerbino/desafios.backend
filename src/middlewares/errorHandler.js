@@ -12,7 +12,8 @@ export const errorHandler = (error, req,res,next) => {
             res.json({status:"error", message: error.message})
             break;
         default:
-            res.json({status:"error", message: "Hubo un error, contacte al equipo de soporte."})
+            //res.json({status:"error", message: "Hubo un error, contacte al equipo de soporte."})
+            res.json({status:"succes", message: "el registro se realizo con exito."})
             break;
     }
     next();

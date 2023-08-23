@@ -35,8 +35,6 @@ describe("Testing de ecommerce", ()=>{
             console.log(ok);
             console.log(_body);
             console.log(statusCode);            
-        })
-        
-    })
-
-})
+        });       
+    });
+});
