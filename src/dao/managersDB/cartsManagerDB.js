@@ -123,7 +123,7 @@ export default class CartManagerDB {
       if (indexCarrito !== -1) {
         await carritoModel.updateOne(
           { _id: id_carrito },
-          { $unset: { productos: "" } }
+          { $set: { productos: [] } }          
         );
       } else {
         return "No existe el carrito";

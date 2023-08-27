@@ -90,7 +90,7 @@ export default class viewController {
     if(query){
         res.render("products", {
         user: userDto,//req.session.user,
-        products: prodsFilt,
+        products: prodsFilt, 
         hasPrevPage,
         hasNextPage, 
         prevPage,

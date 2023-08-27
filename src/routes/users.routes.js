@@ -6,6 +6,7 @@ import { uploaderDocument } from "../utils.js";
 const router = Router();
 const userController = new UserController
 
+router.get("/", userController.getUsers);
 router.put("/premium/:uid", adminAccess, userController.roleChange);
 router.put("/:uid/documents",uploaderDocument.fields([
     {name:"identificacion", maxCount:1},

@@ -1,7 +1,7 @@
 <a href="/products" class="btn btn-primary">Volver a Productos</a>
 <h1>Detalles del carrito</h1>
 
-<p>ID del carrito: {{id}}</p>
+<p id="cartId" data-cart-id={{user.cartId}}>ID del carrito: {{id}}</p>
 <ul>
   {{#each productos}}
     {{!-- <div class="product">
@@ -9,9 +9,13 @@
     <button class="btn btn-danger delete-product" data-product-id="{{this.idProducto}}">Eliminar</button>
     {{!-- <button class="btn btn-danger" data-product-id="{{this._id}}">Eliminar</button> --}}
   {{!-- </div> --}}
-    <li>{{this.quantity}} {{this.name}} - {{this.price}}</li>
+    <li>{{this.quantity}} {{this.name}} - {{this.price}}<button class="btn btn-danger delete-product" data-product-id="{{this.idProducto}}">Eliminar</button></li>
+    
   {{/each}}
 </ul>
+{{!-- /le saque la comillas a {{}} --}}
+<button id="clearCartButton" class="btn btn-danger" data-cart-id={{id}}>Vaciar carrito</button>
+
 <button id="purchaseButton" class="btn btn-primary" data-cart-id={{id}}>Terminar compra</button>
 
 <script src="/js/purchase.js"></script>

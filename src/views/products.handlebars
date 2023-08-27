@@ -1,6 +1,7 @@
 
 <h1>Bienvenid@ {{user.nombreCompleto}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h1><br>
-<a href="/carts/{{user.cartId}}" class="btn btn-primary">Ver carrito</a>
+<p id="cartId" type="hidden" style="color: white;" >{{user.cartId}}</p>
+<a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}" class="btn btn-primary">Ver carrito</a>
 
 {{#if user.role}}
 <div class="text-center" style="background-color: red;"><h5>role: {{user.role}}</h5></div>
@@ -12,10 +13,10 @@
       <img src="images/{{this.thumbnail}}"class="card-img-top" alt="image">
       <div class="card-body">
         <h5 class="card-title">{{this.title}}</h5>
+        <p id="product_id">{{this._id}}</p>        
         <p class="card-text">{{this.description}}</p>
-        <p class="card-text">$ {{this.price}}</p>
-        <p></p>
-        <a href="#" class="btn btn-primary"><button>agregar a carrito</button></a>
+        <p class="card-text">$ {{this.price}}</p>        
+        <a href="#" class="btn btn-primary agregar-button" data-product-id="{{this._id}}"><button>agregar a carrito</button></a>
       </div>
     </div>
   </div>
@@ -38,5 +39,5 @@
   <p style="margin-right: 5px">Pagina: {{page}}</p>
   <p style="margin-left: 5px">Total paginas: {{totalPages}}</p>
 </div>
-
+<script src="/js/products.js"></script>
 

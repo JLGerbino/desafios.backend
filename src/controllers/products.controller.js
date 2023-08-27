@@ -12,15 +12,18 @@ import productoModel from "../dao/models/producto.model.js";
 export default class ProductController {
   async getProducts(req, res) {
     const productos = await productService.getProductsRep(); //productsDao.getProducts() //productsService.getProducts(); //productManagerDB.getProducts(); //productoModel.find();
+    //const userCartId = req.session.user.cartId;//agregue
     const limite = req.query.limit;
     if (!limite) {
       return res.send({
         productos,
+        //userCartId//
       });
     }
     let limiteProductos = productos.slice(0, limite);
     return res.send({
       limiteProductos,
+      //userCartId//
     });
   }
 
