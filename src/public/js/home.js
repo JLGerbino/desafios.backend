@@ -1,15 +1,12 @@
 const socket = io();
 const log = document.getElementById("log");
 
-const botonEnviar = document.getElementById("enviar");
-//const botonEliminar = document.getElementById("eliminar"); 
+const botonEnviar = document.getElementById("enviar"); 
 const newrole = window.role
 const user = window.owner;
-//let nuevoOwner
-console.log("front", role);
+console.log("front", newrole);
 console.log("front", owner);
 
-//este anda
 botonEnviar.addEventListener("click", event => {
    if (event){
       const title = document.getElementById("title").value;
@@ -54,11 +51,16 @@ socket.on("actualizado", productos => {
  }
 });
 
-botonEliminar = document.getElementById("eliminar");
+const botonEliminar = document.getElementById("eliminar");
 botonEliminar.addEventListener("click", event => {
   if (event){
      const id =  document.getElementById("id").value;
-     socket.emit("message1", id);
+     const data = {
+      id: id,
+      user: user,
+      role: newrole
+     }     
+     socket.emit("message1", data);
   }
 })
 

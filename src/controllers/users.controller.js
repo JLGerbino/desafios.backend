@@ -2,6 +2,7 @@ import productoModel from "../dao/models/producto.model.js";
 import userModel from "../dao/models/user.model.js";
 import { envLogger } from "../middlewares/logger.js";
 import { GetUserDto } from "../dao/dto/user.dto.js";
+import { transporter } from "../config/gmail.js";
 
 const logger = envLogger();
 
@@ -65,8 +66,10 @@ export default class UserController {
           reference: identificacion.filename,
         });
       }
-      if (domicilio) {
-        docs.push({ name: "domicilio", reference: domicilio.filename });
+      if (domicilio) {        
+        docs.push({
+          name: "domicilio",
+          reference: domicilio.filename });
       }
       if (estadoDeCuenta) {
         docs.push({
@@ -88,6 +91,43 @@ export default class UserController {
         status: "error",
         message: "Hubo un error en la carga de los archivos",
       });
+    };
+  };
+  
+  async deleteUserById (req, res) {
+    try {
+      const userId = req.params.uid;
+      const userDelete = await userModel.findByIdAndDelete(userId);
+      res.json({ status: "success", message: "Usuario eliminado" });      
+    } catch (error) {
+      console.error("Error al eliminar el usuario:", error);
+      res.status(500).send("Error al eliminar el usuario.");
+    }
+  }
+
+  async deleteUsers (req, res) {
+    try {
+      const users = await userModel.find();
+      const ahora = Date.now()
+      const tiempoLimite = 30*60*1000;//1/2 hora //60*60*1000*48//2 dias
+      users.forEach(async (user) => {
+        if (user.last_connection){//ver este if
+        const last_connection = user.last_connection
+        const diferencia = ahora - last_connection
+        const email = user.email                
+        if (diferencia > tiempoLimite ) {          
+          const contenido = await transporter.sendMail({
+            from: "Ecommerce Backend",
+            to: email,
+            subject: "Usuario eliminado por falta de conexion",
+          }); 
+          await userModel.findByIdAndDelete(user._id);         
+        }}
+      });
+      res.send("Usuarios eliminados por falta de conexion.");
+    } catch (error) {
+      console.error("Error al eliminar usuarios:", error);
+      res.status(500).send("Error al eliminar usuarios.");
     }
   }
 }

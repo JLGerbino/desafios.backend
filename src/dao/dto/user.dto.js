@@ -1,5 +1,6 @@
 export class CreateUserDto {
     constructor(user){
+        this._id = user.id//agregue
         this.first_name = user.nombre;
         this.last_name = user.apellido
         this.email = user.email;
@@ -12,11 +13,12 @@ export class CreateUserDto {
 }
 export class GetUserDto{
     constructor(userDB){
+        this.id = userDB._id//agregue
         this.nombreCompleto = userDB.first_name + " " + userDB.last_name;
         this.email = userDB.email;
         this.edad = userDB.age;
         this.roles = userDB.role;
         this.cartId = userDB.cartId;
-        this.avatar = userDB.avatar;
+        //this.avatar = userDB.avatar;
     }
 }

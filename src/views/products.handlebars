@@ -3,14 +3,17 @@
 <p id="cartId" type="hidden" style="color: white;" >{{user.cartId}}</p>
 <a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}" class="btn btn-primary">Ver carrito</a>
 
-{{#if user.role}}
-<div class="text-center" style="background-color: red;"><h5>role: {{user.role}}</h5></div>
+{{#if isAdmin}}
+  <a href="/realTimeProducts" class="btn btn-primary">Administrar productos</a>  <a href="/users" class="btn btn-primary">Administrar usuarios</a>  
+{{/if}}
+{{#if isPremium}}
+  <a href="/realTimeProducts" class="btn btn-primary">Administrar productos</a>  
 {{/if}}
 <div class="row justify-content-center align-items-center">
   {{#each products}}
-  <div class="col-xl-4 col-md-6 col-sm-12 mb-4"">
+  <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
     <div class="card mx-auto" style="width: 14rem;">
-      <img src="images/{{this.thumbnail}}"class="card-img-top" alt="image">
+      <img src="/images/{{this.thumbnail}}"class="card-img-top" alt="image">
       <div class="card-body">
         <h5 class="card-title">{{this.title}}</h5>
         <p id="product_id">{{this._id}}</p>        
@@ -22,7 +25,6 @@
   </div>
   {{/each}} 
 </div>
-
 <div class="pagination-container d-flex justify-content-center align-items-end">
   {{#if hasPrevPage}}
     <div style="margin-right: 5px">

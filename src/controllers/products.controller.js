@@ -39,7 +39,8 @@ export default class ProductController {
     const user = req.session.user._id;
     //const user = req.session.user.email//agrego esto 
     console.log("products.controller",user);
-    const thumbnails = files.map((file) => `/images/${file.filename}`);
+    //const thumbnails = files.map((file) => `/images/${file.filename}`);
+    const thumbnails = files.map((file) => `/images/${Date.now()}-${file.originalname}`);//agregue
     const filenames = [];
     // comentado de aca
     for (let i = 0; i < files.length; i++) {
@@ -71,7 +72,10 @@ export default class ProductController {
   }
   
   async deleteProduct(req, res) {
-    const id = req.params.pid;    
+    const id = req.params.pid;
+    //esto agregue
+    const user = req.session.user.role
+    console.log("rol del ususario en product.controller", user);//hasta aca   
     const msg = await productService.deleteProductRep(id); //productsDao.deleteProduct(id); //productManagerDB.deleteProduct(id) //productoModel.deleteOne({_id:id});
     res.send(msg);
   }

@@ -11,6 +11,10 @@ router.put("/premium/:uid", adminAccess, userController.roleChange);
 router.put("/:uid/documents",uploaderDocument.fields([
     {name:"identificacion", maxCount:1},
     {name: "domicilio", maxCount:1},
-    {name: "estadoDeCuenta", maxCount:1}]), userController.updateUserDocument)
+    {name: "estadoDeCuenta", maxCount:1}]), userController.updateUserDocument);
+router.delete("/:uid", userController.deleteUserById);   
+router.delete("/", userController.deleteUsers);    
+
+
 
 export default router;

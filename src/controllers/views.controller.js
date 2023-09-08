@@ -1,6 +1,8 @@
 import productoModel from "../dao/models/producto.model.js";
 import ProductManagerDB from "../dao/managersDB/productManagerDB.js";
 import carritoModel from "../dao/models/carrito.model.js";
+import userModel from "../dao/models/user.model.js";
+//import  UserController from "./users.controller.js";
 import { GetUserDto } from "../dao/dto/user.dto.js";
 import { productsDao } from "../dao/factory.js";
 import { cartDao } from "../dao/factory.js";
@@ -8,6 +10,7 @@ import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js";
 
 const managerDB = new ProductManagerDB
 const ticketManager = new TicketManagerDB
+//const userController = new UserController
 
 export default class viewController {
   async getHome(req, res){
@@ -78,7 +81,11 @@ export default class viewController {
     const sort = req.query.sort
     const query = req.query.query
     const user = req.session.user
-    const userDto = new GetUserDto(user)
+    const userDto = new GetUserDto(user)    
+    //const isAdminOrPremium = userDto.roles === "admin" || userDto.roles === "premium"; 
+    const isAdmin = userDto.roles === "admin";
+    const isPremium = userDto.roles === "premium";
+    //console.log("es admin o premium", isAdminOrPremium)  
     const {status, docs, totalPages, prevPage, nextPage, hasPrevPage, hasNextPage} = await productoModel.paginate({},{limit, page, lean:true})
     const products = docs   
     const filter = await productoModel.find({category: query})
@@ -90,6 +97,9 @@ export default class viewController {
     if(query){
         res.render("products", {
         user: userDto,//req.session.user,
+        //isAdminOrPremium,
+        isAdmin,
+        isPremium,
         products: prodsFilt, 
         hasPrevPage,
         hasNextPage, 
@@ -103,7 +113,10 @@ export default class viewController {
 }else{
     if(sort){
     res.render("products", {
-        user: userDto,//req.session.user,    
+        user: userDto,//req.session.user,
+        //isAdminOrPremium,
+        isAdmin,
+        isPremium,    
         products: prodsOrd,
         hasPrevPage,
         hasNextPage, 
@@ -116,7 +129,10 @@ export default class viewController {
     })
 } else{
     res.render("products",{
-        user: userDto,//req.session.user,     
+        user: userDto,//req.session.user,
+        //isAdminOrPremium,
+        isAdmin,
+        isPremium,     
         products,
         hasPrevPage,
         hasNextPage, 
@@ -137,9 +153,11 @@ export default class viewController {
     prods[0].owner = req.session.user.email//_id
     prods[1].role = req.session.user.role
     console.log("realtime",productos)
-    res.render("realTimeProducts", {products: prods, user: req.session.user.email, role: req.session.user.role})//aca en vez de email iba _id
-  };
+    //res.render("realTimeProducts", {products: prods, user: req.session.user.email, role: req.session.user.role})//aca en vez de email iba _id
+    res.render("realTimeProducts", {products: prods, user: req.session.user._id, role: req.session.user.role})
+  };  
   
+//anda ver tema del producto que no existe se puede ver con premiun
   async cartById(req, res) {
     const id_carrito = req.params.cid;
     const ticketId = req.params.ticketId;    
@@ -186,9 +204,34 @@ export default class viewController {
   async resetPassword(req, res){
     const token = req.query.token;
     res.render("resetPassword",{token})    
-  };  
+  }; 
+  
+  async users(req, res){
+    const usersDb = await userModel.find();
+    const users = usersDb.map(user => new GetUserDto(user));
+    //const productos = await managerDB.getProducts();
+    console.log("viewscontroller users",users);
+    res.render("users",{
+      users
+    })
+  };
 }  
-
+// const id_carrito = req.params.cid;
+//     const ticketId = req.params.ticketId;    
+//     const productosCart = await carritoModel.findById(id_carrito).populate("productos.product").lean();
+//     const productos = productosCart.productos.map((item) => ({
+//       name: item.product.title,
+//       price: item.product.price,
+//       quantity: item.quantity,
+//       idProducto: item.product._id
+//     }));
+//     console.log("productosCart", productosCart);
+//     res.render("carts", {
+//       productos: productos,
+//       id: id_carrito,
+//       ticketId: ticketId,      
+//     }); 
+  
 
 
   

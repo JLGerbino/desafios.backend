@@ -22,6 +22,9 @@ export class ProductRepository{
     }
 
     async deleteProductRep(id_producto){
+            //esto agregue
+        const user = req.session.user.role
+        console.log("rol del ususario en product.controller", user);//hasta aca  
         const product = await this.dao.deleteProduct(id_producto);
         return product;
     }

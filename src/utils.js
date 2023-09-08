@@ -15,7 +15,8 @@ const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, __dirname + "/multer/products/images")        
+        //cb(null, __dirname + "/images") 
+        cb(null, path.join(__dirname, "/public/images"));//agregue       
     },
     filename: function(req, file, cb){        
         cb(null, `${Date.now()}-${file.originalname}`)
@@ -82,11 +83,12 @@ const documentStorage = multer.diskStorage({
     destination: function(req,file,cb) {
         cb(null,path.join(__dirname,"/multer/users/documents"));
     },
-    filename: function(req,file,cb) {        
-        cb(null,`${req.user.email}-document-${file.originalname}`);
+    filename: function(req,file,cb) {
+        const userId = req.params.uid;//esto agregue
+        cb(null,`${userId}-document-${file.originalname}`);//esta linea es nueva
+        // cb(null,`${req.user.email}-document-${file.originalname}`);
     }
 })
-
 //creamos el uploader
 export const uploaderDocument = multer({storage:documentStorage});
 
@@ -101,6 +103,7 @@ const productStorage= multer.diskStorage({
 })
 
 export const uploaderProduct = multer({storage:productStorage})
+
 
 //nuevo faker
 export const customFaker = new Faker({

@@ -1,0 +1,61 @@
+<h1>Gestion de usuarios</h1><br>
+<h3>Cargar documentos para el proceso de cambio de rol</h3>
+<form method="put" id="cargaDocs" enctype="multipart/form-data">
+  <h4>Ingresar id del usuario</h4>
+  <input type="text" name="uid" class="form-control" id="idUser" value="{{user.id}}">
+  <h4>Ingresar archivos</h4>
+  <label>Identificación</label>
+  <input type="file" name="identificacion" class="form-control"><br>
+  <label>Domicilio</label>
+  <input type="file" name="domicilio" class="form-control"><br>
+  <label>Estado de cuenta</label>  
+  <input type="file" name="estadoDeCuenta" class="form-control"><br>
+  <input type="submit" value="Cargar documentos" class="btn btn-primary">
+</form><br><br>
+
+<h4>Cambiar rol de usuario</h4>
+<form method="put" id="cambiarRole">
+  <label>Ingresar id del usuario</label>
+  <input type="text" name="uid" class="form-control" id="idUser1" value="{{user.id1}}"><br>
+  <input type="submit" id="cambioRole" value="Cambiar rol" class="btn btn-primary">
+</form><br><br>
+
+<h4>Eliminar usuario</h4>
+<form method="delete" id="eliminoUsuarioId">
+  <label>Ingresar id del usuario</label>
+  <input type="text" name="uid" class="form-control" id="idUser2" value="{{user.id2}}"><br>
+  <input type="submit" id="eliminarUsuario" class="btn btn-primary"><br>
+</form><br>
+
+<div class="container text-center mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="rounded p-3" style="background-color: #f8f9fa; border: 1px solid #ddd;">
+      <h4>Eliminar usuarios cuya inactividad supere los 2 días</h4>
+      <form method="delete" id="eliminarUsersInactividad" class="rounded p-3" style="background-color: #f8f9fa;">
+        <input type="submit" id="eliminarUsuarioInactivo" value="Eliminar usuarios" class="btn btn-danger btn-block">
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- <h4>Eliminar usuarios cuya inactividad supere los 2 dias</h4>
+<form method="delete" id="eliminarUsersInactividad">
+  <input type="submit" id="eliminarUsuarioInactivo" class="btn btn-primary">
+</form> --}}
+
+<a href="/products" class="btn btn-primary">Volver a productos</a>
+<div class="container mt-4">
+  <h1>Listado de usuarios</h1>
+  <div id="inicio">
+    {{#each users}}
+      <p>id:{{this.id}},Nombre: {{this.nombreCompleto}}, email: {{this.email}}, edad: {{this.edad}}, role:{{this.roles}}</p><br>
+    {{/each}}
+  </div>
+  <p id="productos"></p>  
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/users.js"></script>
+
