@@ -1,5 +1,64 @@
+{{!-- <i class="bi bi-cart4"></i>
 
-<h1>Bienvenid@ {{user.nombreCompleto}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h1><br>
+{{> navbar}} --}}
+{{!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/products">Productos</a>
+        {{#if isAdmin}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>
+        <a class="nav-link" href="/users">Administrar Usuarios</a>
+        {{/if}}
+        {{#if isPremium}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>        
+        {{/if}}        
+      </div> 
+      <div><a href="/profile"><i class="fa-solid fa-user"></i></div>
+      <div><a href="/chat"><i class="fa-solid fa-comments"></i></div>     
+    </div>
+    
+  </div>
+  <span ><a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}">
+  <i class="fas fa-shopping-cart"></i>
+</a></span>  
+</nav> --}}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/products">Productos</a>
+        {{#if isAdmin}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>
+        <a class="nav-link" href="/users">Administrar Usuarios</a>
+        {{/if}}
+        {{#if isPremium}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>        
+        {{/if}}        
+      </div> 
+      <div class="d-flex align-items-center mx-2"> <!-- Utilizamos flexbox para alinear verticalmente -->
+        <a href="/profile"><i class="fa-solid fa-user"></i></a>
+      </div>
+      <div class="d-flex align-items-center mx-2"> <!-- Utilizamos flexbox para alinear verticalmente -->
+        <a href="/chat"><i class="fa-solid fa-comments"></i></a>
+      </div>     
+    </div>    
+  </div>
+  <span class="ml-auto"><a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}">
+  <i class="fas fa-shopping-cart"></i>
+</a></span>  
+</nav>
+
+<h2>Hola! {{user.nombreCompleto}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h2><br>
 <p id="cartId" type="hidden" style="color: white;" >{{user.cartId}}</p>
 <a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}" class="btn btn-primary">Ver carrito</a>
 
