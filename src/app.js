@@ -30,7 +30,7 @@ import { transporter } from "./config/gmail.js";
 
 
 
-const PORT = config.server.port;
+const PORT = config.server.port || 8080;
 
 const manager = new ProductManagerFS
 const managerDB = new ProductManagerDB

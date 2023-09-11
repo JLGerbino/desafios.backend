@@ -5,6 +5,7 @@
   "main": "desafio1.js",
   "type": "module",
   "scripts": {
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test1": "mocha test/products.test.js --timeout 10000 --exit",
     "test2": "mocha test/sessions.test.js --timeout 10000 --exit",
