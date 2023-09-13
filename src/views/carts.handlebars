@@ -1,3 +1,33 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/products">Productos</a>
+        {{#if isAdmin}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>
+        <a class="nav-link" href="/users">Administrar Usuarios</a>
+        {{/if}}
+        {{#if isPremium}}
+        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>        
+        {{/if}}        
+      </div> 
+      <div class="d-flex align-items-center mx-2"> 
+        <a href="/profile"><i class="fa-solid fa-user"></i></a>
+      </div>
+      <div class="d-flex align-items-center mx-2"> 
+        <a href="/chat"><i class="fa-solid fa-comments"></i></a>
+      </div>     
+    </div>    
+  </div>
+  <span class="ml-auto"><a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}">
+  <i class="fas fa-shopping-cart"></i>
+</a></span>  
+</nav>
+
 <a href="/products" class="btn btn-primary">Volver a Productos</a>
 <h1>Detalles del carrito</h1>
 

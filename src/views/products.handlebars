@@ -1,33 +1,3 @@
-{{!-- <i class="bi bi-cart4"></i>
-
-{{> navbar}} --}}
-{{!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/products">Productos</a>
-        {{#if isAdmin}}
-        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>
-        <a class="nav-link" href="/users">Administrar Usuarios</a>
-        {{/if}}
-        {{#if isPremium}}
-        <a class="nav-link" href="/realTimeProducts">Administrar productos</a>        
-        {{/if}}        
-      </div> 
-      <div><a href="/profile"><i class="fa-solid fa-user"></i></div>
-      <div><a href="/chat"><i class="fa-solid fa-comments"></i></div>     
-    </div>
-    
-  </div>
-  <span ><a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}">
-  <i class="fas fa-shopping-cart"></i>
-</a></span>  
-</nav> --}}
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -45,10 +15,10 @@
         <a class="nav-link" href="/realTimeProducts">Administrar productos</a>        
         {{/if}}        
       </div> 
-      <div class="d-flex align-items-center mx-2"> <!-- Utilizamos flexbox para alinear verticalmente -->
+      <div class="d-flex align-items-center mx-2"> 
         <a href="/profile"><i class="fa-solid fa-user"></i></a>
       </div>
-      <div class="d-flex align-items-center mx-2"> <!-- Utilizamos flexbox para alinear verticalmente -->
+      <div class="d-flex align-items-center mx-2"> 
         <a href="/chat"><i class="fa-solid fa-comments"></i></a>
       </div>     
     </div>    
@@ -59,25 +29,25 @@
 </nav>
 
 <h2>Hola! {{user.nombreCompleto}}, conocé nuestros productos <a href="/api/sessions/logout" class="btn btn-primary">Cerrar sesión</a></h2><br>
-<p id="cartId" type="hidden" style="color: white;" >{{user.cartId}}</p>
-<a href="/carts/{{user.cartId}}" id="cartId" data-cart-id="{{user.cartId}}" class="btn btn-primary">Ver carrito</a>
+<p id="carritoId" type="hidden" style="color: white;" >{{user.cartId}}</p>
+{{!-- <a href="/carts/{{user.cartId}}" id="carroId" data-cart-id="{{user.cartId}}" class="btn btn-primary">Ver carrito</a> --}}
 
-{{#if isAdmin}}
+{{!-- {{#if isAdmin}}
   <a href="/realTimeProducts" class="btn btn-primary">Administrar productos</a>  <a href="/users" class="btn btn-primary">Administrar usuarios</a>  
 {{/if}}
 {{#if isPremium}}
   <a href="/realTimeProducts" class="btn btn-primary">Administrar productos</a>  
-{{/if}}
+{{/if}} --}}
 <div class="row justify-content-center align-items-center">
   {{#each products}}
   <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
     <div class="card mx-auto" style="width: 14rem;">
       <img src="/images/{{this.thumbnail}}"class="card-img-top" alt="image">
       <div class="card-body">
-        <h5 class="card-title">{{this.title}}</h5>
-        <p id="product_id">{{this._id}}</p>        
+        <h5 class="card-title">{{this.title}}</h5>                
         <p class="card-text">{{this.description}}</p>
-        <p class="card-text">$ {{this.price}}</p>        
+        <p class="card-text">$ {{this.price}}</p>
+        <p id="product_id" style="color: white;">{{this._id}}</p>        
         <a href="#" class="btn btn-primary agregar-button" data-product-id="{{this._id}}"><button>agregar a carrito</button></a>
       </div>
     </div>
@@ -100,5 +70,6 @@
   <p style="margin-right: 5px">Pagina: {{page}}</p>
   <p style="margin-left: 5px">Total paginas: {{totalPages}}</p>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/products.js"></script>
 
