@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/products">Navbar</a>
+    <a class="navbar-brand" href="/products">Total eSports</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,7 +32,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="form-container p-4">
-        <h1>Cargar producto</h1>owner:{{user}} 
+        <h2>Cargar producto</h2>owner:{{user}} 
         role:{{role}}
         <script>    
   </script>
@@ -59,7 +59,7 @@
         <label>Imagenes</label>
         <input id="thumbnail" name="thumbnail" class="form-control" type="file"><br>
 
-        <input id="enviar" type="submit" class="btn btn-primary">          
+        <input id="enviar" type="submit" value="Cargar producto" class="btn btn-primary">          
       </div>
     </div>
   </div>
@@ -70,18 +70,16 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="form-container p-4">
-        <h1>Eliminar producto</h1>
+        <h2>Eliminar producto</h2>
         <label>Ingresar Id</label>
         <input id="id" name="id" type="text" size="30" class="form-control"><br>
-        <input id="eliminar" type="submit" class="btn btn-danger">
+        <input id="eliminar" type="submit" value="Eliminar" class="btn btn-danger">
       </div>
     </div>
   </div>
-</div>
-<a href="/products" class="btn btn-primary">Volver a productos</a>
-<div class="container mt-4">
-  
-  <h1>Listado de productos en tiempo real </h1>
+  <br>
+
+  <h2>Listado de productos en tiempo real </h2>
   <div id="inicio">
     {{#each products}}
       <p id="idn">id: {{this._id}}, title: {{this.title}}, description: {{this.description}}, code: {{this.code}}, price: {{this.price}}, status: {{this.status}}, stock: {{this.stock}}, category: {{this.category}}, owner: {{this.owner}}, thumbnail: {{this.thumbnail}}</p><br>

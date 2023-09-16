@@ -1,59 +1,87 @@
 import { cartDao } from "../dao/factory.js";
-import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js"; 
+import TicketManagerDB from "../dao/managersDB/ticketManagerDb.js";
 
 const ticketManager = new TicketManagerDB();
 
 export default class CartController {
   async createCart(req, res) {
-    const msg = await cartDao.createCart();
-    res.send(msg);
+    try {
+      const msg = await cartDao.createCart();
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async addCart(req, res) {
-    const id_carrito = req.params.cid;
-    const id_producto = req.params.pid;
-    const msg = await cartDao.addCart(id_carrito, id_producto);
-    res.send(msg);
+    try {
+      const id_carrito = req.params.cid;
+      const id_producto = req.params.pid;
+      const msg = await cartDao.addCart(id_carrito, id_producto);
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getCartsId(req, res) {
-    const id = req.params.cid;
-    const producto = await cartDao.getCartsId(id);
-    res.send(producto);
+    try {
+      const id = req.params.cid;
+      const producto = await cartDao.getCartsId(id);
+      res.send(producto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async deleteProdInCartById(req, res) {
-    const id_carrito = req.params.cid;
-    const id_producto = req.params.pid;
-    const msg = await cartDao.deleteProdInCartById(id_carrito, id_producto);
-    res.send(msg);
+    try {
+      const id_carrito = req.params.cid;
+      const id_producto = req.params.pid;
+      const msg = await cartDao.deleteProdInCartById(id_carrito, id_producto);
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async deleteProdInCart(req, res) {
-    const id_carrito = req.params.cid;
-    const msg = await cartDao.deleteProdInCart(id_carrito);
-    res.send(msg);
+    try {
+      const id_carrito = req.params.cid;
+      const msg = await cartDao.deleteProdInCart(id_carrito);
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async UpdateQuantityProd(req, res) {
-    const id_carrito = req.params.cid;
-    const id_producto = req.params.pid;
-    const quantity = req.body.quantity;
-    const cantidad = parseInt(quantity);
-    console.log(cantidad);
-    const msg = await cartDao.UpdateQuantityProd(
-      id_carrito,
-      id_producto,
-      cantidad
-    );
-    res.send(msg);
+    try {
+      const id_carrito = req.params.cid;
+      const id_producto = req.params.pid;
+      const quantity = req.body.quantity;
+      const cantidad = parseInt(quantity);
+      console.log(cantidad);
+      const msg = await cartDao.UpdateQuantityProd(
+        id_carrito,
+        id_producto,
+        cantidad
+      );
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async UpdateCartWithProds(req, res) {
-    const id_carrito = req.params.cid;
-    const products = req.body.products;
-    const msg = await cartDao.UpdateCartWithProds(id_carrito, products);
-    res.send(msg);
+    try {
+      const id_carrito = req.params.cid;
+      const products = req.body.products;
+      const msg = await cartDao.UpdateCartWithProds(id_carrito, products);
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async purchase(req, res) {

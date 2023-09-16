@@ -17,29 +17,33 @@ export default class sessionsController {
   }
 
   async login(req, res) {
-    if (!req.user)
-      return res
-        .status(400)
-        .send({ status: "error", error: "Invalid credentials" });
-    req.user.last_connection = Date.now();
-    await req.user.save();
-    req.session.user = {
-      _id: req.user._id,
-      first_name: req.user.first_name,
-      last_name: req.user.last_name,
-      email: req.user.email,
-      age: req.user.age,
-      role: req.user.role,
-      cartId: req.user.cartId,
-    };
-    const user = req.session.user;
-    const userDto = new GetUserDto(user);
-    console.log("sessions.controller", userDto);
-    res.send({
-      status: "success",
-      payload: req.user,
-      message: "Primer logueo!!",
-    });
+    try {
+      if (!req.user)
+        return res
+          .status(400)
+          .send({ status: "error", error: "Invalid credentials" });
+      req.user.last_connection = Date.now();
+      await req.user.save();
+      req.session.user = {
+        _id: req.user._id,
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        email: req.user.email,
+        age: req.user.age,
+        role: req.user.role,
+        cartId: req.user.cartId,
+      };
+      const user = req.session.user;
+      const userDto = new GetUserDto(user);
+      console.log("sessions.controller", userDto);
+      res.send({
+        status: "success",
+        payload: req.user,
+        message: "Primer logueo!!",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async faillogin(req, res) {
@@ -47,14 +51,18 @@ export default class sessionsController {
     res.send({ error: "Error en el ingreso" });
   }
 
-  async logout(req, res) {    
-    req.session.destroy((err) => {
-      if (err)
-        return res
-          .status(500)
-          .send({ status: "error", error: "No pudo cerrar sesion" });
-      res.redirect("/");
-    });
+  async logout(req, res) {
+    try {
+      req.session.destroy((err) => {
+        if (err)
+          return res
+            .status(500)
+            .send({ status: "error", error: "No pudo cerrar sesion" });
+        res.redirect("/");
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async forgotPassword(req, res) {

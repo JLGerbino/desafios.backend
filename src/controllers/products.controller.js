@@ -11,23 +11,31 @@ const logger = envLogger();
 
 export default class ProductController {
   async getProducts(req, res) {
-    const productos = await productService.getProductsRep();
-    const limite = req.query.limit;
-    if (!limite) {
+    try {
+      const productos = await productService.getProductsRep();
+      const limite = req.query.limit;
+      if (!limite) {
+        return res.send({
+          productos,
+        });
+      }
+      let limiteProductos = productos.slice(0, limite);
       return res.send({
-        productos,
+        limiteProductos,
       });
+    } catch (error) {
+      console.log(error);
     }
-    let limiteProductos = productos.slice(0, limite);
-    return res.send({
-      limiteProductos,
-    });
   }
 
   async getProductsById(req, res) {
-    const id = req.params.pid;
-    const producto = await productService.getProductsByIdRep(id);
-    res.send(producto);
+    try {
+      const id = req.params.pid;
+      const producto = await productService.getProductsByIdRep(id);
+      res.send(producto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async addProduct(req, res) {
@@ -71,11 +79,9 @@ export default class ProductController {
       let codigo = products.find((ele) => ele.code == producto.code);
       if (codigo) {
         logger.error("El 'code' del producto ya existe, intente cambiarlo.");
-        res
-          .status(400)
-          .json({
-            error: "El 'code' del producto ya existe, intente cambiarlo",
-          });
+        res.status(400).json({
+          error: "El 'code' del producto ya existe, intente cambiarlo",
+        });
       } else {
         await productoModel.create(producto);
         res.send("El producto se ha agregado correctamente.");
@@ -87,12 +93,16 @@ export default class ProductController {
   }
 
   async deleteProduct(req, res) {
-    const id = req.params.pid;    
-    const user = req.session.user.role;
-    console.log("rol del ususario en product.controller", user); 
-    const msg = await productService.deleteProductRep(id); 
-    res.send(msg);
-  }
+    try {
+      const id = req.params.pid;
+      const user = req.session.user.role;
+      console.log("rol del ususario en product.controller", user);
+      const msg = await productService.deleteProductRep(id);
+      res.send(msg);
+    } catch (error) {
+      console.log(error);
+    };
+  };
 
   async updateProduct(req, res) {
     const id_producto = req.params.pid;
@@ -121,7 +131,7 @@ export default class ProductController {
     //   producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
     // });
     console.log(producto);
-    const msg = await productService.updateProductRep(producto); 
+    const msg = await productService.updateProductRep(producto);
     res.send(msg);
   }
 
