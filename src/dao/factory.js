@@ -34,5 +34,4 @@ switch (persistence) {
     break;      
 }
 
-
 export {productsDao, cartDao}

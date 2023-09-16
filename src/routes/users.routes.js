@@ -1,6 +1,6 @@
 import { Router } from "express";
 import UserController from "../controllers/users.controller.js";
-import { adminAccess, checkAuthenticated } from "../middlewares/validations.js";
+import { adminAccess } from "../middlewares/validations.js";
 import { uploaderDocument } from "../utils.js"; 
 
 const router = Router();

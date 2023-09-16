@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/products">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,20 +28,16 @@
 </a></span>  
 </nav>
 
-
-
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="form-container p-4">
         <h1>Cargar producto</h1>owner:{{user}} 
         role:{{role}}
-        <script>
-    
-    
+        <script>    
   </script>
 <br>
-<form enctype="multipart/form-data" action="/realTimeProducts">
+<form method="post" id="productForm" enctype="multipart/form-data" >
         <label>Titulo</label>
         <input id="title" name="title" class="form-control"><br>
 
@@ -69,6 +65,7 @@
   </div>
 </div>
 </form>
+
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -83,6 +80,7 @@
 </div>
 <a href="/products" class="btn btn-primary">Volver a productos</a>
 <div class="container mt-4">
+  
   <h1>Listado de productos en tiempo real </h1>
   <div id="inicio">
     {{#each products}}

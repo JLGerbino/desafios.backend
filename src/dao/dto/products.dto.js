@@ -16,6 +16,6 @@ export class GetProductDto{
         this.nombreProducto = productDB.title + ' ' + productDB.desciption;
         this.precio = productDB.price;
         this.status = productDB.status;
-        this.owner = productDB.owner;//aca tambien
+        this.owner = productDB.owner;
     }
 }

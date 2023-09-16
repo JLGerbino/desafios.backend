@@ -8,11 +8,10 @@ export class ProductRepository{
         const products = await this.dao.getProducts()
         return products;
     }
-    async addProductRep(product){//agregue user
+    async addProductRep(product){
         const productDto = new CreateProductDto(product);
-        const user = req.session.user._id//agregue
-        //const productWithOwner = { ...productDto, owner: user };//77agregue esto
-        const productCreated = await this.dao.addProduct(productDto, user);//agregue iduser
+        const user = req.session.user._id        
+        const productCreated = await this.dao.addProduct(productDto, user);
         return productCreated;
     }
 
@@ -21,10 +20,9 @@ export class ProductRepository{
         return product;
     }
 
-    async deleteProductRep(id_producto){
-            //esto agregue
+    async deleteProductRep(id_producto){            
         const user = req.session.user.role
-        console.log("rol del ususario en product.controller", user);//hasta aca  
+        console.log("rol del ususario en product.controller", user);  
         const product = await this.dao.deleteProduct(id_producto);
         return product;
     }

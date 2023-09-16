@@ -11,7 +11,6 @@ router.get("/failregister", sessionsController.failregister);
 router.post("/", passport.authenticate("login" ,{failureRedirect:"/faillogin"}), sessionsController.login);
 router.get("/faillogin", sessionsController.faillogin);
 router.get('/logout', sessionsController.logout);
-//router.post('/resetPassword', sessionsController.resetPassword);
 router.post('/reset-password', sessionsController.resetPassword);
 router.get('/github', passport.authenticate('github', {scope:['user:email']}), sessionsController.github);
 router.get('/githubcallback', passport.authenticate('github',{failureRedirect:'/'}), sessionsController.githubcallback)

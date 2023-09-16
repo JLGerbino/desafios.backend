@@ -4,15 +4,14 @@ const deleteProductButtons = document.querySelectorAll(".delete-product");
 const carroId = purchaseButton.dataset.cartId;
 
 deleteProductButtons.forEach(eliminar => {
-  eliminar.addEventListener("click", async () => {
-    //const carroId = document.getElementById("cartId").textContent;//ver como se esta tomado el id del carrito
+  eliminar.addEventListener("click", async () => {    
     const productoId = eliminar.dataset.productId;    
     try {
-      const response = await fetch(`/api/carts/${carroId}/products/${productoId}`, {//arreglar la ruta
+      const response = await fetch(`/api/carts/${carroId}/products/${productoId}`, {
         method: "DELETE",
       });      
       if (response.ok) {
-        console.log("El producto se elimino con exito.");//cambiar textos y probar
+        console.log("El producto se elimino con exito.");
         location.reload();
       } else {
         console.error("Error al intentar eliminar el producto.");
@@ -23,7 +22,6 @@ deleteProductButtons.forEach(eliminar => {
   });
 });
 
-//limpia el carrito
 clearButton.addEventListener("click", async () => {  
   try {    
     const response = await fetch(`/api/carts/${carroId}`, {
@@ -40,14 +38,21 @@ clearButton.addEventListener("click", async () => {
   }
 });
 
-//finaliza compra
 purchaseButton.addEventListener("click", async () => {  
   try {    
     const response = await fetch(`/api/carts/${carroId}/purchase`, {
       method: "POST",
     });    
-    if (response.ok) {      
-      console.log("Compra exitosa");
+    console.log("fetc fetch fetch",response);
+    if (!response.ok) {
+      Swal.fire({
+        title: "Compra exitosa",
+        text: "Le enviamos un email con el detalle de la compra.",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      }).then(() => {        
+        window.location.reload()
+      });      
     } else {      
       console.error("Error al realizar la compra");
     }
@@ -56,25 +61,3 @@ purchaseButton.addEventListener("click", async () => {
   }
 });
 
-
-//agregue
-// const deleteButtons = document.querySelectorAll(".btn-delete-product");
-// deleteButtons.forEach((button) => {
-//   button.addEventListener("click", async () => {
-//     const productId = button.dataset.productId;
-//     try {
-//       const response = await fetch(`/api/carts/${carroId}/products/${productId}`, {
-//         method: "DELETE",
-//       });
-//       console.log("id producto purchasejs", productId)
-//       if (response.ok) {
-//         console.log("Producto eliminado del carrito");
-//         // Aquí puedes actualizar la vista del carrito si es necesario
-//       } else {
-//         console.error("Error al eliminar el producto del carrito");
-//       }
-//     } catch (error) {
-//       console.error("Error en la solicitud de eliminación del producto", error);
-//     }
-//   });
-// });//hasta aca

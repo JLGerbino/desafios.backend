@@ -17,9 +17,7 @@ const schema = new mongoose.Schema({
     },
     purchaser:{
         type: String,
-        require: true,
-        //type: mongoose.Schema.Types.ObjectId,//String,
-        //ref: "User"
+        require: true,        
         }    
 })
 

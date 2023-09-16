@@ -3,19 +3,17 @@ import local from "passport-local";
 import userModel from "../dao/models/user.model.js";
 import GitHubStrategy from "passport-github2";
 import { createHash, validatePassword } from "../utils.js";
-import CartManagerDB from "../dao/managersDB/cartsManagerDB.js"; //
+import CartManagerDB from "../dao/managersDB/cartsManagerDB.js"; 
 import { config } from "./config.js";
 import { transporter } from "./gmail.js";
 import { EError } from "../enums/EErrors.js";
 import { CustomError } from "../repository/customError.repository.js";
-import { generateUserErrorParam } from "../repository/userErrorParam.js";
 import { generateUserErrorInfo } from "../repository/userErrorInfo.js";
-import { envLogger }  from "../middlewares/logger.js";
-
+import { envLogger } from "../middlewares/logger.js";
 
 const LocalStrategy = local.Strategy;
-const managerDB = new CartManagerDB(); //
-const logger = envLogger()
+const managerDB = new CartManagerDB(); 
+const logger = envLogger();
 
 const initializePassport = () => {
   passport.use(
@@ -23,18 +21,24 @@ const initializePassport = () => {
     new LocalStrategy(
       { passReqToCallback: true, usernameField: "email" },
       async (req, username, password, done) => {
-        const { first_name, last_name, email, age, role, avatar} = req.body;//aca agregue avatar
-        //const {avatar} = req.file
+        const { first_name, last_name, email, age, role, avatar } = req.body;
         console.log("EL ROLE", role);
         try {
-          const userError = { first_name, last_name, email, age, password, role};
-          if (!first_name || !last_name || !email || !age  || !password || !role ) {
+          const userError = {
+            first_name,
+            last_name,
+            email,
+            age,
+            password,
+            role,
+          };
+          if (!first_name || !last_name || !email || !age || !password) {
             CustomError.createError({
               name: "Register error",
               cause: generateUserErrorInfo(userError),
               message: "error de registro",
-              errorCode: EError.INVALID_PARAM,              
-            });            
+              errorCode: EError.INVALID_PARAM,
+            });
           }
           const user = await userModel.findOne({ email: username });
           if (user) {
@@ -50,10 +54,9 @@ const initializePassport = () => {
             age,
             password: createHash(password),
             cartId: cartId,
-            role: role,
-            avatar: avatar,//agregue esto
-            //role: "User",
-          };                    
+            role,
+            avatar: avatar,
+          };
           const result = await userModel.create(newUser);
           const contenido = await transporter.sendMail({
             from: "Ecommerce Backend",
@@ -62,7 +65,6 @@ const initializePassport = () => {
           });
           console.log("contenido", contenido);
           res.json({ status: "sucess", message: "Registo y envio de correo." });
-
           return done(null, result);
         } catch (error) {
           return done("Error al registrar el usuario: " + error);
@@ -88,8 +90,8 @@ const initializePassport = () => {
         try {
           const user = await userModel.findOne({ email: username });
           console.log("login", user);
-          if (!user) { 
-            logger.error("No existe el usuario logger");            
+          if (!user) {
+            logger.error("No existe el usuario logger");
             return done(null, false);
           }
           if (!validatePassword(password, user)) return done(null, false);
@@ -108,15 +110,15 @@ const initializePassport = () => {
       {
         clientID: config.gitHub.clientID,
         clientSecret: config.gitHub.clientSecret,
-        callbackURL: config.gitHub.callbackURL, //"http://localhost:8080/api/sessions/githubcallback"
+        callbackURL: config.gitHub.callbackURL,
       },
       async (accesToken, refreshToken, profile, done) => {
         try {
           console.log(profile);
           let user = await userModel.findOne({ email: profile._json.email });
           if (!user) {
-            const msg = await managerDB.createCart(); //
-            const cartId = msg.id; //
+            const msg = await managerDB.createCart();
+            const cartId = msg.id;
             const email =
               profile._json.email == null ? profile._json.username : null;
             const newUser = {
@@ -125,7 +127,7 @@ const initializePassport = () => {
               email: email,
               age: 18,
               password: "",
-              cartId: cartId, //
+              cartId: cartId,
             };
             const result = await userModel.create(newUser);
             done(null, result);

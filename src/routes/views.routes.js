@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ViewController from "../controllers/views.controller.js";
 import { userAccess, adminPremiumAccess, adminAccess, userPremiumAccess } from "../middlewares/validations.js";
-import { uploaderProfile, uploaderProduct, uploader } from "../utils.js";
+import { uploaderProfile, uploader } from "../utils.js";
 
 const router = Router();
 

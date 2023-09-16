@@ -80,14 +80,14 @@ const messages = []
 io.on("connection", socket =>{
     logger.info("Usuario conectado");                
     socket.on("message", async nuevoProducto =>{        
-    nuevoProducto = await managerDB.addProduct(nuevoProducto); //manager.addProduct(nuevoProducto);
+    nuevoProducto = await managerDB.addProduct(nuevoProducto); 
     console.log(nuevoProducto)
     if (nuevoProducto === "Todos los campos son obligatorios"){
         io.emit("actualizado", "campos"); 
     }if(nuevoProducto === "El 'code' del producto ya existe, intente cambiarlo."){
         io.emit("actualizado", "code");
     }else{
-    const productos = await managerDB.getProducts(); //manager.getProducts();        
+    const productos = await managerDB.getProducts();         
     io.emit("actualizado", productos);}      
 })
 
@@ -102,6 +102,8 @@ socket.on("message1", async (data) => {
       idEliminar = await managerDB.deleteProduct(idEliminar);
       logger.info("producto eliminado");
     } else {
+      const message = "Usted solo está autorizado a borrar sus propios productos";//
+      io.emit("alert", message);
       logger.info("Usted solo esta autorizado a borrar sus propios productos");
     }
   } else {
@@ -120,47 +122,10 @@ socket.on("message1", async (data) => {
   if (idEliminar === "El producto que quiere eliminar no existe") {
     io.emit("actualizado", "inexistente");
   } else {
-    const productos = await managerDB.getProducts(); //manager.getProducts();
+    const productos = await managerDB.getProducts(); 
     io.emit("actualizado", productos);
   }
 });
-//este anda bien y manda mail
-// socket.on("message1", async (data) =>{
-//     let idEliminar = data.id
-//     const idUser = data.user
-//     const producto = await productoModel.findById(idEliminar)
-//     const owner = producto.owner     
-//     idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
-//     logger.info("producto eliminado")
-//     if (owner !== "admin") { 
-//      const user = await userModel.findById(owner)
-//      const email = user.email          
-//     //agrego
-//     const contenido = await transporter.sendMail({
-//         from: "Ecommerce Backend",
-//         to: email,
-//         subject: "Se borro un producto de su propiedad",
-//       });//hasta aca
-//     }
-//     if (idEliminar === "El producto que quiere eliminar no existe") {
-//         io.emit("actualizado", "inexistente")
-//     }else{
-//     const productos = await managerDB.getProducts(); //manager.getProducts();
-//     io.emit("actualizado", productos)
-//     }
-// })
-
-//este anda eliminar pero ya funciona el de arriba, tengo q ue borrarlo
-// socket.on("message1", async idEliminar =>{     
-//     idEliminar = await managerDB.deleteProduct(idEliminar); //manager.deleteProduct(idEliminar);
-//     logger.info("producto eliminado")
-//     if (idEliminar === "El producto que quiere eliminar no existe") {
-//         io.emit("actualizado", "inexistente")
-//     }else{
-//     const productos = await managerDB.getProducts(); //manager.getProducts();
-//     io.emit("actualizado", productos)
-//     }
-// })
 
 //chat
 socket.on("message2", async data =>{

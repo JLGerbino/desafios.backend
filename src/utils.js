@@ -8,19 +8,18 @@ import jwt from "jsonwebtoken";
 import { config } from "./config/config.js";
 
 
-const PRIVATE_KEY = config.keys.jwtSecret//"CoderKEY";
+const PRIVATE_KEY = config.keys.jwtSecret;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        //cb(null, __dirname + "/images") 
-        cb(null, path.join(__dirname, "/public/images"));//agregue       
+    destination: function(req, file, cb){        
+        cb(null, path.join(__dirname, "/public/images"));       
     },
     filename: function(req, file, cb){        
-        cb(null, `${Date.now()}-${file.originalname}`)
-        //cb(null, `${file.originalname}`)
+        //cb(null, `${Date.now()}-${file.originalname}`)
+        cb(null, `${file.originalname}`)       
     }
 })
 
@@ -63,18 +62,14 @@ const multerFilterProfile = (req,file,cb)=>{
     }
 }
 
-const profileStorage = multer.diskStorage({
-    //donde guardo los archivos
+const profileStorage = multer.diskStorage({    
     destination: function(req,file,cb) {
       cb(null,path.join(__dirname,"/multer/users/profiles"))  
-    },
-    //el nombre del archivo que estamos guardando
+    },    
     filename: function (req,file,cb) {
         cb(null,`${req.body.email}-perfil-${file.originalname}`)        
     }
 });
-
-//crear el uploader de multer
 //export const uploaderProfile = multer({storage:profileStorage,fileFilter:multerFilterProfile})
 export const uploaderProfile = multer({storage:profileStorage})
 
@@ -85,11 +80,10 @@ const documentStorage = multer.diskStorage({
     },
     filename: function(req,file,cb) {
         const userId = req.params.uid;//esto agregue
-        cb(null,`${userId}-document-${file.originalname}`);//esta linea es nueva
-        // cb(null,`${req.user.email}-document-${file.originalname}`);
+        cb(null,`${userId}-document-${file.originalname}`);        
     }
 })
-//creamos el uploader
+
 export const uploaderDocument = multer({storage:documentStorage});
 
 //configuracion para guardar imagenes de productos
@@ -106,8 +100,7 @@ export const uploaderProduct = multer({storage:productStorage})
 
 
 //nuevo faker
-export const customFaker = new Faker({
-    //configura el idioma
+export const customFaker = new Faker({    
     locale: [en],
 })
 const { commerce, image, database, string } = customFaker;

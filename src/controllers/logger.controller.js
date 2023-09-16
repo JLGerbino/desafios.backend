@@ -1,4 +1,3 @@
-
 export default class LoggerController{
     async test(req, res) {
         req.logger.fatal("Fatal");

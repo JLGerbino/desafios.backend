@@ -24,7 +24,7 @@ const schema = new mongoose.Schema({
         type: String,
         require: true
     },
-    cartId:{//
+    cartId:{
         type: String,
         require: true
     },
@@ -32,8 +32,7 @@ const schema = new mongoose.Schema({
         type: String,
         required:true,
         enum:["User","admin","premium"],
-        default: 'User',
-        //type: String
+        default: 'User'        
     },
     documents:{
         type:[

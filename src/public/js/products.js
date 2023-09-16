@@ -1,5 +1,4 @@
 const agregarBotones = document.querySelectorAll(".agregar-button");
-//const carroId = cartId.getAttribute("data-cart-id");//cartId.dataset.carroId
 
 agregarBotones.forEach(agregar => {
   agregar.addEventListener("click", async () => {

@@ -10,8 +10,7 @@ const logger = envLogger();
 export const connectDB = async(req)=>{
     try {       
         await mongoose.connect(config.mongo.url);
-        logger.info("Conectado a la base de datos.")        
-        //console.log("Conectado a la base de datos.")          
+        logger.info("Conectado a la base de datos.")                  
     } catch (error) {        
         CustomError.createError({
             name: "Error connection",
