@@ -53,6 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+
+
+
+
+
+  
 });
 
 socket.on("actualizado", (productos) => {
@@ -93,3 +100,64 @@ botonEliminar.addEventListener("click", (event) => {
     socket.emit("message1", data);
   }
 });
+
+const updateProductForm = document.getElementById("updateProductForm");
+const productIdInput = document.getElementById("updateProductId");
+const titleInput = document.getElementById("updateTitle");
+const descriptionInput = document.getElementById("updateDescription");
+const codeInput = document.getElementById("updateCode");
+const priceInput = document.getElementById("updatePrice");
+const statusInput = document.getElementById("updateStatus")
+const stockInput = document.getElementById("updateStock");
+const categoryInput = document.getElementById("updateCategory");
+const ownerInput = document.getElementById("updateOwner");
+
+document.getElementById("buscarProducto").addEventListener("click", async () => {
+  const productId = productIdInput.value;  
+  const response = await fetch(`/api/products/${productId}`);
+  if (response.ok) {
+    const product = await response.json();    
+    titleInput.value = product.title;
+    descriptionInput.value = product.description;
+    codeInput.value = product.code;
+    priceInput.value = product.price;
+    statusInput.value = product.status
+    stockInput.value = product.stock;
+    categoryInput.value = product.category;
+    ownerInput.value = product.owner
+    //thumbnailInput.value = product.thumbnail;    
+  } else {    
+    console.error("Producto no encontrado.");    
+  }
+});
+
+document.getElementById("updateProducto").addEventListener("click", async () => {
+  const productId = productIdInput.value;
+  const thumbnailInput = document.getElementById("updateThumbnail");
+  const thumbnailFile = thumbnailInput.files[0]; 
+  console.log("ID del producto:", productId);
+  const formData = new FormData();
+  formData.append("title", titleInput.value);
+  formData.append("description", descriptionInput.value);
+  formData.append("code", codeInput.value);
+  formData.append("price", priceInput.value);
+  formData.append("status", statusInput.value);
+  formData.append("stock", stockInput.value);
+  formData.append("category", categoryInput.value);
+  formData.append("owner", updateOwner.value);
+  formData.append("thumbnail", thumbnailFile);
+  
+  const response = await fetch(`/api/products/${productId}`, {
+    method: "PUT", 
+    body: formData, 
+  });
+
+  if (response.ok) {    
+    console.log("Producto actualizado con éxito.");
+  } else {    
+    console.error("Error al actualizar el producto.");    
+  }
+});
+
+
+

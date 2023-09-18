@@ -125,7 +125,7 @@ export default class UserController {
           }
         }
       });
-      res.json({ message: "Usuarios eliminados por falta de conexion." });
+      res.json({ message: "Usuarios eliminados por inactividad en Total eSports." });
     } catch (error) {
       console.error("Error al eliminar usuarios:", error);
       res.status(500).send("Error al eliminar usuarios.");

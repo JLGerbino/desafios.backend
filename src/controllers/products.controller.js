@@ -105,35 +105,51 @@ export default class ProductController {
   };
 
   async updateProduct(req, res) {
-    const id_producto = req.params.pid;
-    const { title, description, code, price, status, stock, category, owner } =
-      req.body;
-    const files = req.files;
-    const filenames = [];
-    // for (let i = 0; i < files.length; i++) {
-    //   const file = files[i];
-    //   const filename = `${file.originalname}`;
-    //   filenames.push(filename);
-    // }
-    const producto = {
-      id: id_producto,
-      title,
-      description,
-      code,
-      price,
-      status,
-      stock,
-      category,
-      owner,
-      thumbnail: [],
-    };
-    // filenames.forEach((filename) => {
-    //   producto.thumbnail.push(`http://localhost:8080/images/${filename}`);
-    // });
-    console.log(producto);
-    const msg = await productService.updateProductRep(producto);
-    res.send(msg);
-  }
+    try {
+      const id_producto = req.params.pid;
+      const {
+        title,
+        description,
+        code,
+        price,
+        status,
+        stock,
+        category,
+        owner,        
+      } = req.body;
+
+      if (Object.values(req.body).some(value => value.trim() === "")) {
+        return res.status(400).json({ error: "Todos los campos son obligatorios" });
+      }
+      const files = req.files;     
+      const thumbnail = files.map((file) => `/images/${file.originalname}`);
+      const filenames = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const filename = file.filename;
+        filenames.push(filename);
+      }      
+      const updatedProduct = {
+        title,
+        description,
+        code,
+        price,
+        status,
+        stock,
+        category,
+        owner,
+        thumbnail
+      };
+      const updatedProductDoc = await productoModel.findByIdAndUpdate(id_producto,updatedProduct,{ new: true });  
+      if (!updatedProductDoc) {
+        return res.status(404).json({ message: "Producto no encontrado" });
+      }  
+      return res.status(200).json(updatedProductDoc);
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error);
+      return res.status(500).json({ message: "Error al actualizar el producto" });
+    }
+  }  
 
   //nuevo faker
   async mockingProducts(req, res) {

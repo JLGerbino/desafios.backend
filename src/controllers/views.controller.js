@@ -154,6 +154,10 @@ export default class viewController {
 
   async realTimeProducts(req, res) {
     try {
+      const user = req.session.user;//
+      const userDto = new GetUserDto(user);//
+      const isAdmin = userDto.roles === "admin";//
+      const isPremium = userDto.roles === "premium";//
       const productos = await managerDB.getProducts();
       const prods = productos.map((item) => item.toObject());
       prods[0].owner = req.session.user.email;
@@ -163,6 +167,8 @@ export default class viewController {
         products: prods,
         user: req.session.user._id,
         role: req.session.user.role,
+        isAdmin,
+        isPremium
       });
     } catch (error) {
       console.log(error);

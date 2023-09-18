@@ -11,6 +11,6 @@ router.get("/", productController.getProducts);
 router.get("/:pid", productController.getProductsById);
 router.post("/", uploader.array("thumbnail"), productController.addProduct);
 router.delete("/:pid", productController.deleteProduct);
-router.put("/:pid", productController.updateProduct);
+router.put("/:pid", uploader.array("thumbnail"), productController.updateProduct);
 
 export default router;
